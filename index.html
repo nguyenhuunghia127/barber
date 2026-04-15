@@ -10,6 +10,67 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <style>
+        /* Scroll-reveal animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(28px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .reveal-delay-1 { transition-delay: 0.1s; }
+        .reveal-delay-2 { transition-delay: 0.2s; }
+        .reveal-delay-3 { transition-delay: 0.3s; }
+        .reveal-delay-4 { transition-delay: 0.4s; }
+
+        /* Active nav link */
+        nav a.nav-active {
+            color: #2563eb;
+            font-weight: 700;
+        }
+
+        /* Back to top button */
+        #back-to-top {
+            opacity: 0;
+            pointer-events: none;
+            transform: translateY(10px);
+            transition: opacity 0.3s, transform 0.3s;
+        }
+        #back-to-top.show {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translateY(0);
+        }
+
+        /* Review skeleton */
+        .skeleton {
+            background: linear-gradient(90deg, #f1f5f9 25%, #e2e8f0 50%, #f1f5f9 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite;
+            border-radius: 16px;
+        }
+        @keyframes shimmer {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+
+        /* Gallery image overlay */
+        .gallery-card .overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(15,23,42,0.7) 0%, transparent 50%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        .gallery-card:hover .overlay { opacity: 1; }
+        .gallery-card img {
+            transition: transform 0.5s ease;
+        }
+        .gallery-card:hover img { transform: scale(1.07); }
+    </style>
 </head>
 <body class="min-h-screen bg-white text-slate-900">
 
@@ -88,15 +149,23 @@
 
                 <div class="rounded-[2rem] border border-white/10 bg-white/10 p-4 shadow-2xl backdrop-blur">
                     <div class="grid gap-4 sm:grid-cols-2">
-                        <div class="rounded-[1.5rem] bg-slate-200/90 p-8 text-slate-900 shadow-sm transition hover:-translate-y-1">
-                            <div class="mb-10 h-48 rounded-[1.25rem] bg-[linear-gradient(135deg,#cbd5e1,#94a3b8)]"></div>
-                            <p class="text-sm font-semibold uppercase tracking-[0.2em] text-slate-500 lang-el" data-vi="Mẫu tóc hot" data-en="Trending">Trending</p>
-                            <p class="mt-2 text-xl font-bold lang-el" data-vi="Sạch, chill, nam tính như undercut" data-en="Clean, chill, masculine like undercut">Clean, chill, masculine like undercut</p>
+                        <div class="rounded-[1.5rem] overflow-hidden shadow-sm transition hover:-translate-y-1 relative">
+                            <img src="https://images.unsplash.com/photo-1622286343920-86a58df8ef1d?w=400&h=300&fit=crop&q=80" 
+                                 alt="Modern undercut hairstyle" 
+                                 class="w-full h-48 object-cover" loading="lazy">
+                            <div class="bg-slate-200/90 p-5 text-slate-900">
+                                <p class="text-sm font-semibold uppercase tracking-[0.2em] text-slate-500 lang-el" data-vi="Mẫu tóc hot" data-en="Trending">Trending</p>
+                                <p class="mt-1 text-lg font-bold lang-el" data-vi="Sạch, chill, nam tính như undercut" data-en="Clean, chill, masculine like undercut">Clean, chill, masculine like undercut</p>
+                            </div>
                         </div>
-                        <div class="rounded-[1.5rem] bg-slate-900/80 p-8 text-white shadow-sm transition hover:-translate-y-1">
-                            <div class="mb-10 h-48 rounded-[1.25rem] bg-[linear-gradient(135deg,#1e293b,#475569)]"></div>
-                            <p class="text-sm font-semibold uppercase tracking-[0.2em] text-slate-400 lang-el" data-vi="Mẫu tóc hot" data-en="Trending">Trending</p>
-                            <p class="mt-2 text-xl font-bold lang-el" data-vi="Cổ điển classic như side part" data-en="Classic and elegant like side part">Classic and elegant like side part</p>
+                        <div class="rounded-[1.5rem] overflow-hidden shadow-sm transition hover:-translate-y-1 relative">
+                            <img src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=400&h=300&fit=crop&q=80" 
+                                 alt="Classic side part hairstyle" 
+                                 class="w-full h-48 object-cover" loading="lazy">
+                            <div class="bg-slate-900/90 p-5 text-white">
+                                <p class="text-sm font-semibold uppercase tracking-[0.2em] text-slate-400 lang-el" data-vi="Mẫu tóc hot" data-en="Trending">Trending</p>
+                                <p class="mt-1 text-lg font-bold lang-el" data-vi="Cổ điển classic như side part" data-en="Classic and elegant like side part">Classic and elegant like side part</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -228,9 +297,15 @@
                 <h2 class="mt-3 text-3xl font-black sm:text-4xl lang-el" data-vi="Những kiểu tóc đã thực hiện" data-en="Our Recent Work">Our Recent Work</h2>
             </div>
             <div class="grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
-                <div class="group overflow-hidden rounded-[2rem] border border-slate-200 bg-white shadow-sm cursor-pointer">
-                    <div class="h-72 bg-[linear-gradient(135deg,#e2e8f0,#94a3b8)] transition duration-500 group-hover:scale-105"></div>
-                    <div class="flex items-center justify-between p-5 relative bg-white">
+                <!-- Gallery Card 1 -->
+                <div class="gallery-card group relative overflow-hidden rounded-[2rem] border border-slate-200 bg-white shadow-sm cursor-pointer reveal">
+                    <div class="relative h-72 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1622286343920-86a58df8ef1d?w=600&h=500&fit=crop&q=80"
+                             alt="Modern Fade hairstyle at Barber House"
+                             class="w-full h-full object-cover" loading="lazy">
+                        <div class="overlay"></div>
+                    </div>
+                    <div class="flex items-center justify-between p-5 bg-white">
                         <div>
                             <p class="text-xs font-bold uppercase tracking-[0.2em] text-slate-500 lang-el" data-vi="Mẫu 1" data-en="Style 1">Style 1</p>
                             <h3 class="mt-1 text-xl font-bold lang-el" data-vi="Fade hiện đại" data-en="Modern Fade">Modern Fade</h3>
@@ -238,18 +313,32 @@
                         <span class="rounded-full bg-blue-50 text-blue-700 px-3 py-1.5 text-xs font-bold uppercase tracking-wider">Hot</span>
                     </div>
                 </div>
-                <div class="group overflow-hidden rounded-[2rem] border border-slate-200 bg-white shadow-sm cursor-pointer">
-                    <div class="h-72 bg-[linear-gradient(135deg,#e2e8f0,#94a3b8)] transition duration-500 group-hover:scale-105"></div>
-                    <div class="flex items-center justify-between p-5 relative bg-white">
+
+                <!-- Gallery Card 2 -->
+                <div class="gallery-card group relative overflow-hidden rounded-[2rem] border border-slate-200 bg-white shadow-sm cursor-pointer reveal reveal-delay-1">
+                    <div class="relative h-72 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=600&h=500&fit=crop&q=80"
+                             alt="Elegant Side Part hairstyle at Barber House"
+                             class="w-full h-full object-cover" loading="lazy">
+                        <div class="overlay"></div>
+                    </div>
+                    <div class="flex items-center justify-between p-5 bg-white">
                         <div>
                             <p class="text-xs font-bold uppercase tracking-[0.2em] text-slate-500 lang-el" data-vi="Mẫu 2" data-en="Style 2">Style 2</p>
                             <h3 class="mt-1 text-xl font-bold lang-el" data-vi="Side part lịch lãm" data-en="Elegant Side Part">Elegant Side Part</h3>
                         </div>
                     </div>
                 </div>
-                <div class="group overflow-hidden rounded-[2rem] border border-slate-200 bg-white shadow-sm cursor-pointer">
-                    <div class="h-72 bg-[linear-gradient(135deg,#e2e8f0,#94a3b8)] transition duration-500 group-hover:scale-105"></div>
-                    <div class="flex items-center justify-between p-5 relative bg-white">
+
+                <!-- Gallery Card 3 -->
+                <div class="gallery-card group relative overflow-hidden rounded-[2rem] border border-slate-200 bg-white shadow-sm cursor-pointer reveal reveal-delay-2">
+                    <div class="relative h-72 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1599351431202-1e0f0137899a?w=600&h=500&fit=crop&q=80"
+                             alt="Youthful Texture hairstyle at Barber House"
+                             class="w-full h-full object-cover" loading="lazy">
+                        <div class="overlay"></div>
+                    </div>
+                    <div class="flex items-center justify-between p-5 bg-white">
                         <div>
                             <p class="text-xs font-bold uppercase tracking-[0.2em] text-slate-500 lang-el" data-vi="Mẫu 3" data-en="Style 3">Style 3</p>
                             <h3 class="mt-1 text-xl font-bold lang-el" data-vi="Texture trẻ trung" data-en="Youthful Texture">Youthful Texture</h3>
@@ -292,7 +381,10 @@
                 </div>
                 
                 <div id="review-container" class="grid gap-6 md:grid-cols-3">
-                    <p class="text-slate-500 italic col-span-3 text-center lang-el" data-vi="Đang tải đánh giá mới nhất..." data-en="Loading latest reviews...">Loading latest reviews...</p>
+                    <!-- Skeleton loaders while fetching -->
+                    <div class="skeleton h-48"></div>
+                    <div class="skeleton h-48"></div>
+                    <div class="skeleton h-48"></div>
                 </div>
             </div>
         </section>
@@ -431,6 +523,14 @@
             <span class="hidden text-sm font-bold sm:block">Chat Zalo</span>
         </a>
     </div>
+
+    <!-- Back to top button -->
+    <button id="back-to-top" title="Back to top"
+        class="fixed bottom-24 right-6 z-50 flex h-11 w-11 items-center justify-center rounded-full bg-white border border-slate-200 text-slate-700 shadow-lg transition hover:-translate-y-1 hover:bg-slate-50 sm:bottom-28">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M5 10l7-7m0 0l7 7m-7-7v18"/>
+        </svg>
+    </button>
 
     <!-- Success Modal -->
     <div id="success-modal" class="hidden fixed inset-0 z-[100] items-center justify-center bg-slate-900/60 backdrop-blur-sm p-4 opacity-0 transition-opacity duration-300">
@@ -665,6 +765,53 @@
             }
 
             fetchReviews();
+
+            // --- 5. SCROLL REVEAL ANIMATION ---
+            const revealObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        revealObserver.unobserve(entry.target); // only animate once
+                    }
+                });
+            }, { threshold: 0.12 });
+
+            document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+            // --- 6. ACTIVE NAV LINK (highlight khi cuộn đến section) ---
+            const sections = document.querySelectorAll('main section[id]');
+            const navLinks = document.querySelectorAll('nav a[href^="#"]');
+
+            const navObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        navLinks.forEach(link => {
+                            link.classList.remove('nav-active');
+                            if (link.getAttribute('href') === `#${entry.target.id}`) {
+                                link.classList.add('nav-active');
+                            }
+                        });
+                    }
+                });
+            }, { rootMargin: '-40% 0px -55% 0px' });
+
+            sections.forEach(section => navObserver.observe(section));
+
+            // --- 7. BACK TO TOP BUTTON ---
+            const backToTopBtn = document.getElementById('back-to-top');
+            if (backToTopBtn) {
+                window.addEventListener('scroll', () => {
+                    if (window.scrollY > 400) {
+                        backToTopBtn.classList.add('show');
+                    } else {
+                        backToTopBtn.classList.remove('show');
+                    }
+                }, { passive: true });
+
+                backToTopBtn.addEventListener('click', () => {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+            }
         });
     </script>
 </body>
