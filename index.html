@@ -1,11 +1,14 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth" style="scroll-padding-top: 80px;">
+<html id="html-root" lang="en" class="scroll-smooth" style="scroll-padding-top: 80px;">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Barber House - Men's Grooming Studio. Modern barber shop with skilled barbers, quick online booking, and no hidden fees. Located in Ho Chi Minh City.">
+    <meta name="theme-color" content="#0f172a">
     <title>Barber House - Men's Grooming Studio</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link rel="stylesheet" href="style.css">
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 </head>
 <body class="min-h-screen bg-white text-slate-900">
@@ -327,9 +330,9 @@
                             <div class="pt-6 border-t border-white/10 mt-6">
                                 <p class="mb-4 font-semibold text-white lang-el" data-vi="Theo dõi chúng tôi" data-en="Follow us">Follow us</p>
                                 <div class="flex gap-3">
-                                    <a href="#" class="rounded-xl border border-white/15 bg-white/5 px-5 py-2.5 text-sm font-semibold backdrop-blur transition hover:bg-white/20 hover:scale-105">Facebook</a>
-                                    <a href="#" class="rounded-xl border border-white/15 bg-white/5 px-5 py-2.5 text-sm font-semibold backdrop-blur transition hover:bg-white/20 hover:scale-105">TikTok</a>
-                                    <a href="#" class="rounded-xl border border-white/15 bg-white/5 px-5 py-2.5 text-sm font-semibold backdrop-blur transition hover:bg-white/20 hover:scale-105">Insta</a>
+                                    <a href="#" rel="noopener noreferrer" target="_blank" class="rounded-xl border border-white/15 bg-white/5 px-5 py-2.5 text-sm font-semibold backdrop-blur transition hover:bg-white/20 hover:scale-105">Facebook</a>
+                                    <a href="#" rel="noopener noreferrer" target="_blank" class="rounded-xl border border-white/15 bg-white/5 px-5 py-2.5 text-sm font-semibold backdrop-blur transition hover:bg-white/20 hover:scale-105">TikTok</a>
+                                    <a href="#" rel="noopener noreferrer" target="_blank" class="rounded-xl border border-white/15 bg-white/5 px-5 py-2.5 text-sm font-semibold backdrop-blur transition hover:bg-white/20 hover:scale-105">Insta</a>
                                 </div>
                             </div>
                         </div>
@@ -358,7 +361,7 @@
                                 <input type="text" id="cus_address" name="Address" required class="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3.5 outline-none transition focus:border-blue-600 focus:bg-white focus:ring-4 focus:ring-blue-600/10" placeholder="...">
                             </div>
 
-                            <div class="sm:col-span-2 sm:col-span-1">
+                            <div class="sm:col-span-1">
                                 <label class="mb-2 block text-sm font-bold text-slate-700 lang-el" data-vi="Dịch vụ mong muốn" data-en="Desired Service">Desired Service</label>
                                 <select id="cus_service" name="Service" class="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3.5 outline-none transition focus:border-blue-600 focus:bg-white focus:ring-4 focus:ring-blue-600/10 cursor-pointer text-slate-700">
                                     <option value="Not selected" class="lang-el" data-vi="Chọn dịch vụ" data-en="Select Service">Select Service</option>
@@ -369,7 +372,7 @@
                                     <option value="Fashion Hair Dye" class="lang-el" data-vi="Nhuộm tóc thời trang" data-en="Fashion Hair Dye">Fashion Hair Dye</option>
                                 </select>
                             </div>
-                            <div class="sm:col-span-2 sm:col-span-1">
+                            <div class="sm:col-span-1">
                                 <label class="mb-2 block text-sm font-bold text-slate-700 lang-el" data-vi="Ngày & giờ dự kiến" data-en="Date & Time">Date & Time</label>
                                 <input type="text" id="cus_time" name="Date and Time" class="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3.5 outline-none transition focus:border-blue-600 focus:bg-white focus:ring-4 focus:ring-blue-600/10 text-slate-700 bg-white" placeholder="dd/mm/yyyy hh:mm">
                             </div>
@@ -431,8 +434,8 @@
 
     <!-- Success Modal -->
     <div id="success-modal" class="hidden fixed inset-0 z-[100] items-center justify-center bg-slate-900/60 backdrop-blur-sm p-4 opacity-0 transition-opacity duration-300">
-        <div class="w-full max-w-sm rounded-[2rem] bg-white p-6 shadow-2xl transform scale-95 transition-transform duration-300 relative flex flex-col items-center">
-            <div class="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-green-100 mb-4 animate-[bounce_1s_ease-in-out]">
+        <div id="success-modal-card" class="w-full max-w-sm rounded-[2rem] bg-white p-6 shadow-2xl transform scale-95 transition-transform duration-300 relative flex flex-col items-center">
+            <div class="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-green-100 mb-4">
                 <span class="text-3xl text-green-600">✓</span>
             </div>
             <h3 class="text-center text-2xl font-black text-slate-900 mb-2 lang-el" data-vi="Đặt lịch thành công!" data-en="Booking Successful!">Đặt lịch thành công!</h3>
@@ -444,60 +447,65 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             // --- Modal Handler ---
+            const modalEl = document.getElementById('success-modal');
+            const modalCard = document.getElementById('success-modal-card');
+
             const showModal = (message) => {
-                const modal = document.getElementById('success-modal');
                 const modalMsg = document.getElementById('success-modal-message');
                 modalMsg.innerText = message;
-                modal.classList.remove('hidden');
-                modal.classList.add('flex');
-                // Trigger reflow
-                void modal.offsetWidth;
-                modal.classList.remove('opacity-0');
-                modal.querySelector('div').classList.remove('scale-95');
-                modal.querySelector('div').classList.add('scale-100');
+                modalEl.classList.remove('hidden');
+                modalEl.classList.add('flex');
+                // Trigger reflow for CSS transition
+                void modalEl.offsetWidth;
+                modalEl.classList.remove('opacity-0');
+                modalCard.classList.remove('scale-95');
+                modalCard.classList.add('scale-100');
             };
 
-            document.getElementById('close-modal-btn').addEventListener('click', () => {
-                const modal = document.getElementById('success-modal');
-                modal.classList.add('opacity-0');
-                modal.querySelector('div').classList.remove('scale-100');
-                modal.querySelector('div').classList.add('scale-95');
+            const closeModal = () => {
+                modalEl.classList.add('opacity-0');
+                modalCard.classList.remove('scale-100');
+                modalCard.classList.add('scale-95');
                 setTimeout(() => {
-                    modal.classList.add('hidden');
-                    modal.classList.remove('flex');
+                    modalEl.classList.add('hidden');
+                    modalEl.classList.remove('flex');
                 }, 300);
-            });
+            };
+
+            document.getElementById('close-modal-btn').addEventListener('click', closeModal);
+            // Close modal when clicking backdrop
+            modalEl.addEventListener('click', (e) => { if (e.target === modalEl) closeModal(); });
 
             
             // --- 0. XỬ LÝ CHUYỂN NGÔN NGỮ (LANGUAGE TOGGLE) ---
             const langToggleBtn = document.getElementById('lang-toggle');
             let currentLang = 'en'; // MẶC ĐỊNH LÀ TIẾNG ANH
 
+            const applyLang = (lang) => {
+                // Cập nhật html lang attribute
+                document.getElementById('html-root').setAttribute('lang', lang);
+
+                // Cập nhật chữ trên nút
+                langToggleBtn.innerText = lang === 'en' ? 'VN' : 'EN';
+
+                // Cập nhật toàn bộ các thẻ có class lang-el
+                document.querySelectorAll('.lang-el').forEach(el => {
+                    const newText = el.getAttribute(`data-${lang}`);
+                    if (newText) el.innerHTML = newText;
+                });
+
+                // ĐỔI NGÔN NGỮ GOOGLE FORM (Đổi link iframe)
+                const feedbackIframe = document.getElementById('feedback-form');
+                if (feedbackIframe) {
+                    const newUrl = feedbackIframe.getAttribute(`data-url-${lang}`);
+                    if (newUrl) feedbackIframe.src = newUrl;
+                }
+            };
+
             if (langToggleBtn) {
                 langToggleBtn.addEventListener('click', () => {
-                    // Đảo ngôn ngữ
                     currentLang = currentLang === 'en' ? 'vi' : 'en';
-                    
-                    // Cập nhật chữ trên nút
-                    langToggleBtn.innerText = currentLang === 'en' ? 'VN' : 'EN';
-
-                    // Cập nhật toàn bộ các thẻ có class lang-el
-                    const langElements = document.querySelectorAll('.lang-el');
-                    langElements.forEach(el => {
-                        const newText = el.getAttribute(`data-${currentLang}`);
-                        if(newText) {
-                            el.innerHTML = newText;
-                        }
-                    });
-
-                    // ĐỔI NGÔN NGỮ GOOGLE FORM (Đổi link iframe)
-                    const feedbackIframe = document.getElementById('feedback-form');
-                    if (feedbackIframe) {
-                        const newUrl = feedbackIframe.getAttribute(`data-url-${currentLang}`);
-                        if(newUrl) {
-                            feedbackIframe.src = newUrl;
-                        }
-                    }
+                    applyLang(currentLang);
                 });
             }
 
@@ -519,8 +527,9 @@
             
             // --- 2. XỬ LÝ NGÀY GIỜ BẰNG FLATPICKR (ĐỊNH DẠNG DD/MM/YYYY) ---
             const datetimeInput = document.getElementById('cus_time');
+            let flatpickrInstance = null;
             if (datetimeInput) {
-                flatpickr(datetimeInput, {
+                flatpickrInstance = flatpickr(datetimeInput, {
                     enableTime: true,          // Bật tính năng chọn giờ
                     dateFormat: "d/m/Y H:i",   // Ép định dạng Ngày/Tháng/Năm Giờ:Phút
                     minDate: "today",          // Không cho chọn ngày trong quá khứ
@@ -538,8 +547,17 @@
                     const submitBtn = this.querySelector('button[type="submit"]');
 
                     if(!time) {
-                        alert(currentLang === 'en' ? "Please select a date and time!" : "Vui lòng chọn ngày và giờ dự kiến!");
+                        // Shake the input to indicate error — no alert() needed
+                        datetimeInput.style.borderColor = '#ef4444';
+                        datetimeInput.style.boxShadow = '0 0 0 3px rgba(239,68,68,0.15)';
                         datetimeInput.focus();
+                        const errMsg = currentLang === 'en' ? 'Please select a date and time!' : 'Vui lòng chọn ngày và giờ dự kiến!';
+                        datetimeInput.setAttribute('placeholder', errMsg);
+                        setTimeout(() => {
+                            datetimeInput.style.borderColor = '';
+                            datetimeInput.style.boxShadow = '';
+                            datetimeInput.setAttribute('placeholder', 'dd/mm/yyyy hh:mm');
+                        }, 3000);
                         return;
                     }
 
@@ -566,14 +584,18 @@
                                 showModal(`Cảm ơn anh ${name}.\nBarber House đã ghi nhận lịch hẹn của anh vào: ${formattedTime}.\nChúng tôi sẽ sớm gọi lại để xác nhận.`);
                             }
                             bookingForm.reset();
+                            // Reset flatpickr instance separately (form.reset() does not clear it)
+                            if (flatpickrInstance) flatpickrInstance.clear();
                         } else {
-                            console.log(json);
-                            alert(currentLang === 'en' ? "An error occurred, please try again later!" : "Có lỗi xảy ra, vui lòng thử lại sau!");
+                            console.error('Web3Forms error:', json);
+                            const errText = currentLang === 'en' ? 'An error occurred, please try again later!' : 'Có lỗi xảy ra, vui lòng thử lại sau!';
+                            showModal(errText);
                         }
                     })
                     .catch((error) => {
-                        console.log(error);
-                        alert(currentLang === 'en' ? "Network error! Please try again." : "Lỗi kết nối mạng! Vui lòng thử lại.");
+                        console.error('Network error:', error);
+                        const networkErrText = currentLang === 'en' ? 'Network error! Please check your connection and try again.' : 'Lỗi kết nối mạng! Vui lòng kiểm tra kết nối và thử lại.';
+                        showModal(networkErrText);
                     })
                     .finally(() => {
                         submitBtn.innerText = currentLang === 'en' ? "CONFIRM BOOKING" : "XÁC NHẬN ĐẶT LỊCH";
