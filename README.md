@@ -41,5 +41,25 @@ This is a static Front-end project. No complex build tools are required!
 2. Open `index.html` in any modern web browser.
 3. (Optional) For the best experience and to avoid CORS issues when fetching reviews, run a local development server (e.g., VS Code Live Server, or Python's `python -m http.server`).
 
+## 🤖 Google Reviews Automation (Make.com)
+
+This project uses a zero-cost, automated pipeline to sync 5-star Google Maps reviews to the website without using expensive 3rd-party widgets.
+
+**Workflow:**
+1. User clicks the "Review on Google" button on the website and leaves a review on Google Maps.
+2. [Make.com](https://www.make.com/) (Free tier) acts as an automation bridge.
+3. **Trigger:** Make.com watches for new reviews on Google Business Profile.
+4. **Action:** If the review is 5 stars, Make.com extracts the Name, Rating, and Comment, and adds a new row to the linked Google Sheet (`1F6YAkHVe4AQq3_6ElJivWSOWcd3vAZlmuQ9vDz6vFwc`).
+5. **Result:** The website dynamically fetches the updated Google Sheet data and displays the new review immediately.
+
+### Setup Instructions for Make.com:
+1. Create a new Scenario.
+2. Add **Google Business Profile** module -> `Watch Reviews`. Connect your Google account and select your Barber Shop location.
+3. Add **Google Sheets** module -> `Add a Row`. 
+   - Connect the same Google account.
+   - Select the Spreadsheet ID: `1F6YAkHVe4AQq3_6ElJivWSOWcd3vAZlmuQ9vDz6vFwc`.
+   - Map Column B to `Reviewer Name`, Column E to `Star Rating`, and Column F to `Comment`.
+4. Turn on Scheduling (e.g., Every 15 minutes) and Save.
+
 ---
 *Designed for the best premium grooming experience.*
