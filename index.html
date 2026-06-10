@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html id="html-root" lang="en" class="scroll-smooth" style="scroll-padding-top: 80px;">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Barber House - Men's Grooming Studio. Modern barber shop with skilled barbers, quick online booking, and no hidden fees. Located in Ho Chi Minh City.">
+    <meta name="description"
+        content="Barber House - Men's Grooming Studio. Modern barber shop with skilled barbers, quick online booking, and no hidden fees. Located in Ho Chi Minh City.">
     <meta name="theme-color" content="#0f172a">
     <title>Barber House - Men's Grooming Studio</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="assets/css/style.css">
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <style>
         /* Scroll-reveal animation */
@@ -17,14 +19,27 @@
             transform: translateY(28px);
             transition: opacity 0.6s ease, transform 0.6s ease;
         }
+
         .reveal.visible {
             opacity: 1;
             transform: translateY(0);
         }
-        .reveal-delay-1 { transition-delay: 0.1s; }
-        .reveal-delay-2 { transition-delay: 0.2s; }
-        .reveal-delay-3 { transition-delay: 0.3s; }
-        .reveal-delay-4 { transition-delay: 0.4s; }
+
+        .reveal-delay-1 {
+            transition-delay: 0.1s;
+        }
+
+        .reveal-delay-2 {
+            transition-delay: 0.2s;
+        }
+
+        .reveal-delay-3 {
+            transition-delay: 0.3s;
+        }
+
+        .reveal-delay-4 {
+            transition-delay: 0.4s;
+        }
 
         /* Active nav link */
         nav a.nav-active {
@@ -39,6 +54,7 @@
             transform: translateY(10px);
             transition: opacity 0.3s, transform 0.3s;
         }
+
         #back-to-top.show {
             opacity: 1;
             pointer-events: auto;
@@ -52,32 +68,58 @@
             animation: shimmer 1.5s infinite;
             border-radius: 16px;
         }
+
         @keyframes shimmer {
-            0% { background-position: 200% 0; }
-            100% { background-position: -200% 0; }
+            0% {
+                background-position: 200% 0;
+            }
+
+            100% {
+                background-position: -200% 0;
+            }
         }
 
         /* Gallery image overlay */
         .gallery-card .overlay {
             position: absolute;
             inset: 0;
-            background: linear-gradient(to top, rgba(15,23,42,0.7) 0%, transparent 50%);
+            background: linear-gradient(to top, rgba(15, 23, 42, 0.7) 0%, transparent 50%);
             opacity: 0;
             transition: opacity 0.4s ease;
         }
-        .gallery-card:hover .overlay { opacity: 1; }
+
+        .gallery-card:hover .overlay {
+            opacity: 1;
+        }
+
         .gallery-card img {
             transition: transform 0.5s ease;
         }
-        .gallery-card:hover img { transform: scale(1.07); }
+
+
+        .gallery-card:hover img {
+            transform: scale(1.07);
+        }
+
+        /* Hide scrollbar for carousels */
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
     </style>
 </head>
+
 <body class="min-h-screen bg-white text-slate-900">
 
     <header class="sticky top-0 z-50 border-b border-slate-200 bg-white/90 backdrop-blur">
         <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
             <div class="flex items-center gap-3">
-                <div class="flex h-11 w-11 items-center justify-center rounded-2xl bg-slate-900 text-lg text-white shadow-sm">
+                <div
+                    class="flex h-11 w-11 items-center justify-center rounded-2xl bg-slate-900 text-lg text-white shadow-sm">
                     ✂
                 </div>
                 <div>
@@ -87,35 +129,55 @@
             </div>
 
             <nav class="hidden items-center gap-8 text-sm font-medium md:flex">
-                <a href="#home" class="transition hover:text-blue-600 lang-el" data-vi="Trang chủ" data-en="Home">Home</a>
-                <a href="#services" class="transition hover:text-blue-600 lang-el" data-vi="Dịch vụ" data-en="Services">Services</a>
-                <a href="#gallery" class="transition hover:text-blue-600 lang-el" data-vi="Thư viện ảnh" data-en="Gallery">Gallery</a>
-                <a href="#booking" class="transition hover:text-blue-600 lang-el" data-vi="Liên hệ" data-en="Contact">Contact</a>
+                <a href="#home" class="transition hover:text-blue-600 lang-el" data-vi="Trang chủ"
+                    data-en="Home">Home</a>
+                <a href="#services" class="transition hover:text-blue-600 lang-el" data-vi="Dịch vụ"
+                    data-en="Services">Services</a>
+                <a href="#gallery" class="transition hover:text-blue-600 lang-el" data-vi="Thư viện ảnh"
+                    data-en="Gallery">Gallery</a>
+                <a href="#booking" class="transition hover:text-blue-600 lang-el" data-vi="Liên hệ"
+                    data-en="Contact">Contact</a>
             </nav>
 
             <div class="flex items-center gap-4">
-                <button id="lang-toggle" class="flex h-10 w-10 items-center justify-center rounded-full border-2 border-slate-200 bg-white text-xs font-black text-slate-600 transition hover:border-blue-600 hover:text-blue-600 cursor-pointer">
+                <button id="lang-toggle"
+                    class="flex h-11 w-11 items-center justify-center rounded-full border-2 border-slate-200 bg-white text-xs font-black text-slate-600 transition hover:border-blue-600 hover:text-blue-600 cursor-pointer">
                     VN
                 </button>
 
-                <a href="#booking" class="hidden md:inline-block rounded-2xl bg-blue-600 px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:-translate-y-0.5 lang-el" data-vi="ĐẶT LỊCH NGAY" data-en="BOOK NOW">
+                <a href="#booking"
+                    class="hidden md:inline-block rounded-2xl bg-blue-600 px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:-translate-y-0.5 lang-el"
+                    data-vi="ĐẶT LỊCH NGAY" data-en="BOOK NOW">
                     BOOK NOW
                 </a>
-                <button id="mobile-menu-btn" class="block md:hidden p-2 text-slate-600 hover:text-slate-900 focus:outline-none">
+                <button id="mobile-menu-btn"
+                    class="block md:hidden p-3 min-h-[44px] min-w-[44px] flex items-center justify-center text-slate-600 hover:text-slate-900 focus:outline-none">
                     <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16M4 18h16" />
                     </svg>
                 </button>
             </div>
         </div>
 
-        <div id="mobile-menu" class="hidden border-t border-slate-100 bg-white px-4 py-4 md:hidden shadow-md absolute w-full left-0">
+        <div id="mobile-menu"
+            class="hidden border-t border-slate-100 bg-white px-4 py-4 md:hidden shadow-md absolute w-full left-0">
             <div class="flex flex-col gap-4 text-sm font-medium">
-                <a href="#home" class="mobile-link text-slate-700 hover:text-blue-600 lang-el" data-vi="Trang chủ" data-en="Home">Home</a>
-                <a href="#services" class="mobile-link text-slate-700 hover:text-blue-600 lang-el" data-vi="Dịch vụ" data-en="Services">Services</a>
-                <a href="#gallery" class="mobile-link text-slate-700 hover:text-blue-600 lang-el" data-vi="Thư viện ảnh" data-en="Gallery">Gallery</a>
-                <a href="#booking" class="mobile-link text-slate-700 hover:text-blue-600 lang-el" data-vi="Liên hệ" data-en="Contact">Contact</a>
-                <a href="#booking" class="mobile-link mt-2 rounded-xl bg-blue-600 px-4 py-3 text-center text-sm font-semibold text-white shadow-sm transition active:bg-blue-700 lang-el" data-vi="ĐẶT LỊCH NGAY" data-en="BOOK NOW">
+                <a href="#home"
+                    class="mobile-link block px-4 py-4 min-h-[44px] text-slate-700 hover:text-blue-600 lang-el"
+                    data-vi="Trang chủ" data-en="Home">Home</a>
+                <a href="#services"
+                    class="mobile-link block px-4 py-4 min-h-[44px] text-slate-700 hover:text-blue-600 lang-el"
+                    data-vi="Dịch vụ" data-en="Services">Services</a>
+                <a href="#gallery"
+                    class="mobile-link block px-4 py-4 min-h-[44px] text-slate-700 hover:text-blue-600 lang-el"
+                    data-vi="Thư viện ảnh" data-en="Gallery">Gallery</a>
+                <a href="#booking"
+                    class="mobile-link block px-4 py-4 min-h-[44px] text-slate-700 hover:text-blue-600 lang-el"
+                    data-vi="Liên hệ" data-en="Contact">Contact</a>
+                <a href="#booking"
+                    class="mobile-link mt-2 rounded-xl bg-blue-600 px-4 py-3 text-center text-sm font-semibold text-white shadow-sm transition active:bg-blue-700 lang-el"
+                    data-vi="ĐẶT LỊCH NGAY" data-en="BOOK NOW">
                     BOOK NOW
                 </a>
             </div>
@@ -125,70 +187,109 @@
     <main>
         <section id="home" class="relative overflow-hidden">
             <div class="absolute inset-0 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-700"></div>
-            <div class="absolute inset-0 opacity-20 [background-image:radial-gradient(circle_at_top_right,white,transparent_35%),radial-gradient(circle_at_bottom_left,white,transparent_25%)]"></div>
-            <div class="relative mx-auto grid max-w-7xl gap-10 px-4 py-20 sm:px-6 md:grid-cols-2 md:items-center lg:px-8 lg:py-28">
+            <div
+                class="absolute inset-0 opacity-20 [background-image:radial-gradient(circle_at_top_right,white,transparent_35%),radial-gradient(circle_at_bottom_left,white,transparent_25%)]">
+            </div>
+            <div
+                class="relative mx-auto grid max-w-7xl gap-10 px-4 py-20 sm:px-6 md:grid-cols-2 md:items-center lg:px-8 lg:py-28">
                 <div class="text-white">
-                    <span class="inline-flex rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm backdrop-blur lang-el" data-vi="Barber shop hiện đại • Chuyên phong cách nam" data-en="Modern Barber Shop • Men's Style Specialist">
+                    <span
+                        class="inline-flex rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm backdrop-blur lang-el"
+                        data-vi="Barber shop hiện đại • Chuyên phong cách nam"
+                        data-en="Modern Barber Shop • Men's Style Specialist">
                         Modern Barber Shop • Men's Style Specialist
                     </span>
-                    <h1 class="mt-6 text-4xl font-black leading-tight sm:text-5xl lg:text-6xl lang-el" data-vi="Định hình phong cách phái mạnh" data-en="Shaping Men's Style">
+                    <h1 class="mt-6 text-4xl font-black leading-tight sm:text-5xl lg:text-6xl lang-el"
+                        data-vi="Định hình phong cách phái mạnh" data-en="Shaping Men's Style">
                         Shaping Men's Style
                     </h1>
-                    <p class="mt-5 max-w-xl text-base leading-7 text-slate-200 sm:text-lg lang-el" data-vi="Hơn cả một mái tóc, đó là nghệ thuật. Không gian chỉn chu, thợ lành nghề, trải nghiệm thư giãn và đặt lịch nhanh ngay trên điện thoại." data-en="More than just a haircut, it's art. Neat space, skilled barbers, relaxing experience, and quick booking right on your phone.">
-                        More than just a haircut, it's art. Neat space, skilled barbers, relaxing experience, and quick booking right on your phone.
+                    <p class="mt-5 max-w-xl text-base leading-7 text-slate-200 sm:text-lg lang-el"
+                        data-vi="Hơn cả một mái tóc, đó là nghệ thuật. Không gian chỉn chu, thợ lành nghề, trải nghiệm thư giãn và đặt lịch nhanh ngay trên điện thoại."
+                        data-en="More than just a haircut, it's art. Neat space, skilled barbers, relaxing experience, and quick booking right on your phone.">
+                        More than just a haircut, it's art. Neat space, skilled barbers, relaxing experience, and quick
+                        booking right on your phone.
                     </p>
                     <div class="mt-8 flex flex-wrap gap-4">
-                        <a href="#booking" class="rounded-2xl bg-blue-600 px-6 py-3 font-semibold text-white transition hover:-translate-y-0.5 lang-el" data-vi="Đặt lịch ngay" data-en="Book Now">
+                        <a href="#booking"
+                            class="rounded-2xl bg-blue-600 px-6 py-3 font-semibold text-white transition hover:-translate-y-0.5 lang-el"
+                            data-vi="Đặt lịch ngay" data-en="Book Now">
                             Book Now
                         </a>
-                        <a href="#services" class="rounded-2xl border border-white/20 bg-white/10 px-6 py-3 font-semibold text-white backdrop-blur transition hover:bg-white/20 lang-el" data-vi="Xem bảng giá" data-en="View Prices">
+                        <a href="#services"
+                            class="rounded-2xl border border-white/20 bg-white/10 px-6 py-3 font-semibold text-white backdrop-blur transition hover:bg-white/20 lang-el"
+                            data-vi="Xem bảng giá" data-en="View Prices">
                             View Prices
                         </a>
                     </div>
                 </div>
 
                 <div class="rounded-[2rem] border border-white/10 bg-white/10 p-4 shadow-2xl backdrop-blur">
-                    <div class="grid gap-4 sm:grid-cols-2">
-                        <div class="rounded-[1.5rem] overflow-hidden shadow-sm transition hover:-translate-y-1 relative">
-                            <img src="https://images.unsplash.com/photo-1622286343920-86a58df8ef1d?w=400&h=300&fit=crop&q=80" 
-                                 alt="Modern undercut hairstyle" 
-                                 class="w-full h-48 object-cover" loading="lazy">
-                            <div class="bg-slate-200/90 p-5 text-slate-900">
-                                <p class="text-sm font-semibold uppercase tracking-[0.2em] text-slate-500 lang-el" data-vi="Mẫu tóc hot" data-en="Trending">Trending</p>
-                                <p class="mt-1 text-lg font-bold lang-el" data-vi="Sạch, chill, nam tính như undercut" data-en="Clean, chill, masculine like undercut">Clean, chill, masculine like undercut</p>
+                    <div id="home-banner-track" class="flex gap-4 overflow-x-auto snap-x snap-mandatory hide-scrollbar pb-2">
+                        <div class="shrink-0 w-full snap-center rounded-[1.5rem] overflow-hidden shadow-sm transition hover:-translate-y-1 relative group">
+                            <img src="https://images.unsplash.com/photo-1599351431202-1e0f0137899a?w=400&h=300&fit=crop&q=80"
+                                alt="Modern undercut hairstyle" class="w-full h-[350px] object-cover transition duration-500 group-hover:scale-105" loading="lazy">
+                            <div class="absolute bottom-0 left-0 w-full bg-slate-900/80 p-5 text-white backdrop-blur">
+                                <p class="text-sm font-semibold uppercase tracking-[0.2em] text-blue-400 lang-el"
+                                    data-vi="Mẫu tóc hot" data-en="Trending">Trending</p>
+                                <p class="mt-1 text-lg font-bold lang-el" data-vi="Sạch, chill, nam tính như undercut"
+                                    data-en="Clean, chill, masculine like undercut">Clean, chill, masculine like
+                                    undercut</p>
                             </div>
                         </div>
-                        <div class="rounded-[1.5rem] overflow-hidden shadow-sm transition hover:-translate-y-1 relative">
-                            <img src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=400&h=300&fit=crop&q=80" 
-                                 alt="Classic side part hairstyle" 
-                                 class="w-full h-48 object-cover" loading="lazy">
-                            <div class="bg-slate-900/90 p-5 text-white">
-                                <p class="text-sm font-semibold uppercase tracking-[0.2em] text-slate-400 lang-el" data-vi="Mẫu tóc hot" data-en="Trending">Trending</p>
-                                <p class="mt-1 text-lg font-bold lang-el" data-vi="Cổ điển classic như side part" data-en="Classic and elegant like side part">Classic and elegant like side part</p>
+                        <div class="shrink-0 w-full snap-center rounded-[1.5rem] overflow-hidden shadow-sm transition hover:-translate-y-1 relative group">
+                            <img src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=400&h=300&fit=crop&q=80"
+                                alt="Classic side part hairstyle" class="w-full h-[350px] object-cover transition duration-500 group-hover:scale-105" loading="lazy">
+                            <div class="absolute bottom-0 left-0 w-full bg-slate-900/80 p-5 text-white backdrop-blur">
+                                <p class="text-sm font-semibold uppercase tracking-[0.2em] text-blue-400 lang-el"
+                                    data-vi="Mẫu tóc hot" data-en="Trending">Trending</p>
+                                <p class="mt-1 text-lg font-bold lang-el" data-vi="Cổ điển classic như side part"
+                                    data-en="Classic and elegant like side part">Classic and elegant like side part</p>
+                            </div>
+                        </div>
+                    
+                        <div class="shrink-0 w-full snap-center rounded-[1.5rem] overflow-hidden shadow-sm transition hover:-translate-y-1 relative group">
+                            <img src="https://images.unsplash.com/photo-1593702288056-ccde251c6e1e?w=400&h=300&fit=crop&q=80"
+                                alt="Modern taper fade hairstyle" class="w-full h-[350px] object-cover transition duration-500 group-hover:scale-105" loading="lazy">
+                            <div class="absolute bottom-0 left-0 w-full bg-slate-900/80 p-5 text-white backdrop-blur">
+                                <p class="text-sm font-semibold uppercase tracking-[0.2em] text-blue-400 lang-el"
+                                    data-vi="Mẫu tóc hot" data-en="Trending">Trending</p>
+                                <p class="mt-1 text-lg font-bold lang-el" data-vi="Gọn gàng với Taper Fade"
+                                    data-en="Neat and clean with Taper Fade">Neat and clean with Taper Fade</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
+</section>
+
+        
 
         <section class="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
-            <div class="grid gap-8 rounded-[2rem] bg-slate-50 p-8 md:grid-cols-[1.2fr_0.8fr] md:p-10 border border-slate-100">
+            <div
+                class="grid gap-8 rounded-[2rem] bg-slate-50 p-8 md:grid-cols-[1.2fr_0.8fr] md:p-10 border border-slate-100">
                 <div>
-                    <p class="text-sm font-bold uppercase tracking-[0.25em] text-blue-600 lang-el" data-vi="Về chúng tôi" data-en="About Us">About Us</p>
-                    <h2 class="mt-3 text-3xl font-black sm:text-4xl text-slate-900 lang-el" data-vi="Phong cách hiện đại, dịch vụ chuyên nghiệp" data-en="Modern style, professional service">Modern style, professional service</h2>
-                    <p class="mt-5 max-w-3xl text-slate-600 leading-7 lang-el" data-vi="Barber House theo đuổi tinh thần trẻ trung, hiện đại và chỉn chu trong từng đường kéo. Chúng tôi không chỉ cắt tóc mà còn giúp khách hàng tìm ra kiểu tóc phù hợp với khuôn mặt, phong cách sống và cá tính riêng." data-en="Barber House pursues a youthful, modern spirit and precision in every cut. We don't just cut hair, we help you find the hairstyle that suits your face, lifestyle, and unique personality.">
-                        Barber House pursues a youthful, modern spirit and precision in every cut. We don't just cut hair, we help you find the hairstyle that suits your face, lifestyle, and unique personality.
+                    <p class="text-sm font-bold uppercase tracking-[0.25em] text-blue-600 lang-el"
+                        data-vi="Về chúng tôi" data-en="About Us">About Us</p>
+                    <h2 class="mt-3 text-3xl font-black sm:text-4xl text-slate-900 lang-el"
+                        data-vi="Phong cách hiện đại, dịch vụ chuyên nghiệp"
+                        data-en="Modern style, professional service">Modern style, professional service</h2>
+                    <p class="mt-5 max-w-3xl text-slate-600 leading-7 lang-el"
+                        data-vi="Barber House theo đuổi tinh thần trẻ trung, hiện đại và chỉn chu trong từng đường kéo. Chúng tôi không chỉ cắt tóc mà còn giúp khách hàng tìm ra kiểu tóc phù hợp với khuôn mặt, phong cách sống và cá tính riêng."
+                        data-en="Barber House pursues a youthful, modern spirit and precision in every cut. We don't just cut hair, we help you find the hairstyle that suits your face, lifestyle, and unique personality.">
+                        Barber House pursues a youthful, modern spirit and precision in every cut. We don't just cut
+                        hair, we help you find the hairstyle that suits your face, lifestyle, and unique personality.
                     </p>
                 </div>
                 <div class="grid gap-4 sm:grid-cols-2 md:grid-cols-1">
                     <div class="rounded-2xl bg-white p-5 shadow-sm border border-slate-100">
                         <p class="text-4xl font-black text-blue-600">500+</p>
-                        <p class="mt-2 text-slate-600 font-medium lang-el" data-vi="Lượt khách hài lòng" data-en="Happy Clients">Happy Clients</p>
+                        <p class="mt-2 text-slate-600 font-medium lang-el" data-vi="Lượt khách hài lòng"
+                            data-en="Happy Clients">Happy Clients</p>
                     </div>
                     <div class="rounded-2xl bg-white p-5 shadow-sm border border-slate-100">
                         <p class="text-4xl font-black text-blue-600">4.9/5</p>
-                        <p class="mt-2 text-slate-600 font-medium lang-el" data-vi="Đánh giá trung bình" data-en="Average Rating">Average Rating</p>
+                        <p class="mt-2 text-slate-600 font-medium lang-el" data-vi="Đánh giá trung bình"
+                            data-en="Average Rating">Average Rating</p>
                     </div>
                 </div>
             </div>
@@ -197,112 +298,199 @@
         <section id="services" class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
             <div class="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
                 <div>
-                    <p class="text-sm font-bold uppercase tracking-[0.25em] text-blue-600 lang-el" data-vi="Dịch vụ nổi bật" data-en="Featured Services">Featured Services</p>
-                    <h2 class="mt-3 text-3xl font-black sm:text-4xl lang-el" data-vi="Những lựa chọn được yêu thích nhất" data-en="Most Popular Choices">Most Popular Choices</h2>
+                    <p class="text-sm font-bold uppercase tracking-[0.25em] text-blue-600 lang-el"
+                        data-vi="Dịch vụ nổi bật" data-en="Featured Services">Featured Services</p>
+                    <h2 class="mt-3 text-3xl font-black sm:text-4xl lang-el"
+                        data-vi="Những lựa chọn được yêu thích nhất" data-en="Most Popular Choices">Most Popular Choices
+                    </h2>
                 </div>
-                <p class="max-w-xl text-slate-600 lang-el" data-vi="Tập trung vào các dịch vụ “đỉnh” giúp khách hàng ra quyết định nhanh và đặt lịch dễ hơn." data-en="Focusing on top-tier services to help clients make quick decisions and book easily.">
+                <p class="max-w-xl text-slate-600 lang-el"
+                    data-vi="Tập trung vào các dịch vụ “đỉnh” giúp khách hàng ra quyết định nhanh và đặt lịch dễ hơn."
+                    data-en="Focusing on top-tier services to help clients make quick decisions and book easily.">
                     Focusing on top-tier services to help clients make quick decisions and book easily.
                 </p>
             </div>
 
-            <div class="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
-                <div class="group rounded-[2rem] border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-lg hover:border-blue-200">
-                    <div class="flex h-14 w-14 items-center justify-center rounded-2xl bg-blue-50 text-2xl transition group-hover:bg-blue-100 group-hover:scale-110">✂️</div>
-                    <h3 class="mt-5 text-xl font-bold lang-el" data-vi="Combo Cắt Gội VIP" data-en="VIP Cut & Wash Combo">VIP Cut & Wash Combo</h3>
-                    <p class="mt-3 text-sm leading-6 text-slate-600 lang-el" data-vi="Cắt tóc, gội thư giãn, sấy tạo kiểu và tư vấn phong cách phù hợp khuôn mặt." data-en="Haircut, relaxing wash, styling, and consultation for a hairstyle that suits your face.">Haircut, relaxing wash, styling, and consultation for a hairstyle that suits your face.</p>
+            <div class="mt-10 grid gap-6 grid-cols-1 md:grid-cols-2 xl:grid-cols-4">
+                <div
+                    class="group rounded-[2rem] border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-lg hover:border-blue-200">
+                    <div
+                        class="flex h-14 w-14 items-center justify-center rounded-2xl bg-blue-50 text-2xl transition group-hover:bg-blue-100 group-hover:scale-110">
+                        ✂️</div>
+                    <h3 class="mt-5 text-xl font-bold lang-el" data-vi="Combo Cắt Gội VIP"
+                        data-en="VIP Cut & Wash Combo">VIP Cut & Wash Combo</h3>
+                    <p class="mt-3 text-sm leading-6 text-slate-600 lang-el"
+                        data-vi="Cắt tóc, gội thư giãn, sấy tạo kiểu và tư vấn phong cách phù hợp khuôn mặt."
+                        data-en="Haircut, relaxing wash, styling, and consultation for a hairstyle that suits your face.">
+                        Haircut, relaxing wash, styling, and consultation for a hairstyle that suits your face.</p>
                     <div class="mt-6 flex items-center justify-between border-t border-slate-100 pt-4">
-                        <span class="text-lg font-black text-blue-600">149.000đ</span>
-                        <a href="#booking" class="text-sm font-bold text-slate-900 hover:text-blue-600 transition lang-el" data-vi="Đặt lịch &rarr;" data-en="Book &rarr;">Book &rarr;</a>
+                        <span class="text-lg font-black text-blue-600">$40</span>
+                        <a href="#booking"
+                            class="text-sm font-bold text-slate-900 hover:text-blue-600 transition lang-el"
+                            data-vi="Đặt lịch &rarr;" data-en="Book &rarr;">Book &rarr;</a>
                     </div>
                 </div>
 
-                <div class="group rounded-[2rem] border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-lg hover:border-blue-200">
-                    <div class="flex h-14 w-14 items-center justify-center rounded-2xl bg-blue-50 text-2xl transition group-hover:bg-blue-100 group-hover:scale-110">✨</div>
-                    <h3 class="mt-5 text-xl font-bold lang-el" data-vi="Uốn Tóc Nam" data-en="Men's Perm">Men's Perm</h3>
-                    <p class="mt-3 text-sm leading-6 text-slate-600 lang-el" data-vi="Giữ nếp tự nhiên, hiện đại, phù hợp nhiều phong cách từ Hàn Quốc đến street style." data-en="Natural and modern hold, suitable for various styles from Korean to street style.">Natural and modern hold, suitable for various styles from Korean to street style.</p>
+                <div
+                    class="group rounded-[2rem] border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-lg hover:border-blue-200">
+                    <div
+                        class="flex h-14 w-14 items-center justify-center rounded-2xl bg-blue-50 text-2xl transition group-hover:bg-blue-100 group-hover:scale-110">
+                        ✨</div>
+                    <h3 class="mt-5 text-xl font-bold lang-el" data-vi="Uốn Tóc Nam" data-en="Men's Perm">Men's Perm
+                    </h3>
+                    <p class="mt-3 text-sm leading-6 text-slate-600 lang-el"
+                        data-vi="Giữ nếp tự nhiên, hiện đại, phù hợp nhiều phong cách từ Hàn Quốc đến street style."
+                        data-en="Natural and modern hold, suitable for various styles from Korean to street style.">
+                        Natural and modern hold, suitable for various styles from Korean to street style.</p>
                     <div class="mt-6 flex items-center justify-between border-t border-slate-100 pt-4">
-                        <span class="text-lg font-black text-blue-600">399.000đ</span>
-                        <a href="#booking" class="text-sm font-bold text-slate-900 hover:text-blue-600 transition lang-el" data-vi="Đặt lịch &rarr;" data-en="Book &rarr;">Book &rarr;</a>
+                        <span class="text-lg font-black text-blue-600">$60</span>
+                        <a href="#booking"
+                            class="text-sm font-bold text-slate-900 hover:text-blue-600 transition lang-el"
+                            data-vi="Đặt lịch &rarr;" data-en="Book &rarr;">Book &rarr;</a>
                     </div>
                 </div>
 
-                <div class="group rounded-[2rem] border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-lg hover:border-blue-200">
-                    <div class="flex h-14 w-14 items-center justify-center rounded-2xl bg-blue-50 text-2xl transition group-hover:bg-blue-100 group-hover:scale-110">🪒</div>
-                    <h3 class="mt-5 text-xl font-bold lang-el" data-vi="Cạo Râu Khăn Nóng" data-en="Hot Towel Shave">Hot Towel Shave</h3>
-                    <p class="mt-3 text-sm leading-6 text-slate-600 lang-el" data-vi="Làm sạch, thư giãn và tạo cảm giác sang trọng với trải nghiệm chuẩn barber shop." data-en="Clean, relax, and create a luxurious feel with a standard barber shop experience.">Clean, relax, and create a luxurious feel with a standard barber shop experience.</p>
+                <div
+                    class="group rounded-[2rem] border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-lg hover:border-blue-200">
+                    <div
+                        class="flex h-14 w-14 items-center justify-center rounded-2xl bg-blue-50 text-2xl transition group-hover:bg-blue-100 group-hover:scale-110">
+                        🪒</div>
+                    <h3 class="mt-5 text-xl font-bold lang-el" data-vi="Cạo Râu Khăn Nóng" data-en="Hot Towel Shave">Hot
+                        Towel Shave</h3>
+                    <p class="mt-3 text-sm leading-6 text-slate-600 lang-el"
+                        data-vi="Làm sạch, thư giãn và tạo cảm giác sang trọng với trải nghiệm chuẩn barber shop."
+                        data-en="Clean, relax, and create a luxurious feel with a standard barber shop experience.">
+                        Clean, relax, and create a luxurious feel with a standard barber shop experience.</p>
                     <div class="mt-6 flex items-center justify-between border-t border-slate-100 pt-4">
-                        <span class="text-lg font-black text-blue-600">99.000đ</span>
-                        <a href="#booking" class="text-sm font-bold text-slate-900 hover:text-blue-600 transition lang-el" data-vi="Đặt lịch &rarr;" data-en="Book &rarr;">Book &rarr;</a>
+                        <span class="text-lg font-black text-blue-600">$30</span>
+                        <a href="#booking"
+                            class="text-sm font-bold text-slate-900 hover:text-blue-600 transition lang-el"
+                            data-vi="Đặt lịch &rarr;" data-en="Book &rarr;">Book &rarr;</a>
                     </div>
                 </div>
 
-                <div class="group rounded-[2rem] border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-lg hover:border-blue-200">
-                    <div class="flex h-14 w-14 items-center justify-center rounded-2xl bg-blue-50 text-2xl transition group-hover:bg-blue-100 group-hover:scale-110">🎨</div>
-                    <h3 class="mt-5 text-xl font-bold lang-el" data-vi="Nhuộm Tóc Thời Trang" data-en="Fashion Hair Dye">Fashion Hair Dye</h3>
-                    <p class="mt-3 text-sm leading-6 text-slate-600 lang-el" data-vi="Màu nhuộm cá tính, xử lý nền và chăm sóc tóc kỹ lưỡng để giữ màu lâu hơn." data-en="Unique colors, careful base processing, and hair care to keep the color longer.">Unique colors, careful base processing, and hair care to keep the color longer.</p>
+                <div
+                    class="group rounded-[2rem] border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-lg hover:border-blue-200">
+                    <div
+                        class="flex h-14 w-14 items-center justify-center rounded-2xl bg-blue-50 text-2xl transition group-hover:bg-blue-100 group-hover:scale-110">
+                        🎨</div>
+                    <h3 class="mt-5 text-xl font-bold lang-el" data-vi="Nhuộm Tóc Thời Trang"
+                        data-en="Fashion Hair Dye">Fashion Hair Dye</h3>
+                    <p class="mt-3 text-sm leading-6 text-slate-600 lang-el"
+                        data-vi="Màu nhuộm cá tính, xử lý nền và chăm sóc tóc kỹ lưỡng để giữ màu lâu hơn."
+                        data-en="Unique colors, careful base processing, and hair care to keep the color longer.">Unique
+                        colors, careful base processing, and hair care to keep the color longer.</p>
                     <div class="mt-6 flex items-center justify-between border-t border-slate-100 pt-4">
-                        <span class="text-lg font-black text-blue-600">499.000đ</span>
-                        <a href="#booking" class="text-sm font-bold text-slate-900 hover:text-blue-600 transition lang-el" data-vi="Đặt lịch &rarr;" data-en="Book &rarr;">Book &rarr;</a>
+                        <span class="text-lg font-black text-blue-600">$80</span>
+                        <a href="#booking"
+                            class="text-sm font-bold text-slate-900 hover:text-blue-600 transition lang-el"
+                            data-vi="Đặt lịch &rarr;" data-en="Book &rarr;">Book &rarr;</a>
                     </div>
                 </div>
             </div>
 
             <div class="mt-14 grid gap-8 lg:grid-cols-[0.95fr_1.05fr]">
-                <div class="rounded-[2rem] bg-slate-900 p-8 text-white flex flex-col justify-center relative overflow-hidden">
+                <div
+                    class="rounded-[2rem] bg-slate-900 p-8 text-white flex flex-col justify-center relative overflow-hidden">
                     <div class="absolute -right-20 -top-20 h-64 w-64 rounded-full bg-blue-600/20 blur-3xl"></div>
                     <div class="relative z-10">
-                        <p class="text-sm font-bold uppercase tracking-[0.25em] text-blue-400 lang-el" data-vi="Bảng giá & dịch vụ" data-en="Pricing & Services">Pricing & Services</p>
-                        <h3 class="mt-3 text-2xl font-black sm:text-3xl leading-snug lang-el" data-vi="Minh bạch, rõ ràng,<br>dễ chọn" data-en="Transparent, clear,<br>easy to choose">Transparent, clear,<br>easy to choose</h3>
-                        <p class="mt-4 text-slate-300 leading-7 lang-el" data-vi="Giá dịch vụ được trình bày rõ ràng để khách hàng dễ dàng tham khảo trước khi đặt lịch, không phát sinh chi phí ẩn." data-en="Service prices are clearly presented for customers to reference easily before booking, with no hidden fees.">Service prices are clearly presented for customers to reference easily before booking, with no hidden fees.</p>
+                        <p class="text-sm font-bold uppercase tracking-[0.25em] text-blue-400 lang-el"
+                            data-vi="Bảng giá & dịch vụ" data-en="Pricing & Services">Pricing & Services</p>
+                        <h3 class="mt-3 text-2xl font-black sm:text-3xl leading-snug lang-el"
+                            data-vi="Minh bạch, rõ ràng,<br>dễ chọn" data-en="Transparent, clear,<br>easy to choose">
+                            Transparent, clear,<br>easy to choose</h3>
+                        <p class="mt-4 text-slate-300 leading-7 lang-el"
+                            data-vi="Giá dịch vụ được trình bày rõ ràng để khách hàng dễ dàng tham khảo trước khi đặt lịch, không phát sinh chi phí ẩn."
+                            data-en="Service prices are clearly presented for customers to reference easily before booking, with no hidden fees.">
+                            Service prices are clearly presented for customers to reference easily before booking, with
+                            no hidden fees.</p>
                     </div>
                 </div>
                 <div class="overflow-hidden rounded-[2rem] border border-slate-200 bg-white shadow-sm">
-                    <div class="grid grid-cols-2 border-b border-slate-200 bg-slate-50 px-6 py-4 text-sm font-bold uppercase tracking-wide text-slate-500">
+                    <div
+                        class="grid grid-cols-2 border-b border-slate-200 bg-slate-50 px-6 py-4 text-sm font-bold uppercase tracking-wide text-slate-500">
                         <span class="lang-el" data-vi="Dịch vụ" data-en="Service">Service</span>
-                        <span class="text-right lang-el" data-vi="Giá niêm yết" data-en="Listed Price">Listed Price</span>
+                        <span class="text-right lang-el" data-vi="Giá niêm yết" data-en="Listed Price">Listed
+                            Price</span>
                     </div>
                     <div class="flex flex-col">
-                        <div class="grid grid-cols-2 items-center border-b border-slate-100 px-6 py-4 hover:bg-slate-50 transition">
-                            <span class="font-medium text-slate-800 lang-el" data-vi="Cắt tóc nam cơ bản" data-en="Basic Men's Haircut">Basic Men's Haircut</span>
-                            <span class="text-right font-bold text-blue-600">89.000đ</span>
+                        <div
+                            class="grid grid-cols-2 items-center border-b border-slate-100 px-6 py-4 hover:bg-slate-50 transition">
+                            <span class="font-medium text-slate-800 lang-el" data-vi="Cắt tóc nam cơ bản"
+                                data-en="Basic Men's Haircut">Basic Men's Haircut</span>
+                            <span class="text-right font-bold text-blue-600">$25</span>
                         </div>
-                        <div class="grid grid-cols-2 items-center border-b border-slate-100 px-6 py-4 hover:bg-slate-50 transition">
-                            <span class="font-medium text-slate-800 lang-el" data-vi="Cắt + gội + tạo kiểu" data-en="Cut + Wash + Style">Cut + Wash + Style</span>
-                            <span class="text-right font-bold text-blue-600">129.000đ</span>
+                        <div
+                            class="grid grid-cols-2 items-center border-b border-slate-100 px-6 py-4 hover:bg-slate-50 transition">
+                            <span class="font-medium text-slate-800 lang-el" data-vi="Cắt + gội + tạo kiểu"
+                                data-en="Cut + Wash + Style">Cut + Wash + Style</span>
+                            <span class="text-right font-bold text-blue-600">$35</span>
                         </div>
                         <div class="grid grid-cols-2 items-center border-b border-slate-100 px-6 py-4 bg-blue-50/50">
-                            <span class="font-bold text-slate-900 lang-el" data-vi="Combo Cắt Gội VIP ⭐" data-en="VIP Cut & Wash Combo ⭐">VIP Cut & Wash Combo ⭐</span>
-                            <span class="text-right font-black text-blue-600">149.000đ</span>
+                            <span class="font-bold text-slate-900 lang-el" data-vi="Combo Cắt Gội VIP ⭐"
+                                data-en="VIP Cut & Wash Combo ⭐">VIP Cut & Wash Combo ⭐</span>
+                            <span class="text-right font-black text-blue-600">$40</span>
                         </div>
-                        <div class="grid grid-cols-2 items-center border-b border-slate-100 px-6 py-4 hover:bg-slate-50 transition">
-                            <span class="font-medium text-slate-800 lang-el" data-vi="Cạo râu khăn nóng" data-en="Hot Towel Shave">Hot Towel Shave</span>
-                            <span class="text-right font-bold text-blue-600">99.000đ</span>
+                        <div
+                            class="grid grid-cols-2 items-center border-b border-slate-100 px-6 py-4 hover:bg-slate-50 transition">
+                            <span class="font-medium text-slate-800 lang-el" data-vi="Cạo râu khăn nóng"
+                                data-en="Hot Towel Shave">Hot Towel Shave</span>
+                            <span class="text-right font-bold text-blue-600">$30</span>
                         </div>
-                        <div class="grid grid-cols-2 items-center border-b border-slate-100 px-6 py-4 hover:bg-slate-50 transition">
-                            <span class="font-medium text-slate-800 lang-el" data-vi="Uốn tóc nam" data-en="Men's Perm">Men's Perm</span>
-                            <span class="text-right font-bold text-blue-600">399.000đ</span>
+                        <div
+                            class="grid grid-cols-2 items-center border-b border-slate-100 px-6 py-4 hover:bg-slate-50 transition">
+                            <span class="font-medium text-slate-800 lang-el" data-vi="Uốn tóc nam"
+                                data-en="Men's Perm">Men's Perm</span>
+                            <span class="text-right font-bold text-blue-600">$60</span>
                         </div>
                         <div class="grid grid-cols-2 items-center px-6 py-4 hover:bg-slate-50 transition">
-                            <span class="font-medium text-slate-800 lang-el" data-vi="Nhuộm tóc thời trang" data-en="Fashion Hair Dye">Fashion Hair Dye</span>
-                            <span class="text-right font-bold text-blue-600">499.000đ</span>
+                            <span class="font-medium text-slate-800 lang-el" data-vi="Nhuộm tóc thời trang"
+                                data-en="Fashion Hair Dye">Fashion Hair Dye</span>
+                            <span class="text-right font-bold text-blue-600">$80</span>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
+        
+        
+        <section id="shop-interior" class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+            <div class="mb-8 text-center sm:text-left">
+                <p class="text-sm font-bold uppercase tracking-[0.25em] text-blue-600 lang-el" data-vi="Không gian tiệm" data-en="Shop Interior">Shop Interior</p>
+                <h2 class="mt-3 text-3xl font-black sm:text-4xl text-slate-900 lang-el" data-vi="Trải nghiệm dịch vụ đẳng cấp" data-en="Premium Service Experience">Premium Service Experience</h2>
+            </div>
+            <div id="interior-track" class="flex gap-6 overflow-x-auto snap-x snap-mandatory hide-scrollbar pb-8">
+                <!-- Interior Image 1 -->
+                <div class="group relative overflow-hidden rounded-[2rem] border border-slate-200 bg-white shadow-sm shrink-0 w-[85vw] sm:w-[60vw] lg:w-[45vw] snap-center">
+                    <img src="https://images.unsplash.com/photo-1534778356534-d3d45b6df1da?w=800&h=500&fit=crop&q=80" alt="Barber Shop Interior" class="w-full h-[300px] sm:h-[400px] object-cover transition duration-500 group-hover:scale-105" loading="lazy">
+                </div>
+                <!-- Interior Image 2 -->
+                <div class="group relative overflow-hidden rounded-[2rem] border border-slate-200 bg-white shadow-sm shrink-0 w-[85vw] sm:w-[60vw] lg:w-[45vw] snap-center">
+                    <img src="https://images.unsplash.com/photo-1621644026362-e64e528b80b5?w=800&h=500&fit=crop&q=80" alt="Barber Shop Mirrors" class="w-full h-[300px] sm:h-[400px] object-cover transition duration-500 group-hover:scale-105" loading="lazy">
+                </div>
+                <!-- Interior Image 3 -->
+                <div class="group relative overflow-hidden rounded-[2rem] border border-slate-200 bg-white shadow-sm shrink-0 w-[85vw] sm:w-[60vw] lg:w-[45vw] snap-center">
+                    <img src="https://images.unsplash.com/photo-1635273051936-f08a4f4bd0a9?w=800&h=500&fit=crop&q=80" alt="Barber Chair" class="w-full h-[300px] sm:h-[400px] object-cover transition duration-500 group-hover:scale-105" loading="lazy">
+                </div>
+                <!-- Interior Image 4 -->
+                <div class="group relative overflow-hidden rounded-[2rem] border border-slate-200 bg-white shadow-sm shrink-0 w-[85vw] sm:w-[60vw] lg:w-[45vw] snap-center">
+                    <img src="https://images.unsplash.com/photo-1520338801623-6b88fe32bbf2?w=800&h=500&fit=crop&q=80" alt="Barber Shop Tools" class="w-full h-[300px] sm:h-[400px] object-cover transition duration-500 group-hover:scale-105" loading="lazy">
+                </div>
+            </div>
+        </section>
         <section id="gallery" class="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
             <div class="mb-8 text-center sm:text-left">
-                <p class="text-sm font-bold uppercase tracking-[0.25em] text-blue-600 lang-el" data-vi="Thư viện ảnh" data-en="Gallery">Gallery</p>
-                <h2 class="mt-3 text-3xl font-black sm:text-4xl lang-el" data-vi="Những kiểu tóc đã thực hiện" data-en="Our Recent Work">Our Recent Work</h2>
+                <p class="text-sm font-bold uppercase tracking-[0.25em] text-blue-600 lang-el" data-vi="Thư viện ảnh"
+                    data-en="Gallery">Gallery</p>
+                <h2 class="mt-3 text-3xl font-black sm:text-4xl lang-el" data-vi="Những kiểu tóc đã thực hiện"
+                    data-en="Our Recent Work">Our Recent Work</h2>
             </div>
-            <div class="grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
+            <div id="gallery-track" class="flex gap-6 overflow-x-auto snap-x snap-mandatory hide-scrollbar pb-8">
                 <!-- Gallery Card 1 -->
-                <div class="gallery-card group relative overflow-hidden rounded-[2rem] border border-slate-200 bg-white shadow-sm cursor-pointer reveal">
+                <div class="gallery-card group relative overflow-hidden rounded-[2rem] border border-slate-200 bg-white shadow-sm cursor-pointer shrink-0 w-[85vw] sm:w-[45vw] lg:w-[30vw] snap-center">
                     <div class="relative h-72 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1622286343920-86a58df8ef1d?w=600&h=500&fit=crop&q=80"
-                             alt="Modern Fade hairstyle at Barber House"
-                             class="w-full h-full object-cover" loading="lazy">
+                        <img src="https://images.unsplash.com/photo-1622286343920-86a58df8ef1d?w=600&h=500&fit=crop&q=80" alt="Modern Fade hairstyle at Barber House" class="w-full h-full object-cover" loading="lazy">
                         <div class="overlay"></div>
                     </div>
                     <div class="flex items-center justify-between p-5 bg-white">
@@ -315,11 +503,9 @@
                 </div>
 
                 <!-- Gallery Card 2 -->
-                <div class="gallery-card group relative overflow-hidden rounded-[2rem] border border-slate-200 bg-white shadow-sm cursor-pointer reveal reveal-delay-1">
+                <div class="gallery-card group relative overflow-hidden rounded-[2rem] border border-slate-200 bg-white shadow-sm cursor-pointer shrink-0 w-[85vw] sm:w-[45vw] lg:w-[30vw] snap-center">
                     <div class="relative h-72 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=600&h=500&fit=crop&q=80"
-                             alt="Elegant Side Part hairstyle at Barber House"
-                             class="w-full h-full object-cover" loading="lazy">
+                        <img src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=600&h=500&fit=crop&q=80" alt="Elegant Side Part hairstyle at Barber House" class="w-full h-full object-cover" loading="lazy">
                         <div class="overlay"></div>
                     </div>
                     <div class="flex items-center justify-between p-5 bg-white">
@@ -331,11 +517,9 @@
                 </div>
 
                 <!-- Gallery Card 3 -->
-                <div class="gallery-card group relative overflow-hidden rounded-[2rem] border border-slate-200 bg-white shadow-sm cursor-pointer reveal reveal-delay-2">
+                <div class="gallery-card group relative overflow-hidden rounded-[2rem] border border-slate-200 bg-white shadow-sm cursor-pointer shrink-0 w-[85vw] sm:w-[45vw] lg:w-[30vw] snap-center">
                     <div class="relative h-72 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1599351431202-1e0f0137899a?w=600&h=500&fit=crop&q=80"
-                             alt="Youthful Texture hairstyle at Barber House"
-                             class="w-full h-full object-cover" loading="lazy">
+                        <img src="https://images.unsplash.com/photo-1599351431202-1e0f0137899a?w=600&h=500&fit=crop&q=80" alt="Youthful Texture hairstyle at Barber House" class="w-full h-full object-cover" loading="lazy">
                         <div class="overlay"></div>
                     </div>
                     <div class="flex items-center justify-between p-5 bg-white">
@@ -346,45 +530,100 @@
                         <span class="rounded-full bg-blue-50 text-blue-700 px-3 py-1.5 text-xs font-bold uppercase tracking-wider">Hot</span>
                     </div>
                 </div>
+
+                <!-- Gallery Card 4 -->
+                <div class="gallery-card group relative overflow-hidden rounded-[2rem] border border-slate-200 bg-white shadow-sm cursor-pointer shrink-0 w-[85vw] sm:w-[45vw] lg:w-[30vw] snap-center">
+                    <div class="relative h-72 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1605497788044-5a32c7078486?w=600&h=500&fit=crop&q=80" alt="Crop fade at Barber House" class="w-full h-full object-cover" loading="lazy">
+                        <div class="overlay"></div>
+                    </div>
+                    <div class="flex items-center justify-between p-5 bg-white">
+                        <div>
+                            <p class="text-xs font-bold uppercase tracking-[0.2em] text-slate-500 lang-el" data-vi="Mẫu 4" data-en="Style 4">Style 4</p>
+                            <h3 class="mt-1 text-xl font-bold lang-el" data-vi="Crop Fade" data-en="Crop Fade">Crop Fade</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gallery Card 5 -->
+                <div class="gallery-card group relative overflow-hidden rounded-[2rem] border border-slate-200 bg-white shadow-sm cursor-pointer shrink-0 w-[85vw] sm:w-[45vw] lg:w-[30vw] snap-center">
+                    <div class="relative h-72 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1585747860715-2ba37e788b70?w=600&h=500&fit=crop&q=80" alt="Classic Pompadour at Barber House" class="w-full h-full object-cover" loading="lazy">
+                        <div class="overlay"></div>
+                    </div>
+                    <div class="flex items-center justify-between p-5 bg-white">
+                        <div>
+                            <p class="text-xs font-bold uppercase tracking-[0.2em] text-slate-500 lang-el" data-vi="Mẫu 5" data-en="Style 5">Style 5</p>
+                            <h3 class="mt-1 text-xl font-bold lang-el" data-vi="Pompadour Cổ Điển" data-en="Classic Pompadour">Classic Pompadour</h3>
+                        </div>
+                        <span class="rounded-full bg-blue-50 text-blue-700 px-3 py-1.5 text-xs font-bold uppercase tracking-wider">Hot</span>
+                    </div>
+                </div>
+
+                <!-- Gallery Card 6 -->
+                <div class="gallery-card group relative overflow-hidden rounded-[2rem] border border-slate-200 bg-white shadow-sm cursor-pointer shrink-0 w-[85vw] sm:w-[45vw] lg:w-[30vw] snap-center">
+                    <div class="relative h-72 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1593702288056-ccde251c6e1e?w=600&h=500&fit=crop&q=80" alt="Modern Taper at Barber House" class="w-full h-full object-cover" loading="lazy">
+                        <div class="overlay"></div>
+                    </div>
+                    <div class="flex items-center justify-between p-5 bg-white">
+                        <div>
+                            <p class="text-xs font-bold uppercase tracking-[0.2em] text-slate-500 lang-el" data-vi="Mẫu 6" data-en="Style 6">Style 6</p>
+                            <h3 class="mt-1 text-xl font-bold lang-el" data-vi="Taper Hiện Đại" data-en="Modern Taper">Modern Taper</h3>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
 
         <section class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
             <div class="rounded-[2rem] border border-slate-200 bg-white p-6 sm:p-10 shadow-sm">
                 <div class="mb-8 text-center sm:text-left">
-                    <p class="text-sm font-bold uppercase tracking-[0.25em] text-blue-600 lang-el" data-vi="Góp ý & Đánh giá" data-en="Feedback & Rating">Feedback & Rating</p>
-                    <h2 class="mt-3 text-3xl font-black sm:text-4xl text-slate-900 lang-el" data-vi="Hãy cho chúng tôi biết cảm nhận của bạn" data-en="Let us know how you feel">Let us know how you feel</h2>
-                    <p class="mt-3 text-slate-600 max-w-2xl lang-el" data-vi="Mỗi đánh giá của bạn là động lực để đội ngũ Barber House không ngừng hoàn thiện và mang đến trải nghiệm tốt nhất." data-en="Every review is a motivation for Barber House to constantly improve and deliver the best experience.">Every review is a motivation for Barber House to constantly improve and deliver the best experience.</p>
+                    <p class="text-sm font-bold uppercase tracking-[0.25em] text-blue-600 lang-el"
+                        data-vi="Góp ý & Đánh giá" data-en="Feedback & Rating">Feedback & Rating</p>
+                    <h2 class="mt-3 text-3xl font-black sm:text-4xl text-slate-900 lang-el"
+                        data-vi="Hãy cho chúng tôi biết cảm nhận của bạn" data-en="Let us know how you feel">Let us know
+                        how you feel</h2>
+                    <p class="mt-3 text-slate-600 max-w-2xl lang-el"
+                        data-vi="Mỗi đánh giá của bạn là động lực để đội ngũ Barber House không ngừng hoàn thiện và mang đến trải nghiệm tốt nhất."
+                        data-en="Every review is a motivation for Barber House to constantly improve and deliver the best experience.">
+                        Every review is a motivation for Barber House to constantly improve and deliver the best
+                        experience.</p>
                 </div>
-                
-                <div class="relative w-full overflow-hidden rounded-2xl bg-slate-50 border border-slate-100 flex justify-center">
-                    <iframe id="feedback-form" 
+
+                <div
+                    class="relative w-full overflow-hidden rounded-2xl bg-slate-50 border border-slate-100 flex justify-center">
+                    <iframe id="feedback-form"
                         data-url-vi="https://docs.google.com/forms/d/e/1FAIpQLSdPxwNYdVQX8Akyp-ajMFlEmEEgQY9xtpKvFQqFv9r8c4qV2A/viewform?embedded=true&hl=vi"
                         data-url-en="https://docs.google.com/forms/d/e/1FAIpQLSdPxwNYdVQX8Akyp-ajMFlEmEEgQY9xtpKvFQqFv9r8c4qV2A/viewform?embedded=true&hl=en"
                         src="https://docs.google.com/forms/d/e/1FAIpQLSdPxwNYdVQX8Akyp-ajMFlEmEEgQY9xtpKvFQqFv9r8c4qV2A/viewform?embedded=true&hl=en"
-                        class="w-full max-w-3xl h-[600px] sm:h-[800px]"
-                        frameborder="0"
-                        marginheight="0"
+                        class="w-full max-w-3xl h-[600px] sm:h-[800px]" frameborder="0" marginheight="0"
                         marginwidth="0">
                         Loading…
                     </iframe>
                 </div>
             </div>
-            
+
             <div class="mt-8 rounded-[2rem] bg-blue-50/50 p-8 md:p-12 border border-blue-100">
                 <div class="mb-10 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
                     <div>
-                        <p class="text-sm font-bold uppercase tracking-[0.25em] text-blue-600 lang-el" data-vi="Đánh giá khách hàng" data-en="Customer Reviews">Customer Reviews</p>
-                        <h2 class="mt-3 text-3xl font-black sm:text-4xl text-slate-900 lang-el" data-vi="Uy tín đến từ trải nghiệm thật" data-en="Prestige from real experiences">Prestige from real experiences</h2>
+                        <p class="text-sm font-bold uppercase tracking-[0.25em] text-blue-600 lang-el"
+                            data-vi="Đánh giá khách hàng" data-en="Customer Reviews">Customer Reviews</p>
+                        <h2 class="mt-3 text-3xl font-black sm:text-4xl text-slate-900 lang-el"
+                            data-vi="Uy tín đến từ trải nghiệm thật" data-en="Prestige from real experiences">Prestige
+                            from real experiences</h2>
                     </div>
-                    <p class="text-slate-600 max-w-md sm:text-right lang-el" data-vi="Những lời khen của khách hàng là động lực lớn nhất để Barber House phát triển mỗi ngày." data-en="Compliments from our clients are the biggest motivation for Barber House to grow every day.">Compliments from our clients are the biggest motivation for Barber House to grow every day.</p>
+                    <p class="text-slate-600 max-w-md sm:text-right lang-el"
+                        data-vi="Những lời khen của khách hàng là động lực lớn nhất để Barber House phát triển mỗi ngày."
+                        data-en="Compliments from our clients are the biggest motivation for Barber House to grow every day.">
+                        Compliments from our clients are the biggest motivation for Barber House to grow every day.</p>
                 </div>
-                
-                <div id="review-container" class="grid gap-6 md:grid-cols-3">
+
+                <div id="review-container" class="flex gap-6 overflow-x-auto snap-x snap-mandatory hide-scrollbar pb-8">
                     <!-- Skeleton loaders while fetching -->
-                    <div class="skeleton h-48"></div>
-                    <div class="skeleton h-48"></div>
-                    <div class="skeleton h-48"></div>
+                    <div class="skeleton h-48 shrink-0 w-[85vw] sm:w-[45vw] lg:w-[30vw] snap-center"></div>
+                    <div class="skeleton h-48 shrink-0 w-[85vw] sm:w-[45vw] lg:w-[30vw] snap-center"></div>
+                    <div class="skeleton h-48 shrink-0 w-[85vw] sm:w-[45vw] lg:w-[30vw] snap-center"></div>
                 </div>
             </div>
         </section>
@@ -392,39 +631,53 @@
         <section id="booking" class="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
             <div class="grid gap-8 lg:grid-cols-[0.9fr_1.1fr]">
                 <div class="rounded-[2rem] bg-slate-900 p-8 text-white sm:p-10 relative overflow-hidden">
-                    <div class="absolute right-0 bottom-0 h-64 w-64 rounded-full bg-blue-600/10 blur-3xl translate-x-1/2 translate-y-1/2"></div>
+                    <div
+                        class="absolute right-0 bottom-0 h-64 w-64 rounded-full bg-blue-600/10 blur-3xl translate-x-1/2 translate-y-1/2">
+                    </div>
                     <div class="relative z-10">
-                        <p class="text-sm font-bold uppercase tracking-[0.25em] text-blue-400 lang-el" data-vi="Liên hệ & đặt lịch" data-en="Contact & Booking">Contact & Booking</p>
-                        <h2 class="mt-3 text-3xl font-black sm:text-4xl lang-el" data-vi="Giữ chỗ ngay trong 30 giây" data-en="Save your spot in 30 seconds">Save your spot in 30 seconds</h2>
+                        <p class="text-sm font-bold uppercase tracking-[0.25em] text-blue-400 lang-el"
+                            data-vi="Liên hệ & đặt lịch" data-en="Contact & Booking">Contact & Booking</p>
+                        <h2 class="mt-3 text-3xl font-black sm:text-4xl lang-el" data-vi="Giữ chỗ ngay trong 30 giây"
+                            data-en="Save your spot in 30 seconds">Save your spot in 30 seconds</h2>
                         <div class="mt-10 space-y-6 text-slate-300">
                             <div class="flex gap-4 items-start">
                                 <div class="mt-1 text-blue-400">📍</div>
                                 <div>
-                                    <p class="font-semibold text-white lang-el" data-vi="Địa chỉ" data-en="Address">Address</p>
-                                    <p class="mt-1 lang-el" data-vi="123 Nguyễn Văn A, Quận 1, TP. Hồ Chí Minh" data-en="123 Nguyen Van A, District 1, Ho Chi Minh City">123 Nguyen Van A, District 1, Ho Chi Minh City</p>
+                                    <p class="font-semibold text-white lang-el" data-vi="Địa chỉ" data-en="Address">
+                                        Address</p>
+                                    <p class="mt-1 lang-el" data-vi="123 Main Street, Houston, TX 77002"
+                                        data-en="123 Main Street, Houston, TX 77002">123 Main Street, Houston, TX 77002
+                                    </p>
                                 </div>
                             </div>
                             <div class="flex gap-4 items-start">
                                 <div class="mt-1 text-blue-400">📞</div>
                                 <div>
-                                    <p class="font-semibold text-white lang-el" data-vi="Điện thoại" data-en="Phone">Phone</p>
-                                    <p class="mt-1">0901 234 567</p>
+                                    <p class="font-semibold text-white lang-el" data-vi="Điện thoại" data-en="Phone">
+                                        Phone</p>
+                                    <p class="mt-1">+1 (555) 019-2834</p>
                                 </div>
                             </div>
                             <div class="flex gap-4 items-start">
                                 <div class="mt-1 text-blue-400">⏰</div>
                                 <div>
-                                    <p class="font-semibold text-white lang-el" data-vi="Giờ mở cửa" data-en="Working Hours">Working Hours</p>
-                                    <p class="mt-1 lang-el" data-vi="Thứ 2 - Chủ Nhật: 9h00 - 20h00" data-en="Mon - Sun: 9:00 AM - 8:00 PM">Mon - Sun: 9:00 AM - 8:00 PM</p>
+                                    <p class="font-semibold text-white lang-el" data-vi="Giờ mở cửa"
+                                        data-en="Working Hours">Working Hours</p>
+                                    <p class="mt-1 lang-el" data-vi="Thứ 2 - Chủ Nhật: 9h00 - 20h00"
+                                        data-en="Mon - Sun: 9:00 AM - 8:00 PM">Mon - Sun: 9:00 AM - 8:00 PM</p>
                                 </div>
                             </div>
-                            
+
                             <div class="pt-6 border-t border-white/10 mt-6">
-                                <p class="mb-4 font-semibold text-white lang-el" data-vi="Theo dõi chúng tôi" data-en="Follow us">Follow us</p>
+                                <p class="mb-4 font-semibold text-white lang-el" data-vi="Theo dõi chúng tôi"
+                                    data-en="Follow us">Follow us</p>
                                 <div class="flex gap-3">
-                                    <a href="#" rel="noopener noreferrer" target="_blank" class="rounded-xl border border-white/15 bg-white/5 px-5 py-2.5 text-sm font-semibold backdrop-blur transition hover:bg-white/20 hover:scale-105">Facebook</a>
-                                    <a href="#" rel="noopener noreferrer" target="_blank" class="rounded-xl border border-white/15 bg-white/5 px-5 py-2.5 text-sm font-semibold backdrop-blur transition hover:bg-white/20 hover:scale-105">TikTok</a>
-                                    <a href="#" rel="noopener noreferrer" target="_blank" class="rounded-xl border border-white/15 bg-white/5 px-5 py-2.5 text-sm font-semibold backdrop-blur transition hover:bg-white/20 hover:scale-105">Insta</a>
+                                    <a href="#" rel="noopener noreferrer" target="_blank"
+                                        class="rounded-xl border border-white/15 bg-white/5 px-5 py-3 min-h-[44px] text-sm font-semibold backdrop-blur transition hover:bg-white/20 hover:scale-105">Facebook</a>
+                                    <a href="#" rel="noopener noreferrer" target="_blank"
+                                        class="rounded-xl border border-white/15 bg-white/5 px-5 py-3 min-h-[44px] text-sm font-semibold backdrop-blur transition hover:bg-white/20 hover:scale-105">TikTok</a>
+                                    <a href="#" rel="noopener noreferrer" target="_blank"
+                                        class="rounded-xl border border-white/15 bg-white/5 px-5 py-3 min-h-[44px] text-sm font-semibold backdrop-blur transition hover:bg-white/20 hover:scale-105">Insta</a>
                                 </div>
                             </div>
                         </div>
@@ -432,48 +685,75 @@
                 </div>
 
                 <div class="rounded-[2rem] border border-slate-200 bg-white p-8 sm:p-10 shadow-sm">
-                   <form action="https://api.web3forms.com/submit" method="POST" id="booking-form">
+                    <form action="https://api.web3forms.com/submit" method="POST" id="booking-form">
                         <input type="hidden" name="access_key" value="e6e61688-7823-4900-945e-fd037ffb6865">
-                        
+
                         <input type="hidden" name="subject" value="🔔 NEW BOOKING FROM BARBER HOUSE WEBSITE!">
                         <input type="hidden" name="from_name" value="Barber House System">
 
                         <div class="grid gap-5 sm:grid-cols-2">
                             <div class="sm:col-span-1">
-                                <label class="mb-2 block text-sm font-bold text-slate-700"><span class="lang-el" data-vi="Họ và tên" data-en="Full Name">Full Name</span> <span class="text-red-500">*</span></label>
-                                <input type="text" id="cus_name" name="Full Name" required class="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3.5 outline-none transition focus:border-blue-600 focus:bg-white focus:ring-4 focus:ring-blue-600/10" placeholder="John Doe">
+                                <label class="mb-2 block text-sm font-bold text-slate-700"><span class="lang-el"
+                                        data-vi="Họ và tên" data-en="Full Name">Full Name</span> <span
+                                        class="text-red-500">*</span></label>
+                                <input type="text" id="cus_name" name="Full Name" required
+                                    class="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3.5 outline-none transition focus:border-blue-600 focus:bg-white focus:ring-4 focus:ring-blue-600/10"
+                                    placeholder="John Doe">
                             </div>
                             <div class="sm:col-span-1">
-                                <label class="mb-2 block text-sm font-bold text-slate-700"><span class="lang-el" data-vi="Số điện thoại" data-en="Phone Number">Phone Number</span> <span class="text-red-500">*</span></label>
-                                <input type="tel" id="cus_phone" name="Phone Number" required class="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3.5 outline-none transition focus:border-blue-600 focus:bg-white focus:ring-4 focus:ring-blue-600/10" placeholder="+84 xxx xxx xxx">
+                                <label class="mb-2 block text-sm font-bold text-slate-700"><span class="lang-el"
+                                        data-vi="Số điện thoại" data-en="Phone Number">Phone Number</span> <span
+                                        class="text-red-500">*</span></label>
+                                <input type="tel" id="cus_phone" name="Phone Number" required
+                                    class="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3.5 outline-none transition focus:border-blue-600 focus:bg-white focus:ring-4 focus:ring-blue-600/10"
+                                    placeholder="+1 (555) xxx-xxxx">
                             </div>
-                            
+
                             <div class="sm:col-span-2">
-                                <label class="mb-2 block text-sm font-bold text-slate-700"><span class="lang-el" data-vi="Địa chỉ" data-en="Address">Address</span> <span class="text-red-500">*</span></label>
-                                <input type="text" id="cus_address" name="Address" required class="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3.5 outline-none transition focus:border-blue-600 focus:bg-white focus:ring-4 focus:ring-blue-600/10" placeholder="...">
+                                <label class="mb-2 block text-sm font-bold text-slate-700"><span class="lang-el"
+                                        data-vi="Địa chỉ" data-en="Address">Address</span> <span
+                                        class="text-red-500">*</span></label>
+                                <input type="text" id="cus_address" name="Address" required
+                                    class="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3.5 outline-none transition focus:border-blue-600 focus:bg-white focus:ring-4 focus:ring-blue-600/10"
+                                    placeholder="...">
                             </div>
 
                             <div class="sm:col-span-1">
-                                <label class="mb-2 block text-sm font-bold text-slate-700 lang-el" data-vi="Dịch vụ mong muốn" data-en="Desired Service">Desired Service</label>
-                                <select id="cus_service" name="Service" class="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3.5 outline-none transition focus:border-blue-600 focus:bg-white focus:ring-4 focus:ring-blue-600/10 cursor-pointer text-slate-700">
-                                    <option value="Not selected" class="lang-el" data-vi="Chọn dịch vụ" data-en="Select Service">Select Service</option>
-                                    <option value="Basic Men's Haircut" class="lang-el" data-vi="Cắt tóc nam cơ bản" data-en="Basic Men's Haircut">Basic Men's Haircut</option>
-                                    <option value="VIP Cut & Wash Combo" class="lang-el" data-vi="Combo Cắt Gội VIP" data-en="VIP Cut & Wash Combo">VIP Cut & Wash Combo</option>
-                                    <option value="Men's Perm" class="lang-el" data-vi="Uốn tóc nam" data-en="Men's Perm">Men's Perm</option>
-                                    <option value="Hot Towel Shave" class="lang-el" data-vi="Cạo râu khăn nóng" data-en="Hot Towel Shave">Hot Towel Shave</option>
-                                    <option value="Fashion Hair Dye" class="lang-el" data-vi="Nhuộm tóc thời trang" data-en="Fashion Hair Dye">Fashion Hair Dye</option>
+                                <label class="mb-2 block text-sm font-bold text-slate-700 lang-el"
+                                    data-vi="Dịch vụ mong muốn" data-en="Desired Service">Desired Service</label>
+                                <select id="cus_service" name="Service"
+                                    class="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3.5 outline-none transition focus:border-blue-600 focus:bg-white focus:ring-4 focus:ring-blue-600/10 cursor-pointer text-slate-700">
+                                    <option value="Not selected" class="lang-el" data-vi="Chọn dịch vụ"
+                                        data-en="Select Service">Select Service</option>
+                                    <option value="Basic Men's Haircut" class="lang-el" data-vi="Cắt tóc nam cơ bản"
+                                        data-en="Basic Men's Haircut">Basic Men's Haircut</option>
+                                    <option value="VIP Cut & Wash Combo" class="lang-el" data-vi="Combo Cắt Gội VIP"
+                                        data-en="VIP Cut & Wash Combo">VIP Cut & Wash Combo</option>
+                                    <option value="Men's Perm" class="lang-el" data-vi="Uốn tóc nam"
+                                        data-en="Men's Perm">Men's Perm</option>
+                                    <option value="Hot Towel Shave" class="lang-el" data-vi="Cạo râu khăn nóng"
+                                        data-en="Hot Towel Shave">Hot Towel Shave</option>
+                                    <option value="Fashion Hair Dye" class="lang-el" data-vi="Nhuộm tóc thời trang"
+                                        data-en="Fashion Hair Dye">Fashion Hair Dye</option>
                                 </select>
                             </div>
                             <div class="sm:col-span-1">
-                                <label class="mb-2 block text-sm font-bold text-slate-700 lang-el" data-vi="Ngày & giờ dự kiến" data-en="Date & Time">Date & Time</label>
-                                <input type="text" id="cus_time" name="Date and Time" class="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3.5 outline-none transition focus:border-blue-600 focus:bg-white focus:ring-4 focus:ring-blue-600/10 text-slate-700 bg-white" placeholder="dd/mm/yyyy hh:mm">
+                                <label class="mb-2 block text-sm font-bold text-slate-700 lang-el"
+                                    data-vi="Ngày & giờ dự kiến" data-en="Date & Time">Date & Time</label>
+                                <input type="text" id="cus_time" name="Date and Time"
+                                    class="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3.5 outline-none transition focus:border-blue-600 focus:bg-white focus:ring-4 focus:ring-blue-600/10 text-slate-700 bg-white"
+                                    placeholder="mm/dd/yyyy hh:mm">
                             </div>
                             <div class="sm:col-span-2">
-                                <label class="mb-2 block text-sm font-bold text-slate-700 lang-el" data-vi="Ghi chú thêm" data-en="Additional Notes">Additional Notes</label>
-                                <textarea id="cus_notes" name="Notes" rows="3" class="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3.5 outline-none transition focus:border-blue-600 focus:bg-white focus:ring-4 focus:ring-blue-600/10 resize-none"></textarea>
+                                <label class="mb-2 block text-sm font-bold text-slate-700 lang-el"
+                                    data-vi="Ghi chú thêm" data-en="Additional Notes">Additional Notes</label>
+                                <textarea id="cus_notes" name="Notes" rows="3"
+                                    class="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3.5 outline-none transition focus:border-blue-600 focus:bg-white focus:ring-4 focus:ring-blue-600/10 resize-none"></textarea>
                             </div>
                         </div>
-                        <button type="submit" class="mt-8 w-full rounded-2xl bg-blue-600 px-6 py-4 text-base font-bold tracking-wide text-white transition hover:-translate-y-0.5 hover:bg-blue-700 shadow-lg shadow-blue-600/30 lang-el" data-vi="XÁC NHẬN ĐẶT LỊCH" data-en="CONFIRM BOOKING">
+                        <button type="submit"
+                            class="mt-8 w-full rounded-2xl bg-blue-600 px-6 py-4 text-base font-bold tracking-wide text-white transition hover:-translate-y-0.5 hover:bg-blue-700 shadow-lg shadow-blue-600/30 lang-el"
+                            data-vi="XÁC NHẬN ĐẶT LỊCH" data-en="CONFIRM BOOKING">
                             CONFIRM BOOKING
                         </button>
                     </form>
@@ -486,25 +766,36 @@
         <div class="mx-auto grid max-w-7xl gap-8 px-4 py-12 sm:px-6 md:grid-cols-4 lg:px-8">
             <div class="md:col-span-2">
                 <div class="flex items-center gap-2 mb-4">
-                    <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-slate-900 text-sm text-white shadow-sm">✂</div>
+                    <div
+                        class="flex h-8 w-8 items-center justify-center rounded-lg bg-slate-900 text-sm text-white shadow-sm">
+                        ✂</div>
                     <p class="text-lg font-black tracking-wide">BARBER HOUSE</p>
                 </div>
-                <p class="mt-3 text-slate-600 leading-7 max-w-md lang-el" data-vi="Không chỉ là nơi cắt tóc, đây là nơi giúp bạn định hình phong cách, mang lại sự tự tin và nam tính hơn mỗi ngày." data-en="Not just a place for a haircut, this is where you shape your style, bringing confidence and masculinity every day.">Not just a place for a haircut, this is where you shape your style, bringing confidence and masculinity every day.</p>
+                <p class="mt-3 text-slate-600 leading-7 max-w-md lang-el"
+                    data-vi="Không chỉ là nơi cắt tóc, đây là nơi giúp bạn định hình phong cách, mang lại sự tự tin và nam tính hơn mỗi ngày."
+                    data-en="Not just a place for a haircut, this is where you shape your style, bringing confidence and masculinity every day.">
+                    Not just a place for a haircut, this is where you shape your style, bringing confidence and
+                    masculinity every day.</p>
             </div>
             <div>
                 <p class="font-bold text-slate-900 lang-el" data-vi="Liên hệ" data-en="Contact">Contact</p>
                 <div class="mt-4 space-y-3 text-sm text-slate-600">
-                    <p class="lang-el" data-vi="123 Nguyễn Văn A, Q.1, HCM" data-en="123 Nguyen Van A, D.1, HCMC">123 Nguyen Van A, D.1, HCMC</p>
-                    <p>0901 234 567</p>
-                    <p>contact@barberhouse.vn</p>
+                    <p class="lang-el" data-vi="123 Main Street, Houston, TX 77002"
+                        data-en="123 Main Street, Houston, TX 77002">123 Main Street, Houston, TX 77002</p>
+                    <p>+1 (555) 019-2834</p>
+                    <p>contact@barberhouse.com</p>
                 </div>
             </div>
             <div>
-                <p class="font-bold text-slate-900 lang-el" data-vi="Giờ làm việc" data-en="Working Hours">Working Hours</p>
+                <p class="font-bold text-slate-900 lang-el" data-vi="Giờ làm việc" data-en="Working Hours">Working Hours
+                </p>
                 <div class="mt-4 space-y-3 text-sm text-slate-600">
-                    <p class="lang-el" data-vi="Thứ 2 - Thứ 6: 09:00 - 20:00" data-en="Mon - Fri: 09:00 AM - 08:00 PM">Mon - Fri: 09:00 AM - 08:00 PM</p>
-                    <p class="lang-el" data-vi="Thứ 7 - CN: 08:30 - 21:00" data-en="Sat - Sun: 08:30 AM - 09:00 PM">Sat - Sun: 08:30 AM - 09:00 PM</p>
-                    <p class="text-blue-600 font-semibold mt-2 lang-el" data-vi="Nghỉ các ngày lễ Tết" data-en="Closed on public holidays">Closed on public holidays</p>
+                    <p class="lang-el" data-vi="Thứ 2 - Thứ 6: 09:00 - 20:00" data-en="Mon - Fri: 09:00 AM - 08:00 PM">
+                        Mon - Fri: 09:00 AM - 08:00 PM</p>
+                    <p class="lang-el" data-vi="Thứ 7 - CN: 08:30 - 21:00" data-en="Sat - Sun: 08:30 AM - 09:00 PM">Sat
+                        - Sun: 08:30 AM - 09:00 PM</p>
+                    <p class="text-blue-600 font-semibold mt-2 lang-el" data-vi="Nghỉ các ngày lễ Tết"
+                        data-en="Closed on public holidays">Closed on public holidays</p>
                 </div>
             </div>
         </div>
@@ -514,11 +805,14 @@
     </footer>
 
     <div class="fixed bottom-6 right-6 z-50 flex flex-col gap-3">
-        <a href="tel:0901234567" class="flex h-12 w-12 items-center justify-center rounded-full bg-blue-600 text-white shadow-lg shadow-blue-600/30 transition hover:-translate-y-1 sm:h-auto sm:w-auto sm:px-5 sm:py-3">
+        <a href="tel:+15550192834"
+            class="flex h-12 w-12 items-center justify-center rounded-full bg-blue-600 text-white shadow-lg shadow-blue-600/30 transition hover:-translate-y-1 sm:h-auto sm:w-auto sm:px-5 sm:py-3">
             <span class="sm:hidden">📞</span>
-            <span class="hidden text-sm font-bold sm:block lang-el" data-vi="Gọi ngay" data-en="Call Now">Call Now</span>
+            <span class="hidden text-sm font-bold sm:block lang-el" data-vi="Gọi ngay" data-en="Call Now">Call
+                Now</span>
         </a>
-        <a href="#" class="flex h-12 w-12 items-center justify-center rounded-full bg-slate-900 text-white shadow-lg transition hover:-translate-y-1 sm:h-auto sm:w-auto sm:px-5 sm:py-3">
+        <a href="#"
+            class="flex h-12 w-12 items-center justify-center rounded-full bg-slate-900 text-white shadow-lg transition hover:-translate-y-1 sm:h-auto sm:w-auto sm:px-5 sm:py-3">
             <span class="sm:hidden">💬</span>
             <span class="hidden text-sm font-bold sm:block">Chat Zalo</span>
         </a>
@@ -526,293 +820,32 @@
 
     <!-- Back to top button -->
     <button id="back-to-top" title="Back to top"
-        class="fixed bottom-24 right-6 z-50 flex h-11 w-11 items-center justify-center rounded-full bg-white border border-slate-200 text-slate-700 shadow-lg transition hover:-translate-y-1 hover:bg-slate-50 sm:bottom-28">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M5 10l7-7m0 0l7 7m-7-7v18"/>
+        class="fixed bottom-40 right-6 z-50 flex h-11 w-11 items-center justify-center rounded-full bg-white border border-slate-200 text-slate-700 shadow-lg transition hover:-translate-y-1 hover:bg-slate-50 sm:bottom-40">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+            stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M5 10l7-7m0 0l7 7m-7-7v18" />
         </svg>
     </button>
 
     <!-- Success Modal -->
-    <div id="success-modal" class="hidden fixed inset-0 z-[100] items-center justify-center bg-slate-900/60 backdrop-blur-sm p-4 opacity-0 transition-opacity duration-300">
-        <div id="success-modal-card" class="w-full max-w-sm rounded-[2rem] bg-white p-6 shadow-2xl transform scale-95 transition-transform duration-300 relative flex flex-col items-center">
+    <div id="success-modal"
+        class="hidden fixed inset-0 z-[100] items-center justify-center bg-slate-900/60 backdrop-blur-sm p-4 opacity-0 transition-opacity duration-300">
+        <div id="success-modal-card"
+            class="w-full max-w-sm rounded-[2rem] bg-white p-6 shadow-2xl transform scale-95 transition-transform duration-300 relative flex flex-col items-center">
             <div class="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-green-100 mb-4">
                 <span class="text-3xl text-green-600">✓</span>
             </div>
-            <h3 class="text-center text-2xl font-black text-slate-900 mb-2 lang-el" data-vi="Đặt lịch thành công!" data-en="Booking Successful!">Đặt lịch thành công!</h3>
-            <p id="success-modal-message" class="text-center text-slate-600 mb-6 leading-relaxed whitespace-pre-line"></p>
-            <button id="close-modal-btn" class="w-full rounded-2xl bg-blue-600 py-3.5 font-bold text-white transition hover:-translate-y-0.5 hover:bg-blue-700 shadow-lg shadow-blue-600/30 lang-el" data-vi="Tuyệt vời" data-en="Awesome">Tuyệt vời</button>
+            <h3 class="text-center text-2xl font-black text-slate-900 mb-2 lang-el" data-vi="Đặt lịch thành công!"
+                data-en="Booking Successful!">Đặt lịch thành công!</h3>
+            <p id="success-modal-message" class="text-center text-slate-600 mb-6 leading-relaxed whitespace-pre-line">
+            </p>
+            <button id="close-modal-btn"
+                class="w-full rounded-2xl bg-blue-600 py-3.5 font-bold text-white transition hover:-translate-y-0.5 hover:bg-blue-700 shadow-lg shadow-blue-600/30 lang-el"
+                data-vi="Tuyệt vời" data-en="Awesome">Tuyệt vời</button>
         </div>
     </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // --- Modal Handler ---
-            const modalEl = document.getElementById('success-modal');
-            const modalCard = document.getElementById('success-modal-card');
-
-            const showModal = (message) => {
-                const modalMsg = document.getElementById('success-modal-message');
-                modalMsg.innerText = message;
-                modalEl.classList.remove('hidden');
-                modalEl.classList.add('flex');
-                // Trigger reflow for CSS transition
-                void modalEl.offsetWidth;
-                modalEl.classList.remove('opacity-0');
-                modalCard.classList.remove('scale-95');
-                modalCard.classList.add('scale-100');
-            };
-
-            const closeModal = () => {
-                modalEl.classList.add('opacity-0');
-                modalCard.classList.remove('scale-100');
-                modalCard.classList.add('scale-95');
-                setTimeout(() => {
-                    modalEl.classList.add('hidden');
-                    modalEl.classList.remove('flex');
-                }, 300);
-            };
-
-            document.getElementById('close-modal-btn').addEventListener('click', closeModal);
-            // Close modal when clicking backdrop
-            modalEl.addEventListener('click', (e) => { if (e.target === modalEl) closeModal(); });
-
-            
-            // --- 0. XỬ LÝ CHUYỂN NGÔN NGỮ (LANGUAGE TOGGLE) ---
-            const langToggleBtn = document.getElementById('lang-toggle');
-            let currentLang = 'en'; // MẶC ĐỊNH LÀ TIẾNG ANH
-
-            const applyLang = (lang) => {
-                // Cập nhật html lang attribute
-                document.getElementById('html-root').setAttribute('lang', lang);
-
-                // Cập nhật chữ trên nút
-                langToggleBtn.innerText = lang === 'en' ? 'VN' : 'EN';
-
-                // Cập nhật toàn bộ các thẻ có class lang-el
-                document.querySelectorAll('.lang-el').forEach(el => {
-                    const newText = el.getAttribute(`data-${lang}`);
-                    if (newText) el.innerHTML = newText;
-                });
-
-                // ĐỔI NGÔN NGỮ GOOGLE FORM (Đổi link iframe)
-                const feedbackIframe = document.getElementById('feedback-form');
-                if (feedbackIframe) {
-                    const newUrl = feedbackIframe.getAttribute(`data-url-${lang}`);
-                    if (newUrl) feedbackIframe.src = newUrl;
-                }
-            };
-
-            if (langToggleBtn) {
-                langToggleBtn.addEventListener('click', () => {
-                    currentLang = currentLang === 'en' ? 'vi' : 'en';
-                    applyLang(currentLang);
-                });
-            }
-
-            // --- 1. XỬ LÝ MOBILE MENU ---
-            const btn = document.getElementById('mobile-menu-btn');
-            const menu = document.getElementById('mobile-menu');
-            const links = document.querySelectorAll('.mobile-link');
-
-            btn.addEventListener('click', () => {
-                menu.classList.toggle('hidden');
-            });
-
-            links.forEach(link => {
-                link.addEventListener('click', () => {
-                    menu.classList.add('hidden');
-                });
-            });
-
-            
-            // --- 2. XỬ LÝ NGÀY GIỜ BẰNG FLATPICKR (ĐỊNH DẠNG DD/MM/YYYY) ---
-            const datetimeInput = document.getElementById('cus_time');
-            let flatpickrInstance = null;
-            if (datetimeInput) {
-                flatpickrInstance = flatpickr(datetimeInput, {
-                    enableTime: true,          // Bật tính năng chọn giờ
-                    dateFormat: "d/m/Y H:i",   // Ép định dạng Ngày/Tháng/Năm Giờ:Phút
-                    minDate: "today",          // Không cho chọn ngày trong quá khứ
-                    time_24hr: true            // Hiển thị giờ định dạng 24h
-                });
-            }
-
-            // --- 3. XỬ LÝ SUBMIT FORM ĐẶT LỊCH (GỬI QUA WEB3FORMS) ---
-            const bookingForm = document.getElementById('booking-form');
-            if (bookingForm) {
-                bookingForm.addEventListener('submit', function(e) {
-                    e.preventDefault(); 
-
-                    const time = datetimeInput.value;
-                    const submitBtn = this.querySelector('button[type="submit"]');
-
-                    if(!time) {
-                        // Shake the input to indicate error — no alert() needed
-                        datetimeInput.style.borderColor = '#ef4444';
-                        datetimeInput.style.boxShadow = '0 0 0 3px rgba(239,68,68,0.15)';
-                        datetimeInput.focus();
-                        const errMsg = currentLang === 'en' ? 'Please select a date and time!' : 'Vui lòng chọn ngày và giờ dự kiến!';
-                        datetimeInput.setAttribute('placeholder', errMsg);
-                        setTimeout(() => {
-                            datetimeInput.style.borderColor = '';
-                            datetimeInput.style.boxShadow = '';
-                            datetimeInput.setAttribute('placeholder', 'dd/mm/yyyy hh:mm');
-                        }, 3000);
-                        return;
-                    }
-
-                    const formData = new FormData(bookingForm);
-
-                    const originalBtnText = submitBtn.innerText;
-                    submitBtn.innerText = currentLang === 'en' ? "SENDING INFO..." : "ĐANG GỬI THÔNG TIN...";
-                    submitBtn.disabled = true;
-                    submitBtn.classList.add('opacity-75', 'cursor-not-allowed');
-
-                    fetch('https://api.web3forms.com/submit', {
-                        method: 'POST',
-                        body: formData
-                    })
-                    .then(async (response) => {
-                        let json = await response.json();
-                        if (response.status == 200) {
-                            const name = document.getElementById('cus_name').value;
-                            const formattedTime = time.replace('T', ' ');
-                            
-                            if (currentLang === 'en') {
-                                showModal(`Thank you ${name}.\nBarber House has recorded your appointment on: ${formattedTime}.\nWe will call you shortly to confirm.`);
-                            } else {
-                                showModal(`Cảm ơn anh ${name}.\nBarber House đã ghi nhận lịch hẹn của anh vào: ${formattedTime}.\nChúng tôi sẽ sớm gọi lại để xác nhận.`);
-                            }
-                            bookingForm.reset();
-                            // Reset flatpickr instance separately (form.reset() does not clear it)
-                            if (flatpickrInstance) flatpickrInstance.clear();
-                        } else {
-                            console.error('Web3Forms error:', json);
-                            const errText = currentLang === 'en' ? 'An error occurred, please try again later!' : 'Có lỗi xảy ra, vui lòng thử lại sau!';
-                            showModal(errText);
-                        }
-                    })
-                    .catch((error) => {
-                        console.error('Network error:', error);
-                        const networkErrText = currentLang === 'en' ? 'Network error! Please check your connection and try again.' : 'Lỗi kết nối mạng! Vui lòng kiểm tra kết nối và thử lại.';
-                        showModal(networkErrText);
-                    })
-                    .finally(() => {
-                        submitBtn.innerText = currentLang === 'en' ? "CONFIRM BOOKING" : "XÁC NHẬN ĐẶT LỊCH";
-                        submitBtn.disabled = false;
-                        submitBtn.classList.remove('opacity-75', 'cursor-not-allowed');
-                    });
-                });
-            }
-
-            // --- 4. KÉO DỮ LIỆU ĐÁNH GIÁ TỪ GOOGLE SHEETS ---
-            const SHEET_ID = '1F6YAkHVe4AQq3_6ElJivWSOWcd3vAZlmuQ9vDz6vFwc'; 
-            const gvizUrl = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json`;
-
-            async function fetchReviews() {
-                const container = document.getElementById('review-container');
-                if(!container) return;
-                
-                try {
-                    const response = await fetch(gvizUrl);
-                    const textData = await response.text();
-                    
-                    const jsonString = textData.match(/google\.visualization\.Query\.setResponse\(([\s\S\w]+)\)/)[1];
-                    const data = JSON.parse(jsonString);
-                    let rows = data.table.rows;
-                    
-                    let validReviews = rows.filter(row => row.c && row.c[1] && row.c[4] && row.c[5]).reverse();
-                    let latestReviews = validReviews.slice(0, 3);
-                    
-                    container.innerHTML = ''; 
-                    
-                    if(latestReviews.length === 0) {
-                        const noReviewText = currentLang === 'en' ? 'No reviews yet.' : 'Chưa có đánh giá nào.';
-                        container.innerHTML = `<p class="text-slate-500 italic col-span-3 text-center lang-el" data-vi="Chưa có đánh giá nào." data-en="No reviews yet.">${noReviewText}</p>`;
-                        return;
-                    }
-
-                    latestReviews.forEach(row => {
-                        const name = row.c[1].v; 
-                        const ratingStr = row.c[4].v; 
-                        const rating = parseInt(ratingStr.toString().charAt(0)) || 5; 
-                        const comment = row.c[5].v; 
-
-                        const starsHTML = '<span class="text-yellow-400 text-xl">' + '★'.repeat(rating) + '</span><span class="text-slate-200 text-xl">' + '★'.repeat(5 - rating) + '</span>';
-
-                        const html = `
-                            <div class="rounded-[2rem] bg-white p-8 shadow-sm border border-slate-100 flex flex-col justify-between transition hover:-translate-y-1 hover:shadow-md">
-                                <div>
-                                    <div class="flex gap-1 tracking-widest">${starsHTML}</div>
-                                    <p class="mt-4 leading-7 text-slate-600 italic line-clamp-4">"${comment}"</p>
-                                </div>
-                                <div class="mt-6 flex items-center gap-3 pt-4 border-t border-slate-50">
-                                    <div class="flex h-10 w-10 items-center justify-center rounded-full bg-blue-100 text-blue-600 font-bold uppercase">
-                                        ${name.charAt(0)}
-                                    </div>
-                                    <p class="font-bold text-slate-900">${name}</p>
-                                </div>
-                            </div>
-                        `;
-                        container.insertAdjacentHTML('beforeend', html);
-                    });
-
-                } catch (error) {
-                    console.error('Lỗi khi tải đánh giá:', error);
-                    const errorText = currentLang === 'en' ? 'Unable to load reviews at this time.' : 'Không thể tải đánh giá lúc này.';
-                    container.innerHTML = `<p class="text-red-500 text-sm col-span-3 text-center lang-el" data-vi="Không thể tải đánh giá lúc này." data-en="Unable to load reviews at this time.">${errorText}</p>`;
-                }
-            }
-
-            fetchReviews();
-
-            // --- 5. SCROLL REVEAL ANIMATION ---
-            const revealObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                        revealObserver.unobserve(entry.target); // only animate once
-                    }
-                });
-            }, { threshold: 0.12 });
-
-            document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
-
-            // --- 6. ACTIVE NAV LINK (highlight khi cuộn đến section) ---
-            const sections = document.querySelectorAll('main section[id]');
-            const navLinks = document.querySelectorAll('nav a[href^="#"]');
-
-            const navObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        navLinks.forEach(link => {
-                            link.classList.remove('nav-active');
-                            if (link.getAttribute('href') === `#${entry.target.id}`) {
-                                link.classList.add('nav-active');
-                            }
-                        });
-                    }
-                });
-            }, { rootMargin: '-40% 0px -55% 0px' });
-
-            sections.forEach(section => navObserver.observe(section));
-
-            // --- 7. BACK TO TOP BUTTON ---
-            const backToTopBtn = document.getElementById('back-to-top');
-            if (backToTopBtn) {
-                window.addEventListener('scroll', () => {
-                    if (window.scrollY > 400) {
-                        backToTopBtn.classList.add('show');
-                    } else {
-                        backToTopBtn.classList.remove('show');
-                    }
-                }, { passive: true });
-
-                backToTopBtn.addEventListener('click', () => {
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                });
-            }
-        });
-    </script>
+    <script src="assets/js/main.js"></script>
 </body>
+
 </html>
