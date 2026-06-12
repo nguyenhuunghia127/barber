@@ -135,9 +135,9 @@ document.addEventListener('DOMContentLoaded', () => {
                                 const formattedTime = time.replace('T', ' ');
 
                                 if (currentLang === 'en') {
-                                    showModal(`Thank you ${name}.\nBarber House has recorded your appointment on: ${formattedTime}.\nWe will call you shortly to confirm.`);
+                                    showModal(`Thank you ${name}.\n1997 Barber has recorded your appointment on: ${formattedTime}.\nWe will call you shortly to confirm.`);
                                 } else {
-                                    showModal(`Cảm ơn anh ${name}.\nBarber House đã ghi nhận lịch hẹn của anh vào: ${formattedTime}.\nChúng tôi sẽ sớm gọi lại để xác nhận.`);
+                                    showModal(`Cảm ơn anh ${name}.\n1997 Barber đã ghi nhận lịch hẹn của anh vào: ${formattedTime}.\nChúng tôi sẽ sớm gọi lại để xác nhận.`);
                                 }
                                 bookingForm.reset();
                                 // Reset flatpickr instance separately (form.reset() does not clear it)
@@ -200,7 +200,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         const rating = parseInt(ratingStr.toString().charAt(0)) || 5;
                         const comment = row.c[5].v;
 
-                        const starsHTML = '<span class="text-yellow-400 text-xl">' + '★'.repeat(rating) + '</span><span class="text-slate-200 text-xl">' + '★'.repeat(5 - rating) + '</span>';
+                        const starsHTML = '<span class="text-yellow-400 text-2xl">' + '★'.repeat(rating) + '</span><span class="text-slate-200 text-2xl">' + '★'.repeat(5 - rating) + '</span>';
 
                         const html = `
                             <div class="rounded-[2rem] bg-white p-8 shadow-sm border border-slate-100 flex flex-col justify-between transition hover:-translate-y-1 hover:shadow-md shrink-0 w-[85vw] sm:w-[45vw] lg:w-[30vw] snap-center">
@@ -222,7 +222,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 } catch (error) {
                     console.error('Lỗi khi tải đánh giá:', error);
                     const errorText = currentLang === 'en' ? 'Unable to load reviews at this time.' : 'Không thể tải đánh giá lúc này.';
-                    container.innerHTML = `<p class="text-red-500 text-sm col-span-3 text-center lang-el" data-vi="Không thể tải đánh giá lúc này." data-en="Unable to load reviews at this time.">${errorText}</p>`;
+                    container.innerHTML = `<p class="text-red-500 text-base col-span-3 text-center lang-el" data-vi="Không thể tải đánh giá lúc này." data-en="Unable to load reviews at this time.">${errorText}</p>`;
                 }
             }
 
