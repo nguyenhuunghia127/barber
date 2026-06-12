@@ -161,11 +161,54 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
             }
 
-            // --- 4. KÉO DỮ LIỆU ĐÁNH GIÁ TỪ GOOGLE SHEETS ---
-            const SHEET_ID = '1F6YAkHVe4AQq3_6ElJivWSOWcd3vAZlmuQ9vDz6vFwc';
-            const gvizUrl = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json`;
+            // --- GOOGLE SHEETS REVIEWS ---
+            let allReviews = [];
 
-            async function fetchReviews() {
+            const renderReviews = (reviews) => {
+                const container = document.getElementById('review-container');
+                if (!container) return;
+                
+                container.innerHTML = '';
+                
+                // Limit to max 15 reviews
+                const reviewsToRender = reviews.slice(0, 15);
+
+                if (reviewsToRender.length === 0) {
+                    const noReviewText = currentLang === 'en' ? 'No reviews yet.' : 'Chưa có đánh giá nào.';
+                    container.innerHTML = `<p class="text-slate-500 italic text-center w-full lang-el" data-vi="Chưa có đánh giá nào." data-en="No reviews yet.">${noReviewText}</p>`;
+                    return;
+                }
+
+                reviewsToRender.forEach(row => {
+                    const name = row.c[1].v;
+                    const ratingStr = row.c[4].v;
+                    const rating = parseInt(ratingStr.toString().charAt(0)) || 5;
+                    const comment = row.c[5].v;
+
+                    const starsHTML = '<span class="text-yellow-400 text-2xl">' + '★'.repeat(rating) + '</span><span class="text-slate-200 text-2xl">' + '★'.repeat(5 - rating) + '</span>';
+
+                    const html = `
+                        <div class="rounded-[2rem] bg-white p-8 shadow-sm border border-slate-100 flex flex-col justify-between transition hover:-translate-y-1 hover:shadow-md shrink-0 w-[85vw] sm:w-[45vw] lg:w-[30vw] snap-center">
+                            <div>
+                                <div class="flex gap-1 tracking-widest">${starsHTML}</div>
+                                <p class="mt-4 leading-7 text-slate-600 italic line-clamp-4">"${comment}"</p>
+                            </div>
+                            <div class="mt-6 flex items-center gap-3 pt-4 border-t border-slate-50">
+                                <div class="flex h-11 w-11 items-center justify-center rounded-full bg-blue-100 text-blue-600 font-bold uppercase">
+                                    ${name.charAt(0)}
+                                </div>
+                                <p class="font-bold text-slate-900">${name}</p>
+                            </div>
+                        </div>
+                    `;
+                    container.insertAdjacentHTML('beforeend', html);
+                });
+            };
+
+            const fetchReviews = async () => {
+                const SHEET_ID = '1F6YAkHVe4AQq3_6ElJivWSOWcd3vAZlmuQ9vDz6vFwc';
+                const gvizUrl = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json`;
+                
                 const container = document.getElementById('review-container');
                 if (!container) return;
 
@@ -177,48 +220,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     const data = JSON.parse(jsonString);
                     let rows = data.table.rows;
 
-                    let validReviews = rows.filter(row => row.c && row.c[1] && row.c[4] && row.c[5]).reverse();
+                    allReviews = rows.filter(row => row.c && row.c[1] && row.c[4] && row.c[5]).reverse();
                     
-                    // Sắp xếp ưu tiên 5 sao trước
-                    validReviews.sort((a, b) => {
-                        const ratingA = parseInt(a.c[4].v.toString().charAt(0)) || 5;
-                        const ratingB = parseInt(b.c[4].v.toString().charAt(0)) || 5;
-                        return ratingB - ratingA;
-                    });
-
-                    container.innerHTML = '';
-
-                    if (validReviews.length === 0) {
-                        const noReviewText = currentLang === 'en' ? 'No reviews yet.' : 'Chưa có đánh giá nào.';
-                        container.innerHTML = `<p class="text-slate-500 italic text-center w-full lang-el" data-vi="Chưa có đánh giá nào." data-en="No reviews yet.">${noReviewText}</p>`;
-                        return;
-                    }
-
-                    validReviews.forEach(row => {
-                        const name = row.c[1].v;
-                        const ratingStr = row.c[4].v;
-                        const rating = parseInt(ratingStr.toString().charAt(0)) || 5;
-                        const comment = row.c[5].v;
-
-                        const starsHTML = '<span class="text-yellow-400 text-2xl">' + '★'.repeat(rating) + '</span><span class="text-slate-200 text-2xl">' + '★'.repeat(5 - rating) + '</span>';
-
-                        const html = `
-                            <div class="rounded-[2rem] bg-white p-8 shadow-sm border border-slate-100 flex flex-col justify-between transition hover:-translate-y-1 hover:shadow-md shrink-0 w-[85vw] sm:w-[45vw] lg:w-[30vw] snap-center">
-                                <div>
-                                    <div class="flex gap-1 tracking-widest">${starsHTML}</div>
-                                    <p class="mt-4 leading-7 text-slate-600 italic line-clamp-4">"${comment}"</p>
-                                </div>
-                                <div class="mt-6 flex items-center gap-3 pt-4 border-t border-slate-50">
-                                    <div class="flex h-11 w-11 items-center justify-center rounded-full bg-blue-100 text-blue-600 font-bold uppercase">
-                                        ${name.charAt(0)}
-                                    </div>
-                                    <p class="font-bold text-slate-900">${name}</p>
-                                </div>
-                            </div>
-                        `;
-                        container.insertAdjacentHTML('beforeend', html);
-                    });
-
+                    renderReviews(allReviews);
                 } catch (error) {
                     console.error('Lỗi khi tải đánh giá:', error);
                     const errorText = currentLang === 'en' ? 'Unable to load reviews at this time.' : 'Không thể tải đánh giá lúc này.';
@@ -226,7 +230,53 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
 
-            fetchReviews();
+            const setupReviewFilters = () => {
+                const btnLatest = document.getElementById('filter-latest');
+                const btnBest = document.getElementById('filter-best');
+                const btnWorst = document.getElementById('filter-worst');
+                
+                if(!btnLatest || !btnBest || !btnWorst) return;
+                
+                const buttons = [btnLatest, btnBest, btnWorst];
+                
+                const setActiveBtn = (activeBtn) => {
+                    buttons.forEach(btn => {
+                        btn.classList.remove('bg-blue-600', 'text-white');
+                        btn.classList.add('bg-white', 'text-slate-700');
+                    });
+                    activeBtn.classList.remove('bg-white', 'text-slate-700');
+                    activeBtn.classList.add('bg-blue-600', 'text-white');
+                };
+
+                btnLatest.addEventListener('click', () => {
+                    setActiveBtn(btnLatest);
+                    renderReviews(allReviews); // allReviews is already newest first (reversed)
+                });
+                
+                btnBest.addEventListener('click', () => {
+                    setActiveBtn(btnBest);
+                    const bestReviews = [...allReviews].sort((a, b) => {
+                        const ratingA = parseInt(a.c[4].v.toString().charAt(0)) || 5;
+                        const ratingB = parseInt(b.c[4].v.toString().charAt(0)) || 5;
+                        return ratingB - ratingA;
+                    });
+                    renderReviews(bestReviews);
+                });
+                
+                btnWorst.addEventListener('click', () => {
+                    setActiveBtn(btnWorst);
+                    const worstReviews = [...allReviews].sort((a, b) => {
+                        const ratingA = parseInt(a.c[4].v.toString().charAt(0)) || 5;
+                        const ratingB = parseInt(b.c[4].v.toString().charAt(0)) || 5;
+                        return ratingA - ratingB;
+                    });
+                    renderReviews(worstReviews);
+                });
+            };
+
+            fetchReviews().then(() => {
+                setupReviewFilters();
+            });
 
             // --- AUTO SCROLL CAROUSELS ---
             const setupAutoScroll = (containerId) => {

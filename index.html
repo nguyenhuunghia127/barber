@@ -19,10 +19,7 @@
     <header class="sticky top-0 z-50 border-b border-slate-200 bg-white/90 backdrop-blur">
         <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
             <div class="flex items-center gap-3">
-                <div
-                    class="flex h-11 w-11 items-center justify-center rounded-2xl bg-slate-900 text-xl text-white shadow-sm">
-                    ✂
-                </div>
+                <img src="./img/image.png" alt="1997 Barber Logo" class="h-11 w-11 rounded-xl object-cover shadow-sm bg-slate-900">
                 <div>
                     <p class="text-xl font-bold tracking-wide">1997 BARBER</p>
                     <p class="text-sm uppercase tracking-[0.25em] text-slate-500">Men's Grooming Studio</p>
@@ -691,6 +688,12 @@
                     </div>
                 </div>
 
+                <div class="mb-6 flex gap-3 overflow-x-auto hide-scrollbar pb-2">
+                    <button id="filter-latest" class="review-filter active rounded-xl bg-blue-600 px-5 py-2.5 text-sm font-bold text-white shadow-md transition hover:bg-blue-700 whitespace-nowrap lang-el" data-vi="Mới nhất" data-en="Latest">Mới nhất</button>
+                    <button id="filter-best" class="review-filter rounded-xl bg-white border border-slate-200 px-5 py-2.5 text-sm font-bold text-slate-700 shadow-sm transition hover:bg-slate-50 hover:text-blue-600 whitespace-nowrap lang-el" data-vi="Tốt nhất (5 sao)" data-en="Best (5 stars)">Tốt nhất (5 sao)</button>
+                    <button id="filter-worst" class="review-filter rounded-xl bg-white border border-slate-200 px-5 py-2.5 text-sm font-bold text-slate-700 shadow-sm transition hover:bg-slate-50 hover:text-blue-600 whitespace-nowrap lang-el" data-vi="Thấp nhất" data-en="Lowest">Thấp nhất</button>
+                </div>
+
                 <div id="review-container" class="flex gap-6 overflow-x-auto snap-x snap-mandatory hide-scrollbar pb-8">
                     <!-- Skeleton loaders while fetching -->
                     <div class="skeleton h-48 shrink-0 w-[85vw] sm:w-[45vw] lg:w-[30vw] snap-center"></div>
@@ -760,7 +763,7 @@
                                 <div class="flex gap-3">
                                     <a href="#" rel="noopener noreferrer" target="_blank"
                                         class="rounded-xl border border-white/15 bg-white/5 px-5 py-3 min-h-[44px] text-base font-semibold backdrop-blur transition hover:bg-white/20 hover:scale-105">Facebook</a>
-                                    <a href="#" rel="noopener noreferrer" target="_blank"
+                                    <a href="https://www.tiktok.com/@justin.realbarber1?_r=1&_t=ZP-956hku2GH9D&fbclid=PAZXh0bgNhZW0CMTEAc3J0YwZhcHBfaWQPOTM2NjE5NzQzMzkyNDU5AAGn61NrOdO7bCxxYkopG1nNZS1OL5UK-pI4_b9QhCi9LbSVItYu3y9jnGR8vik_aem_cPagB-tCnYfb_iXE2UkCXw" rel="noopener noreferrer" target="_blank"
                                         class="rounded-xl border border-white/15 bg-white/5 px-5 py-3 min-h-[44px] text-base font-semibold backdrop-blur transition hover:bg-white/20 hover:scale-105">TikTok</a>
                                     <a href="https://www.instagram.com/justin.nguyen1997"
                                         class="rounded-xl border border-white/15 bg-white/5 px-5 py-3 min-h-[44px] text-base font-semibold backdrop-blur transition hover:bg-white/20 hover:scale-105">Insta</a>
@@ -853,9 +856,7 @@
         <div class="mx-auto grid max-w-7xl gap-8 px-4 py-12 sm:px-6 md:grid-cols-4 lg:px-8">
             <div class="md:col-span-2">
                 <div class="flex items-center gap-2 mb-4">
-                    <div
-                        class="flex h-8 w-8 items-center justify-center rounded-lg bg-slate-900 text-base text-white shadow-sm">
-                        ✂</div>
+                    <img src="./img/image.png" alt="1997 Barber Logo" class="h-8 w-8 rounded-lg object-cover shadow-sm bg-slate-900">
                     <p class="text-xl font-black tracking-wide">1997 BARBER</p>
                 </div>
                 <p class="mt-3 text-slate-600 leading-7 max-w-md lang-el"
