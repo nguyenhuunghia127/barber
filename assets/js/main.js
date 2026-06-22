@@ -119,7 +119,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
                     const formData = new FormData(bookingForm);
 
-                    const originalBtnText = submitBtn.innerText;
                     submitBtn.innerText = currentLang === 'en' ? "SENDING INFO..." : "ĐANG GỬI THÔNG TIN...";
                     submitBtn.disabled = true;
                     submitBtn.classList.add('opacity-75', 'cursor-not-allowed');
@@ -137,7 +136,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                 if (currentLang === 'en') {
                                     showModal(`Thank you ${name}.\n1997 Barber has recorded your appointment on: ${formattedTime}.\nWe will call you shortly to confirm.`);
                                 } else {
-                                    showModal(`Cảm ơn anh ${name}.\n1997 Barber đã ghi nhận lịch hẹn của anh vào: ${formattedTime}.\nChúng tôi sẽ sớm gọi lại để xác nhận.`);
+                                    showModal(`Cảm ơn bạn ${name}.\n1997 Barber đã ghi nhận lịch hẹn của bạn vào: ${formattedTime}.\nChúng tôi sẽ sớm gọi lại để xác nhận.`);
                                 }
                                 bookingForm.reset();
                                 // Reset flatpickr instance separately (form.reset() does not clear it)
