@@ -8,6 +8,42 @@
         content="1997 Barber - Men's Grooming Studio. Modern barber shop with skilled barbers, quick online booking, and no hidden fees. Located in Ho Chi Minh City.">
     <meta name="theme-color" content="#0f172a">
     <title>1997 Barber - Men's Grooming Studio</title>
+    
+    <!-- SEO & Social Media -->
+    <link rel="canonical" href="https://barber-eight-omega.vercel.app/" />
+    <link rel="icon" type="image/png" href="./img/image.png" />
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://barber-eight-omega.vercel.app/">
+    <meta property="og:title" content="1997 Barber - Men's Grooming Studio">
+    <meta property="og:description" content="1997 Barber - Men's Grooming Studio. Modern barber shop with skilled barbers, quick online booking, and no hidden fees.">
+    <meta property="og:image" content="https://barber-eight-omega.vercel.app/img/image.png">
+
+    <!-- Schema Markup (LocalBusiness) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Barbershop",
+      "name": "1997 Barber",
+      "image": "https://barber-eight-omega.vercel.app/img/image.png",
+      "url": "https://barber-eight-omega.vercel.app",
+      "telephone": "+15105010274",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "24654 Joyce street",
+        "addressLocality": "Hayward",
+        "postalCode": "94544",
+        "addressCountry": "US"
+      },
+      "openingHoursSpecification": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+          "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
+        ],
+        "opens": "09:00",
+        "closes": "17:00"
+      }
+    }
+    </script>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <link rel="stylesheet" href="assets/css/style.css">
@@ -768,23 +804,8 @@
                     </div>
                 </div>
 
-                <div class="mb-6 flex gap-3 overflow-x-auto hide-scrollbar pb-2">
-                    <button id="filter-latest"
-                        class="review-filter active rounded-xl bg-blue-600 px-5 py-2.5 text-sm font-bold text-white shadow-md transition hover:bg-blue-700 whitespace-nowrap lang-el"
-                        data-vi="Mới nhất" data-en="Latest">Mới nhất</button>
-                    <button id="filter-best"
-                        class="review-filter rounded-xl bg-white border border-slate-200 px-5 py-2.5 text-sm font-bold text-slate-700 shadow-sm transition hover:bg-slate-50 hover:text-blue-600 whitespace-nowrap lang-el"
-                        data-vi="Tốt nhất (5 sao)" data-en="Best (5 stars)">Tốt nhất (5 sao)</button>
-                    <button id="filter-worst"
-                        class="review-filter rounded-xl bg-white border border-slate-200 px-5 py-2.5 text-sm font-bold text-slate-700 shadow-sm transition hover:bg-slate-50 hover:text-blue-600 whitespace-nowrap lang-el"
-                        data-vi="Thấp nhất" data-en="Lowest">Thấp nhất</button>
-                </div>
-
-                <div id="review-container" class="flex gap-6 overflow-x-auto snap-x snap-mandatory hide-scrollbar pb-8">
-                    <!-- Skeleton loaders while fetching -->
-                    <div class="skeleton h-48 shrink-0 w-[85vw] sm:w-[45vw] lg:w-[30vw] snap-center"></div>
-                    <div class="skeleton h-48 shrink-0 w-[85vw] sm:w-[45vw] lg:w-[30vw] snap-center"></div>
-                    <div class="skeleton h-48 shrink-0 w-[85vw] sm:w-[45vw] lg:w-[30vw] snap-center"></div>
+                <div class="mt-8">
+                    <script defer async src='https://cdn.trustindex.io/loader.js?9084ba875fc63007ca6694e8d33'></script>
                 </div>
             </div>
         </section>
@@ -857,9 +878,9 @@
                                 <div>
                                     <p class="font-semibold text-white lang-el" data-vi="Giờ mở cửa"
                                         data-en="Working Hours">Working Hours</p>
-                                    <p class="mt-1 text-slate-300 lang-el" data-vi="Thứ 2 - Chủ Nhật: 9h00 - 20h00"
-                                        data-en="Mon - Sun: 9:00 AM - 8:00 PM">
-                                        Mon - Sun: 9:00 AM - 8:00 PM
+                                    <p class="mt-1 text-slate-300 lang-el" data-vi="Thứ 2 - Chủ Nhật: 09:00 - 17:00"
+                                        data-en="Mon - Sun: 09:00 AM - 05:00 PM">
+                                        Mon - Sun: 09:00 AM - 05:00 PM
                                     </p>
                                 </div>
                             </div>
@@ -904,15 +925,6 @@
                                 <input type="tel" id="cus_phone" name="Phone Number" required
                                     class="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3.5 outline-none transition focus:border-blue-600 focus:bg-white focus:ring-4 focus:ring-blue-600/10"
                                     placeholder="Customer Phone">
-                            </div>
-
-                            <div class="sm:col-span-2">
-                                <label class="mb-2 block text-base font-bold text-slate-700"><span class="lang-el"
-                                        data-vi="Địa chỉ" data-en="Address">Address</span> <span
-                                        class="text-red-500">*</span></label>
-                                <input type="text" id="cus_address" name="Address" required
-                                    class="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3.5 outline-none transition focus:border-blue-600 focus:bg-white focus:ring-4 focus:ring-blue-600/10"
-                                    placeholder="...">
                             </div>
 
                             <div class="sm:col-span-1">
@@ -979,17 +991,15 @@
                     <p class="lang-el" data-vi="24654 Joyce street, Hayward 94544"
                         data-en="24654 Joyce street, Hayward 94544">24654 Joyce street, Hayward 94544</p>
                     <p>510-501-0274</p>
-                    <p>contact@barberhouse.com</p>
+                    <h5 class="lang-el" data-vi="tuaudi@gmail.com" data-en="tuaudi@gmail.com">tuaudi@gmail.com</h5>
                 </div>
             </div>
             <div>
                 <p class="font-bold text-slate-900 lang-el" data-vi="Giờ làm việc" data-en="Working Hours">Working Hours
                 </p>
                 <div class="mt-4 space-y-3 text-base text-slate-600">
-                    <p class="lang-el" data-vi="Thứ 2 - Thứ 6: 09:00 - 20:00" data-en="Mon - Fri: 09:00 AM - 08:00 PM">
-                        Mon - Fri: 09:00 AM - 08:00 PM</p>
-                    <p class="lang-el" data-vi="Thứ 7 - CN: 08:30 - 21:00" data-en="Sat - Sun: 08:30 AM - 09:00 PM">Sat
-                        - Sun: 08:30 AM - 09:00 PM</p>
+                    <p class="lang-el" data-vi="Thứ 2 - Chủ Nhật: 09:00 - 17:00" data-en="Mon - Sun: 09:00 AM - 05:00 PM">
+                        Mon - Sun: 09:00 AM - 05:00 PM</p>
                     <p class="text-blue-600 font-semibold mt-2 lang-el" data-vi="Nghỉ các ngày lễ Tết"
                         data-en="Closed on public holidays">Closed on public holidays</p>
                 </div>
