@@ -5,20 +5,21 @@
 
 ## 🚀 Các tính năng chính
 
-*   **Tối ưu cho Di động (Mobile-First):** Giao diện thân thiện với thiết bị di động, nút bấm lớn, thiết kế lưới (grid) và linh hoạt (flex).
-*   **Thanh trượt động (Carousel):** Tự động cuộn cho Banner, Không gian tiệm và Thư viện ảnh. Hỗ trợ tính năng kéo để cuộn trên máy tính và dừng khi di chuột vào.
+*   **Tối ưu cho Di động (Mobile-First):** Giao diện thân thiện với thiết bị di động, nút bấm lớn, bố cục lưới (grid) linh hoạt.
 *   **Hỗ trợ Đa ngôn ngữ:** Chuyển đổi tức thì giữa Tiếng Anh (EN) và Tiếng Việt (VN) mà không cần tải lại trang.
-*   **Hệ thống Đặt lịch:** Tích hợp form đặt lịch với [Flatpickr](https://flatpickr.js.org/) để chọn ngày giờ. Dữ liệu được gửi an toàn thông qua [Web3Forms](https://web3forms.com/).
-*   **Đánh giá của khách hàng (Live Reviews):** Tự động lấy và hiển thị các đánh giá thực tế từ cơ sở dữ liệu Google Sheets.
-*   **Hiệu ứng cuộn trang (Scroll Animations):** Các phần tử xuất hiện mượt mà khi cuộn nhờ Intersection Observer API.
+*   **Đánh giá của khách hàng (Trustindex):** Tự động lấy và hiển thị các đánh giá mới nhất, chân thực nhất từ Google Maps thông qua widget Trustindex.
+*   **Mạng xã hội (TikTok Feed):** Tích hợp lưới video TikTok tự động cập nhật từ kênh của quán thông qua Elfsight widget.
+*   **Hệ thống Đặt lịch:** Tích hợp form đặt lịch với [Flatpickr](https://flatpickr.js.org/) để chọn ngày giờ. Dữ liệu được gửi an toàn trực tiếp về email thông qua [Web3Forms](https://web3forms.com/).
+*   **Chuẩn SEO Local Business:** Đã thiết lập đầy đủ thẻ Open Graph, Canonical, và JSON-LD Schema để tối ưu tìm kiếm địa phương trên Google.
 
 ## 📁 Cấu trúc Dự án
 
 ```text
 barber_house/
-├── index.html            # File layout HTML chính
+├── index.html            # File giao diện HTML chính
 ├── README.md             # Tài liệu hướng dẫn
 ├── .gitignore            # Cấu hình Git
+├── img/                  # Chứa hình ảnh (logo, background)
 └── assets/
     ├── css/
     │   └── style.css     # CSS tùy chỉnh và Tailwind
@@ -26,68 +27,46 @@ barber_house/
         └── main.js       # Logic JavaScript chính
 ```
 
-## 🛠️ Công nghệ sử dụng
+## 🛠 Công nghệ sử dụng
 
 *   **HTML5** (Cấu trúc Semantic)
 *   **Tailwind CSS** (Định dạng qua CDN)
 *   **Vanilla JavaScript** (ES6+, DOM, Intersection Observer)
-*   **Web3Forms** (Backend cho Form liên hệ/đặt lịch)
-*   **Google Sheets API (gviz)** (Cơ sở dữ liệu cho phần Đánh giá)
+*   **Web3Forms** (Backend gửi email cho Form đặt lịch)
+*   **Trustindex & Elfsight** (Widget đánh giá và mạng xã hội)
 
-## 💡 Cách chạy thử trên máy tính
+---
 
-Dự án này là Front-end tĩnh. Không cần cài đặt công cụ phức tạp!
+## 💻 Cách chạy thử trên máy tính
+
+Dự án này là Front-end tĩnh. Không cần cài đặt máy chủ phức tạp!
 1. Tải (Clone) mã nguồn về máy.
-2. Mở file `index.html` trên bất kỳ trình duyệt web nào.
-3. *(Tùy chọn)* Để tránh lỗi CORS khi tải đánh giá, hãy mở bằng một Live Server (ví dụ: tiện ích Live Server trên VS Code).
+2. Mở file `index.html` trên bất kỳ trình duyệt web nào (Chrome, Safari, Edge).
+3. *(Tùy chọn)* Để các hiệu ứng chạy mượt nhất, hãy mở bằng một Live Server (ví dụ: tiện ích Live Server trên VS Code).
 
 ---
 
-## 🤖 Hướng dẫn chi tiết: Tự động hóa lấy Đánh giá từ Google Maps lên Web
+## 🌐 Triển khai (Deploy) lên Vercel
 
-Trang web này sử dụng một quy trình tự động, hoàn toàn miễn phí để lấy các đánh giá từ Google Maps hiển thị lên web thông qua Make.com và Google Sheets.
-
-**Luồng hoạt động (Workflow):**
-1. Khách hàng nhấp vào nút đánh giá và để lại nhận xét trên Google Maps.
-2. Nền tảng **Make.com** (Bản miễn phí) đóng vai trò là cầu nối tự động.
-3. **Kích hoạt (Trigger):** Make.com liên tục theo dõi các đánh giá mới trên trang Google Business của bạn.
-4. **Hành động (Action):** Khi có đánh giá mới, Make.com sẽ tự động lấy Tên, Số sao và Nội dung đánh giá, sau đó thêm thành 1 dòng mới vào file Google Sheet.
-5. **Kết quả:** Website tự động đọc dữ liệu từ file Google Sheet này và hiển thị đánh giá mới lên giao diện ngay lập tức.
-
-### Bước 1: Chuẩn bị file Google Sheets
-1. Tạo một file Google Sheets mới trên Google Drive của bạn.
-2. Đặt quyền chia sẻ file là **"Bất kỳ ai có liên kết đều có thể xem" (Anyone with the link can view)**.
-3. Nhìn lên thanh địa chỉ (URL) của file, copy đoạn mã ID của file. (Ví dụ: `https://docs.google.com/spreadsheets/d/1F6YAkHVe4AQq3_6ElJivWSOWcd3vAZlmuQ9vDz6vFwc/edit` thì ID là `1F6YAkHVe4AQq3_6ElJivWSOWcd3vAZlmuQ9vDz6vFwc`).
-4. Mở file `assets/js/main.js` trong thư mục dự án, tìm hàm `fetchReviews` (khoảng dòng 208). Thay thế biến `SHEET_ID` bằng ID file Google Sheet mới của bạn.
-
-### Bước 2: Thiết lập tự động trên Make.com
-1. Đăng ký một tài khoản miễn phí tại [Make.com](https://www.make.com/).
-2. Đăng nhập và tạo một kịch bản mới (Nhấn **Create a new scenario**).
-3. **Thêm Trigger:** Nhấp vào dấu **+**, tìm ứng dụng **Google Business Profile**, chọn **Watch Reviews** (Theo dõi đánh giá mới). Đăng nhập bằng tài khoản Google quản lý tiệm của bạn và chọn đúng địa điểm tiệm trên Google Map.
-4. **Thêm Action:** Nhấp vào dấu **+** tiếp theo, tìm ứng dụng **Google Sheets**, chọn **Add a Row** (Thêm dòng mới).
-   - Đăng nhập bằng tài khoản Google chứa file Sheet đã tạo ở Bước 1.
-   - Chọn đúng file Spreadsheet của bạn.
-   - Khi Make.com yêu cầu khớp dữ liệu (Map), hãy thiết lập như sau (tuân theo đúng định dạng được đọc trong `main.js`):
-     - **Cột B:** Gắn với trường `Reviewer Name` (Tên khách).
-     - **Cột E:** Gắn với trường `Star Rating` (Số sao, ví dụ: FIVE, FOUR...).
-     - **Cột F:** Gắn với trường `Comment` (Nội dung đánh giá).
-5. **(Tùy chọn)** Thêm bộ lọc (Filter) giữa 2 bước này nếu bạn chỉ muốn lấy các đánh giá 5 sao.
-6. Lưu lại (Save) kịch bản.
-7. Bật chế độ lập lịch (Scheduling) thành **ON** ở góc dưới bên trái và cài đặt thời gian chạy tự động (ví dụ: 15 phút một lần hoặc 1 ngày 1 lần).
+Trang web đã được cấu hình sẵn để triển khai dễ dàng lên các nền tảng miễn phí như Vercel:
+1. Đẩy (Push) mã nguồn lên tài khoản GitHub của bạn.
+2. Đăng nhập vào [Vercel](https://vercel.com/), chọn **Add New Project**.
+3. Kết nối với kho lưu trữ (repository) GitHub chứa mã nguồn này.
+4. Bấm **Deploy**. Vercel sẽ tự động cấp cho bạn một đường link HTTPS miễn phí (ví dụ: `https://barber-eight-omega.vercel.app/`).
+5. Nếu bạn có tên miền riêng (VD: `1997barber.com`), bạn có thể cấu hình Custom Domain trong phần Settings của Vercel.
 
 ---
 
-## 📧 Hướng dẫn: Nhận thông báo Đặt lịch qua Web3Forms
+## ⚙️ Hướng dẫn: Nhận thông báo Đặt lịch qua Email (Web3Forms)
 
-Hệ thống đặt lịch sử dụng Web3Forms để gửi email miễn phí mà không cần cài đặt máy chủ (server-side).
+Hệ thống đặt lịch sử dụng Web3Forms để gửi email miễn phí mà không cần cài đặt máy chủ (server-side). Hiện tại form đã được kết nối, nhưng nếu bạn muốn thay đổi email nhận thông báo:
 
 1. Truy cập [Web3Forms.com](https://web3forms.com/).
 2. Nhập địa chỉ Email của bạn vào ô đăng ký để lấy **Access Key**.
-3. Bạn sẽ nhận được một đoạn mã Access Key (ví dụ: `e6e61688-7823-4900-945e-fd037ffb6865`) gửi vào email.
+3. Bạn sẽ nhận được một đoạn mã Access Key (ví dụ: `e6e61688-7823...`) gửi vào email.
 4. Mở file `index.html`, tìm đến đoạn `<form id="booking-form">` (gần cuối file).
 5. Thay thế giá trị trong thẻ `<input type="hidden" name="access_key" value="...">` bằng Access Key bạn vừa nhận được.
-6. Nếu bạn muốn đổi tên chủ đề email, hãy sửa `value` trong thẻ `<input type="hidden" name="subject" value="🔔 NEW BOOKING FROM 1997 BARBER WEBSITE!">`.
-7. Xong! Bất kỳ khi nào khách hàng điền form, thông tin sẽ được tự động gửi thẳng vào hộp thư email của bạn.
+6. Xong! Bất kỳ khi nào khách hàng điền form, thông tin sẽ được tự động gửi thẳng vào hộp thư email của bạn.
 
 ---
 *Được thiết kế nhằm mang lại trải nghiệm phong cách nam tính và đẳng cấp nhất.*
