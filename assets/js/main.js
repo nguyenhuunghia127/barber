@@ -81,7 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
 
 
-            // --- 2. XỬ LÝ NGÀY GIỜ BẰNG FLATPICKR (ĐỊNH DẠNG DD/MM/YYYY) ---
+            // --- 2. XỬ LÝ NGÀY GIỜ BẰNG FLATPICKR (ĐỊNH DẠNG DD/MM/YYYY HẰNG 30 PHÚT) ---
             const datetimeInput = document.getElementById('cus_time');
             let flatpickrInstance = null;
             if (datetimeInput) {
@@ -89,7 +89,43 @@ document.addEventListener('DOMContentLoaded', () => {
                     enableTime: true,          // Bật tính năng chọn giờ
                     dateFormat: "m/d/Y H:i",   // Ép định dạng Ngày/Tháng/Năm Giờ:Phút
                     minDate: "today",          // Không cho chọn ngày trong quá khứ
-                    time_24hr: true            // Hiển thị giờ định dạng 24h
+                    time_24hr: true,           // Hiển thị giờ định dạng 24h
+                    minuteIncrement: 30,       // Bước nhảy chọn phút là 30 phút
+                    minTime: "08:00",          // Giờ nhận khách sớm nhất (Sáng)
+                    maxTime: "22:00",          // Giờ nhận khách muộn nhất (Tối)
+                    formatDate: (date, formatStr) => {
+                        const pad = (num) => String(num).padStart(2, '0');
+                        const m = pad(date.getMonth() + 1);
+                        const d = pad(date.getDate());
+                        const y = date.getFullYear();
+                        const h = pad(date.getHours());
+                        const min = pad(date.getMinutes());
+                        
+                        // Tính giờ kết thúc (+30 phút)
+                        const endDate = new Date(date.getTime() + 30 * 60 * 1000);
+                        const eh = pad(endDate.getHours());
+                        const emin = pad(endDate.getMinutes());
+                        
+                        return `${m}/${d}/${y} ${h}:${min} - ${eh}:${emin}`;
+                    },
+                    parseDate: (dateStr, formatStr) => {
+                        if (!dateStr) return null;
+                        const startPart = dateStr.split(" - ")[0];
+                        const parts = startPart.split(" ");
+                        if (parts.length < 2) return new Date(dateStr);
+                        const dateParts = parts[0].split("/");
+                        const timeParts = parts[1].split(":");
+                        if (dateParts.length === 3 && timeParts.length === 2) {
+                            return new Date(
+                                parseInt(dateParts[2]),
+                                parseInt(dateParts[0]) - 1,
+                                parseInt(dateParts[1]),
+                                parseInt(timeParts[0]),
+                                parseInt(timeParts[1])
+                            );
+                        }
+                        return new Date(dateStr);
+                    }
                 });
             }
 
@@ -112,7 +148,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         setTimeout(() => {
                             datetimeInput.style.borderColor = '';
                             datetimeInput.style.boxShadow = '';
-                            datetimeInput.setAttribute('placeholder', 'dd/mm/yyyy hh:mm');
+                            datetimeInput.setAttribute('placeholder', 'mm/dd/yyyy hh:mm - hh:mm');
                         }, 3000);
                         return;
                     }
