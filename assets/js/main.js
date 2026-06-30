@@ -85,12 +85,23 @@ document.addEventListener('DOMContentLoaded', () => {
             const datetimeInput = document.getElementById('cus_time');
             let flatpickrInstance = null;
             if (datetimeInput) {
+                // Tính toán defaultHour và defaultMinute dựa trên thời gian hiện tại làm tròn lên 30 phút tiếp theo
+                const now = new Date();
+                let defaultHour = now.getHours();
+                let defaultMinute = Math.ceil(now.getMinutes() / 30) * 30;
+                if (defaultMinute === 60) {
+                    defaultMinute = 0;
+                    defaultHour = (defaultHour + 1) % 24;
+                }
+
                 flatpickrInstance = flatpickr(datetimeInput, {
                     enableTime: true,          // Bật tính năng chọn giờ
                     dateFormat: "m/d/Y H:i",   // Ép định dạng Ngày/Tháng/Năm Giờ:Phút
                     minDate: "today",          // Không cho chọn ngày trong quá khứ
                     time_24hr: true,           // Hiển thị giờ định dạng 24h
                     minuteIncrement: 30,       // Bước nhảy chọn phút là 30 phút
+                    defaultHour: defaultHour,
+                    defaultMinute: defaultMinute,
                     minTime: "08:00",          // Giờ nhận khách sớm nhất (Sáng)
                     maxTime: "22:00",          // Giờ nhận khách muộn nhất (Tối)
                     formatDate: (date, formatStr) => {
@@ -110,9 +121,21 @@ document.addEventListener('DOMContentLoaded', () => {
                     },
                     parseDate: (dateStr, formatStr) => {
                         if (!dateStr) return null;
+                        
+                        // Xử lý các chuỗi chỉ có giờ (như "08:00", "22:00" của minTime/maxTime)
+                        if (/^\d{2}:\d{2}$/.test(dateStr)) {
+                            const [hours, minutes] = dateStr.split(":").map(Number);
+                            const date = new Date();
+                            date.setHours(hours, minutes, 0, 0);
+                            return date;
+                        }
+
                         const startPart = dateStr.split(" - ")[0];
                         const parts = startPart.split(" ");
-                        if (parts.length < 2) return new Date(dateStr);
+                        if (parts.length < 2) {
+                            const parsed = new Date(dateStr);
+                            return isNaN(parsed.getTime()) ? null : parsed;
+                        }
                         const dateParts = parts[0].split("/");
                         const timeParts = parts[1].split(":");
                         if (dateParts.length === 3 && timeParts.length === 2) {
@@ -124,7 +147,20 @@ document.addEventListener('DOMContentLoaded', () => {
                                 parseInt(timeParts[1])
                             );
                         }
-                        return new Date(dateStr);
+                        const parsed = new Date(dateStr);
+                        return isNaN(parsed.getTime()) ? null : parsed;
+                    },
+                    onChange: function (selectedDates, dateStr, instance) {
+                        if (selectedDates.length > 0) {
+                            const date = selectedDates[0];
+                            const minutes = date.getMinutes();
+                            if (minutes % 30 !== 0) {
+                                // Làm tròn phút về bội số của 30 gần nhất
+                                const ms = 30 * 60 * 1000;
+                                const roundedDate = new Date(Math.round(date.getTime() / ms) * ms);
+                                instance.setDate(roundedDate, false);
+                            }
+                        }
                     }
                 });
             }
@@ -396,7 +432,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
             }, { threshold: 0.12 });
 
-            document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+            document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale').forEach(el => revealObserver.observe(el));
 
             // --- 6. ACTIVE NAV LINK (highlight khi cuộn đến section) ---
             const sections = document.querySelectorAll('main section[id]');
