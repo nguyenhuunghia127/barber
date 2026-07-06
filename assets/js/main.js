@@ -81,89 +81,239 @@ document.addEventListener('DOMContentLoaded', () => {
             });
 
 
-            // --- 2. XỬ LÝ NGÀY GIỜ BẰNG FLATPICKR (ĐỊNH DẠNG DD/MM/YYYY HẰNG 30 PHÚT) ---
+            // --- 2. XỬ LÝ ĐẶT LỊCH TRỰC QUAN (SERVICE & DATE-TIME SLOTS SELECTOR) ---
             const datetimeInput = document.getElementById('cus_time');
-            let flatpickrInstance = null;
-            if (datetimeInput) {
-                // Tính toán defaultHour và defaultMinute dựa trên thời gian hiện tại làm tròn lên 30 phút tiếp theo
-                const now = new Date();
-                let defaultHour = now.getHours();
-                let defaultMinute = Math.ceil(now.getMinutes() / 30) * 30;
-                if (defaultMinute === 60) {
-                    defaultMinute = 0;
-                    defaultHour = (defaultHour + 1) % 24;
-                }
-
-                flatpickrInstance = flatpickr(datetimeInput, {
-                    enableTime: true,          // Bật tính năng chọn giờ
-                    dateFormat: "m/d/Y H:i",   // Ép định dạng Ngày/Tháng/Năm Giờ:Phút
-                    minDate: "today",          // Không cho chọn ngày trong quá khứ
-                    time_24hr: true,           // Hiển thị giờ định dạng 24h
-                    minuteIncrement: 30,       // Bước nhảy chọn phút là 30 phút
-                    defaultHour: defaultHour,
-                    defaultMinute: defaultMinute,
-                    minTime: "08:00",          // Giờ nhận khách sớm nhất (Sáng)
-                    maxTime: "22:00",          // Giờ nhận khách muộn nhất (Tối)
-                    formatDate: (date, formatStr) => {
-                        const pad = (num) => String(num).padStart(2, '0');
-                        const m = pad(date.getMonth() + 1);
-                        const d = pad(date.getDate());
-                        const y = date.getFullYear();
-                        const h = pad(date.getHours());
-                        const min = pad(date.getMinutes());
-                        
-                        // Tính giờ kết thúc (+30 phút)
-                        const endDate = new Date(date.getTime() + 30 * 60 * 1000);
-                        const eh = pad(endDate.getHours());
-                        const emin = pad(endDate.getMinutes());
-                        
-                        return `${m}/${d}/${y} ${h}:${min} - ${eh}:${emin}`;
-                    },
-                    parseDate: (dateStr, formatStr) => {
-                        if (!dateStr) return null;
-                        
-                        // Xử lý các chuỗi chỉ có giờ (như "08:00", "22:00" của minTime/maxTime)
-                        if (/^\d{2}:\d{2}$/.test(dateStr)) {
-                            const [hours, minutes] = dateStr.split(":").map(Number);
-                            const date = new Date();
-                            date.setHours(hours, minutes, 0, 0);
-                            return date;
-                        }
-
-                        const startPart = dateStr.split(" - ")[0];
-                        const parts = startPart.split(" ");
-                        if (parts.length < 2) {
-                            const parsed = new Date(dateStr);
-                            return isNaN(parsed.getTime()) ? null : parsed;
-                        }
-                        const dateParts = parts[0].split("/");
-                        const timeParts = parts[1].split(":");
-                        if (dateParts.length === 3 && timeParts.length === 2) {
-                            return new Date(
-                                parseInt(dateParts[2]),
-                                parseInt(dateParts[0]) - 1,
-                                parseInt(dateParts[1]),
-                                parseInt(timeParts[0]),
-                                parseInt(timeParts[1])
-                            );
-                        }
-                        const parsed = new Date(dateStr);
-                        return isNaN(parsed.getTime()) ? null : parsed;
-                    },
-                    onChange: function (selectedDates, dateStr, instance) {
-                        if (selectedDates.length > 0) {
-                            const date = selectedDates[0];
-                            const minutes = date.getMinutes();
-                            if (minutes % 30 !== 0) {
-                                // Làm tròn phút về bội số của 30 gần nhất
-                                const ms = 30 * 60 * 1000;
-                                const roundedDate = new Date(Math.round(date.getTime() / ms) * ms);
-                                instance.setDate(roundedDate, false);
-                            }
-                        }
+            const serviceSelect = document.getElementById('cus_service');
+            const serviceCards = document.querySelectorAll('.service-card');
+            
+            // 2a. Chọn dịch vụ
+            serviceCards.forEach(card => {
+                card.addEventListener('click', () => {
+                    // Reset active states
+                    serviceCards.forEach(c => {
+                        c.classList.remove('border-blue-600', 'bg-blue-50/50', 'ring-4', 'ring-blue-600/10');
+                        c.classList.add('border-slate-200', 'bg-slate-50');
+                    });
+                    // Set active state
+                    card.classList.remove('border-slate-200', 'bg-slate-50');
+                    card.classList.add('border-blue-600', 'bg-blue-50/50', 'ring-4', 'ring-blue-600/10');
+                    
+                    // Update hidden select dropdown value
+                    const value = card.getAttribute('data-value');
+                    if (serviceSelect) {
+                        serviceSelect.value = value;
                     }
                 });
-            }
+            });
+
+            // State variables for Date & Time Selection
+            let selectedDateObj = null; // Date object representing selected day
+            let selectedTimeStr = "";  // "HH:MM" format
+
+            const dateTabsContainer = document.getElementById('date-tabs');
+            const morningSlotsContainer = document.getElementById('morning-slots');
+            const afternoonSlotsContainer = document.getElementById('afternoon-slots');
+            const eveningSlotsContainer = document.getElementById('evening-slots');
+            const selectedTimeDisplay = document.getElementById('selected-time-display');
+            const selectedTimeText = document.getElementById('selected-time-text');
+
+            // Helper function to pad zeros
+            const pad = (num) => String(num).padStart(2, '0');
+
+            // Format date for display in Vietnamese and English
+            const getDayLabel = (date, idx) => {
+                if (idx === 0) {
+                    return { vi: "Hôm nay", en: "Today" };
+                }
+                const weekdaysVI = ["Chủ Nhật", "Thứ 2", "Thứ 3", "Thứ 4", "Thứ 5", "Thứ 6", "Thứ 7"];
+                const weekdaysEN = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+                const dayOfWeek = date.getDay();
+                return {
+                    vi: weekdaysVI[dayOfWeek],
+                    en: weekdaysEN[dayOfWeek]
+                };
+            };
+
+            // 2b. Generate Date Tabs for the next 7 days
+            const generateDateTabs = () => {
+                if (!dateTabsContainer) return;
+                dateTabsContainer.innerHTML = '';
+                
+                const now = new Date();
+                
+                for (let i = 0; i < 7; i++) {
+                    const tempDate = new Date();
+                    tempDate.setDate(now.getDate() + i);
+                    
+                    const label = getDayLabel(tempDate, i);
+                    const formattedDateNum = pad(tempDate.getDate());
+                    const formattedMonth = pad(tempDate.getMonth() + 1);
+                    const formattedYear = tempDate.getFullYear();
+                    
+                    const dateValStr = `${formattedMonth}/${formattedDateNum}/${formattedYear}`; // m/d/Y format
+                    const isFirst = i === 0;
+                    
+                    const button = document.createElement('button');
+                    button.type = "button";
+                    button.setAttribute('data-date-str', dateValStr);
+                    button.className = `date-tab shrink-0 snap-center flex flex-col items-center justify-center p-3 w-20 rounded-2xl border transition-all ${
+                        isFirst 
+                        ? 'border-blue-600 bg-blue-50/50 text-blue-600 font-bold ring-4 ring-blue-600/10' 
+                        : 'border-slate-200 bg-slate-50 text-slate-700 hover:bg-slate-100/50 hover:border-slate-300'
+                    }`;
+                    
+                    button.innerHTML = `
+                        <span class="text-xs uppercase tracking-wider lang-el" data-vi="${label.vi}" data-en="${label.en}">${currentLang === 'en' ? label.en : label.vi}</span>
+                        <span class="text-xl font-black mt-1">${formattedDateNum}</span>
+                    `;
+                    
+                    button.addEventListener('click', () => {
+                        document.querySelectorAll('.date-tab').forEach(t => {
+                            t.classList.remove('border-blue-600', 'bg-blue-50/50', 'text-blue-600', 'font-bold', 'ring-4', 'ring-blue-600/10');
+                            t.classList.add('border-slate-200', 'bg-slate-50', 'text-slate-700');
+                        });
+                        button.classList.remove('border-slate-200', 'bg-slate-50', 'text-slate-700');
+                        button.classList.add('border-blue-600', 'bg-blue-50/50', 'text-blue-600', 'font-bold', 'ring-4', 'ring-blue-600/10');
+                        
+                        selectedDateObj = tempDate;
+                        updateTimeSlots();
+                        updateFinalDateTime();
+                    });
+                    
+                    dateTabsContainer.appendChild(button);
+                    
+                    if (isFirst) {
+                        selectedDateObj = tempDate;
+                    }
+                }
+            };
+
+            // Define target time slots (Morning, Afternoon, Evening shifts)
+            const shifts = {
+                morning: ["08:00", "08:30", "09:00", "09:30", "10:00", "10:30", "11:00", "11:30"],
+                afternoon: ["12:00", "12:30", "13:00", "13:30", "14:00", "14:30", "15:00", "15:30", "16:00", "16:30", "17:00", "17:30"],
+                evening: ["18:00", "18:30", "19:00", "19:30", "20:00", "20:30", "21:00", "21:30"]
+            };
+
+            // 2c. Update & generate Time Slots (filter out past time slots if date is today)
+            const updateTimeSlots = () => {
+                if (!selectedDateObj) return;
+                
+                const now = new Date();
+                const isToday = selectedDateObj.toDateString() === now.toDateString();
+                const currentHour = now.getHours();
+                const currentMin = now.getMinutes();
+
+                const renderShiftSlots = (slotList, container) => {
+                    if (!container) return;
+                    container.innerHTML = '';
+                    
+                    let availableCount = 0;
+
+                    slotList.forEach(time => {
+                        const [h, m] = time.split(':').map(Number);
+                        const isPast = isToday && (h < currentHour || (h === currentHour && m <= currentMin));
+                        
+                        if (isPast) return; // Skip past slots for today
+                        
+                        availableCount++;
+                        
+                        const button = document.createElement('button');
+                        button.type = "button";
+                        button.setAttribute('data-time', time);
+                        
+                        const isActive = selectedTimeStr === time;
+                        button.className = `time-slot-btn py-2 px-3 text-sm font-bold rounded-xl border text-center transition-all ${
+                            isActive 
+                            ? 'border-blue-600 bg-blue-50/50 text-blue-600 ring-4 ring-blue-600/10' 
+                            : 'border-slate-200 bg-slate-50 text-slate-800 hover:bg-slate-100/50 hover:border-slate-300'
+                        }`;
+                        button.innerText = time;
+                        
+                        button.addEventListener('click', () => {
+                            document.querySelectorAll('.time-slot-btn').forEach(b => {
+                                b.classList.remove('border-blue-600', 'bg-blue-50/50', 'text-blue-600', 'ring-4', 'ring-blue-600/10');
+                                b.classList.add('border-slate-200', 'bg-slate-50', 'text-slate-800');
+                            });
+                            button.classList.remove('border-slate-200', 'bg-slate-50', 'text-slate-800');
+                            button.classList.add('border-blue-600', 'bg-blue-50/50', 'text-blue-600', 'ring-4', 'ring-blue-600/10');
+                            
+                            selectedTimeStr = time;
+                            updateFinalDateTime();
+                        });
+                        
+                        container.appendChild(button);
+                    });
+
+                    // If no slots available (e.g. today after 21:30)
+                    if (availableCount === 0) {
+                        const emptyMsg = document.createElement('p');
+                        emptyMsg.className = "text-xs italic text-slate-400 py-1 lang-el col-span-4";
+                        emptyMsg.setAttribute('data-vi', 'Đã hết giờ nhận khách');
+                        emptyMsg.setAttribute('data-en', 'No slots left');
+                        emptyMsg.innerText = currentLang === 'en' ? 'No slots left' : 'Đã hết giờ nhận khách';
+                        container.appendChild(emptyMsg);
+                    }
+                };
+
+                renderShiftSlots(shifts.morning, morningSlotsContainer);
+                renderShiftSlots(shifts.afternoon, afternoonSlotsContainer);
+                renderShiftSlots(shifts.evening, eveningSlotsContainer);
+            };
+
+            // 2d. Combine selected Date + Time and update hidden input and visual text
+            const updateFinalDateTime = () => {
+                if (!selectedDateObj || !selectedTimeStr) {
+                    if (datetimeInput) datetimeInput.value = "";
+                    if (selectedTimeDisplay) selectedTimeDisplay.classList.add('hidden');
+                    return;
+                }
+                
+                const d = pad(selectedDateObj.getDate());
+                const m = pad(selectedDateObj.getMonth() + 1);
+                const y = selectedDateObj.getFullYear();
+                
+                // Parse select time hour and minutes
+                const [h, min] = selectedTimeStr.split(':').map(Number);
+                
+                // Compute end time (+30 minutes)
+                let eh = h;
+                let mintemp = min + 30;
+                if (mintemp === 60) {
+                    mintemp = 0;
+                    eh = (h + 1) % 24;
+                }
+                
+                const startStr = `${pad(h)}:${pad(min)}`;
+                const endStr = `${pad(eh)}:${pad(mintemp)}`;
+                
+                // Format: m/d/Y H:i - eh:emin (same as flatpickr output format)
+                const finalVal = `${m}/${d}/${y} ${startStr} - ${endStr}`;
+                if (datetimeInput) {
+                    datetimeInput.value = finalVal;
+                }
+
+                // Show visual selection summary card
+                if (selectedTimeDisplay && selectedTimeText) {
+                    selectedTimeDisplay.classList.remove('hidden');
+                    
+                    const weekdaysFullVI = ["Chủ Nhật", "Thứ Hai", "Thứ Ba", "Thứ Tư", "Thứ Năm", "Thứ Sáu", "Thứ Bảy"];
+                    const weekdaysFullEN = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+                    const dayOfWeek = selectedDateObj.getDay();
+                    
+                    const viText = `${weekdaysFullVI[dayOfWeek]}, ngày ${d}/${m}/${y} | Khung giờ: ${startStr} - ${endStr}`;
+                    const enText = `${weekdaysFullEN[dayOfWeek]}, ${m}/${d}/${y} | Slot: ${startStr} - ${endStr}`;
+                    
+                    selectedTimeText.setAttribute('data-vi', viText);
+                    selectedTimeText.setAttribute('data-en', enText);
+                    selectedTimeText.innerText = currentLang === 'en' ? enText : viText;
+                }
+            };
+
+            // Initialize visual elements on load
+            generateDateTabs();
+            updateTimeSlots();
+
 
             // --- 3. XỬ LÝ SUBMIT FORM ĐẶT LỊCH (GỬI QUA WEB3FORMS) ---
             const bookingForm = document.getElementById('booking-form');
@@ -171,21 +321,33 @@ document.addEventListener('DOMContentLoaded', () => {
                 bookingForm.addEventListener('submit', function (e) {
                     e.preventDefault();
 
+                    const service = serviceSelect.value;
                     const time = datetimeInput.value;
                     const submitBtn = this.querySelector('button[type="submit"]');
 
+                    // Validation 1: Service Card selection
+                    if (!service || service === "" || service === "Not selected") {
+                        const serviceWrapper = document.getElementById('service-selector-wrapper');
+                        if (serviceWrapper) {
+                            serviceWrapper.classList.add('border-red-500', 'ring-4', 'ring-red-500/10');
+                            serviceWrapper.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                            setTimeout(() => {
+                                serviceWrapper.classList.remove('border-red-500', 'ring-4', 'ring-red-500/10');
+                            }, 3000);
+                        }
+                        return;
+                    }
+
+                    // Validation 2: Time Selection
                     if (!time) {
-                        // Shake the input to indicate error — no alert() needed
-                        datetimeInput.style.borderColor = '#ef4444';
-                        datetimeInput.style.boxShadow = '0 0 0 3px rgba(239,68,68,0.15)';
-                        datetimeInput.focus();
-                        const errMsg = currentLang === 'en' ? 'Please select a date and time!' : 'Vui lòng chọn ngày và giờ dự kiến!';
-                        datetimeInput.setAttribute('placeholder', errMsg);
-                        setTimeout(() => {
-                            datetimeInput.style.borderColor = '';
-                            datetimeInput.style.boxShadow = '';
-                            datetimeInput.setAttribute('placeholder', 'mm/dd/yyyy hh:mm - hh:mm');
-                        }, 3000);
+                        const timeWrapper = document.getElementById('datetime-picker-wrapper');
+                        if (timeWrapper) {
+                            timeWrapper.classList.add('border-red-500', 'ring-4', 'ring-red-500/10');
+                            timeWrapper.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                            setTimeout(() => {
+                                timeWrapper.classList.remove('border-red-500', 'ring-4', 'ring-red-500/10');
+                            }, 3000);
+                        }
                         return;
                     }
 
@@ -211,8 +373,16 @@ document.addEventListener('DOMContentLoaded', () => {
                                     showModal(`Cảm ơn bạn ${name}.\n1997 Barber đã ghi nhận lịch hẹn của bạn vào: ${formattedTime}.\nChúng tôi sẽ sớm gọi lại để xác nhận.`);
                                 }
                                 bookingForm.reset();
-                                // Reset flatpickr instance separately (form.reset() does not clear it)
-                                if (flatpickrInstance) flatpickrInstance.clear();
+                                
+                                // Reset custom selection states
+                                serviceCards.forEach(c => {
+                                    c.classList.remove('border-blue-600', 'bg-blue-50/50', 'ring-4', 'ring-blue-600/10');
+                                    c.classList.add('border-slate-200', 'bg-slate-50');
+                                });
+                                selectedTimeStr = "";
+                                generateDateTabs();
+                                updateTimeSlots();
+                                updateFinalDateTime();
                             } else {
                                 console.error('Web3Forms error:', json);
                                 const errText = currentLang === 'en' ? 'An error occurred, please try again later!' : 'Có lỗi xảy ra, vui lòng thử lại sau!';
