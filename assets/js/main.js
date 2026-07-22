@@ -120,6 +120,13 @@ document.addEventListener('DOMContentLoaded', () => {
             // Helper function to pad zeros
             const pad = (num) => String(num).padStart(2, '0');
 
+            // Helper function to check if business is open (Tuesday = 2, Wednesday = 3)
+            const isOpenDay = (date) => {
+                if (!date) return false;
+                const day = date.getDay();
+                return day === 2 || day === 3;
+            };
+
             // Format date for display in Vietnamese and English
             const getDayLabel = (date, idx) => {
                 if (idx === 0) {
@@ -141,6 +148,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 
                 const now = new Date();
                 
+                // Find first open day (Tuesday or Wednesday) to auto-select
+                let defaultSelectIdx = -1;
+                for (let i = 0; i < 7; i++) {
+                    const checkDate = new Date();
+                    checkDate.setDate(now.getDate() + i);
+                    if (isOpenDay(checkDate)) {
+                        defaultSelectIdx = i;
+                        break;
+                    }
+                }
+                if (defaultSelectIdx === -1) defaultSelectIdx = 0;
+                
                 for (let i = 0; i < 7; i++) {
                     const tempDate = new Date();
                     tempDate.setDate(now.getDate() + i);
@@ -151,13 +170,18 @@ document.addEventListener('DOMContentLoaded', () => {
                     const formattedYear = tempDate.getFullYear();
                     
                     const dateValStr = `${formattedMonth}/${formattedDateNum}/${formattedYear}`; // m/d/Y format
-                    const isFirst = i === 0;
+                    const isSelected = i === defaultSelectIdx;
+                    const open = isOpenDay(tempDate);
+                    
+                    const statusVi = open ? "Mở cửa" : "Nghỉ";
+                    const statusEn = open ? "Open" : "Closed";
+                    const statusClass = open ? "text-emerald-600 font-semibold" : "text-slate-400 font-normal";
                     
                     const button = document.createElement('button');
                     button.type = "button";
                     button.setAttribute('data-date-str', dateValStr);
-                    button.className = `date-tab shrink-0 snap-center flex flex-col items-center justify-center p-3 w-20 rounded-2xl border transition-all ${
-                        isFirst 
+                    button.className = `date-tab shrink-0 snap-center flex flex-col items-center justify-center p-3 w-22 rounded-2xl border transition-all ${
+                        isSelected 
                         ? 'border-blue-600 bg-blue-50/50 text-blue-600 font-bold ring-4 ring-blue-600/10' 
                         : 'border-slate-200 bg-slate-50 text-slate-700 hover:bg-slate-100/50 hover:border-slate-300'
                     }`;
@@ -165,6 +189,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     button.innerHTML = `
                         <span class="text-xs uppercase tracking-wider lang-el" data-vi="${label.vi}" data-en="${label.en}">${currentLang === 'en' ? label.en : label.vi}</span>
                         <span class="text-xl font-black mt-1">${formattedDateNum}</span>
+                        <span class="text-[10px] mt-0.5 lang-el ${statusClass}" data-vi="${statusVi}" data-en="${statusEn}">${currentLang === 'en' ? statusEn : statusVi}</span>
                     `;
                     
                     button.addEventListener('click', () => {
@@ -182,22 +207,42 @@ document.addEventListener('DOMContentLoaded', () => {
                     
                     dateTabsContainer.appendChild(button);
                     
-                    if (isFirst) {
+                    if (isSelected) {
                         selectedDateObj = tempDate;
                     }
                 }
             };
 
-            // Define target time slots (Morning, Afternoon, Evening shifts)
+            // Define target time slots (Morning, Afternoon, Evening shifts: 09:00 to 20:00)
             const shifts = {
-                morning: ["08:00", "08:30", "09:00", "09:30", "10:00", "10:30", "11:00", "11:30"],
+                morning: ["09:00", "09:30", "10:00", "10:30", "11:00", "11:30"],
                 afternoon: ["12:00", "12:30", "13:00", "13:30", "14:00", "14:30", "15:00", "15:30", "16:00", "16:30", "17:00", "17:30"],
-                evening: ["18:00", "18:30", "19:00", "19:30", "20:00", "20:30", "21:00", "21:30"]
+                evening: ["18:00", "18:30", "19:00", "19:30"]
             };
 
             // 2c. Update & generate Time Slots (filter out past time slots if date is today)
             const updateTimeSlots = () => {
                 if (!selectedDateObj) return;
+                
+                // If shop is closed on the selected day (only open Tue & Wed)
+                if (!isOpenDay(selectedDateObj)) {
+                    selectedTimeStr = "";
+                    if (morningSlotsContainer) {
+                        morningSlotsContainer.innerHTML = `
+                            <div class="col-span-full py-4 px-4 text-center rounded-2xl bg-amber-50 border border-amber-200/80 text-amber-900">
+                                <p class="font-bold text-sm lang-el" data-vi="Tiệm đóng cửa vào ngày này" data-en="Shop is closed on this day">
+                                    ${currentLang === 'en' ? 'Shop is closed on this day' : 'Tiệm đóng cửa vào ngày này'}
+                                </p>
+                                <p class="text-xs mt-1 text-amber-700 lang-el" data-vi="Tiệm chỉ mở cửa vào Thứ 3 & Thứ 4 hàng tuần." data-en="Open on Tuesday & Wednesday only.">
+                                    ${currentLang === 'en' ? 'Open on Tuesday & Wednesday only.' : 'Tiệm chỉ mở cửa vào Thứ 3 & Thứ 4 hàng tuần.'}
+                                </p>
+                            </div>
+                        `;
+                    }
+                    if (afternoonSlotsContainer) afternoonSlotsContainer.innerHTML = '';
+                    if (eveningSlotsContainer) eveningSlotsContainer.innerHTML = '';
+                    return;
+                }
                 
                 const now = new Date();
                 const isToday = selectedDateObj.toDateString() === now.toDateString();
