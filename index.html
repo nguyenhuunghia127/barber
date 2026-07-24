@@ -46,6 +46,7 @@
     }
     </script>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 
@@ -86,10 +87,7 @@
                 </a>
                 <button id="mobile-menu-btn"
                     class="block md:hidden p-3 min-h-[44px] min-w-[44px] flex items-center justify-center text-slate-600 hover:text-slate-900 focus:outline-none">
-                    <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M4 6h16M4 12h16M4 18h16" />
-                    </svg>
+                    <i class="fa-solid fa-bars text-xl"></i>
                 </button>
             </div>
         </div>
@@ -119,79 +117,90 @@
     </header>
 
     <main>
-        <section id="home" class="relative overflow-hidden">
-            <div class="absolute inset-0 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-700"></div>
+        <section id="home" class="relative overflow-hidden bg-slate-900 text-white">
+            <div class="absolute inset-0 bg-gradient-to-br from-slate-950 via-slate-900 to-slate-800"></div>
+            <div class="absolute inset-0 bg-slate-900/60"></div>
             <div
-                class="absolute inset-0 opacity-20 [background-image:radial-gradient(circle_at_top_right,white,transparent_35%),radial-gradient(circle_at_bottom_left,white,transparent_25%)]">
-            </div>
-            <div
-                class="relative mx-auto grid max-w-7xl gap-10 px-4 pt-10 pb-16 sm:py-20 sm:px-6 md:grid-cols-2 md:items-center lg:px-8 lg:py-28">
+                class="relative mx-auto grid max-w-7xl gap-12 px-4 pt-12 pb-20 sm:py-20 sm:px-6 md:grid-cols-2 md:items-center lg:px-8 lg:py-28">
                 <div class="text-white reveal-left">
 
-                    <h1 class="mt-0 text-5xl font-black leading-tight sm:text-6xl lg:text-7xl lang-el"
-                        data-vi="Định hình phong cách phái mạnh" data-en="Shaping Men's Style">
-                        Shaping Men's Style
+
+                    <h1 class="mt-0 text-5xl font-black leading-[1.1] sm:text-6xl lg:text-7xl tracking-tight lang-el"
+                        data-vi="Định hình phong cách<br><span class='text-blue-500'>phái mạnh 1997</span>"
+                        data-en="Shaping Men's<br><span class='text-blue-500'>Style Since 1997</span>">
+                        Shaping Men's<br><span class="text-blue-500">Style Since 1997</span>
                     </h1>
-                    <p class="mt-5 max-w-xl text-lg leading-7 text-slate-200 sm:text-xl lang-el"
-                        data-vi="Hơn cả một mái tóc, đó là nghệ thuật. Không gian chỉn chu, thợ lành nghề, trải nghiệm thư giãn và đặt lịch nhanh ngay trên điện thoại."
-                        data-en="More than just a haircut, it's art. Neat space, skilled barbers, relaxing experience, and quick booking right on your phone.">
-                        More than just a haircut, it's art. Neat space, skilled barbers, relaxing experience, and quick
-                        booking right on your phone.
+
+                    <p class="mt-6 max-w-xl text-base leading-relaxed text-slate-300 sm:text-lg lang-el"
+                        data-vi="Hơn cả một mái tóc, đó là nghệ thuật và đẳng cấp. Không gian chỉn chu, thợ tay nghề cao, trải nghiệm thư giãn và đặt lịch giữ chỗ nhanh chóng."
+                        data-en="More than just a haircut, it's art and lifestyle. Premium studio space, master barbers, relaxing experience, and instant slot reservation.">
+                        More than just a haircut, it's art and lifestyle. Premium studio space, master barbers, relaxing experience, and instant slot reservation.
                     </p>
-                    <div class="mt-8 flex flex-wrap gap-4">
+
+                    <div class="mt-8 flex flex-wrap items-center gap-4">
                         <a href="#booking"
-                            class="rounded-2xl bg-blue-600 px-6 py-3 font-semibold text-white transition hover:-translate-y-0.5 lang-el"
-                            data-vi="Đặt lịch ngay" data-en="Book Now">
-                            Book Now
+                            class="inline-flex items-center gap-2 rounded-2xl bg-blue-600 px-7 py-4 text-base font-bold text-white shadow-lg shadow-blue-600/30 transition hover:-translate-y-0.5 hover:bg-blue-700 lang-el"
+                            data-vi="ĐẶT LỊCH NGAY <i class='fa-solid fa-arrow-right text-sm ml-1'></i>"
+                            data-en="BOOK NOW <i class='fa-solid fa-arrow-right text-sm ml-1'></i>">
+                            BOOK NOW <i class="fa-solid fa-arrow-right text-sm ml-1"></i>
                         </a>
                         <a href="#services"
-                            class="rounded-2xl border border-white/20 bg-white/10 px-6 py-3 font-semibold text-white backdrop-blur transition hover:bg-white/20 lang-el"
-                            data-vi="Xem bảng giá" data-en="View Prices">
-                            View Prices
+                            class="inline-flex items-center gap-2 rounded-2xl border border-white/20 bg-white/10 px-7 py-4 text-base font-bold text-white backdrop-blur transition hover:bg-white/20 lang-el"
+                            data-vi="Xem dịch vụ & bảng giá" data-en="View Services & Prices">
+                            View Services & Prices
                         </a>
                     </div>
                 </div>
 
                 <div
-                    class="rounded-[2rem] border border-white/10 bg-white/10 p-4 shadow-2xl backdrop-blur reveal-right">
+                    class="rounded-[2rem] border border-white/15 bg-white/5 p-4 shadow-2xl backdrop-blur-xl reveal-right">
                     <div id="home-banner-track"
                         class="flex gap-4 overflow-x-auto snap-x snap-mandatory hide-scrollbar pb-2">
+                        <!-- Banner 1 -->
                         <div
-                            class="shrink-0 w-full snap-center rounded-[1.5rem] overflow-hidden shadow-sm transition hover:-translate-y-1 relative group">
+                            class="shrink-0 w-full snap-center rounded-[1.5rem] overflow-hidden shadow-lg transition hover:-translate-y-1 relative group">
                             <img src="./img/undercut2.png" alt="Modern undercut hairstyle"
                                 class="w-full aspect-[4/5] object-cover transition duration-500 group-hover:scale-105"
                                 loading="lazy">
-                            <div class="absolute bottom-0 left-0 w-full bg-slate-900/80 p-5 text-white backdrop-blur">
-                                <p class="text-base font-semibold uppercase tracking-[0.2em] text-blue-400 lang-el"
-                                    data-vi="Mẫu tóc hot" data-en="Trending">Trending</p>
-                                <p class="mt-1 text-xl font-bold lang-el" data-vi="Sạch, chill, nam tính như undercut"
-                                    data-en="Clean, chill, masculine like undercut">Clean, chill, masculine like
-                                    undercut</p>
-                            </div>
-                        </div>
-                        <div
-                            class="shrink-0 w-full snap-center rounded-[1.5rem] overflow-hidden shadow-sm transition hover:-translate-y-1 relative group">
-                            <img src="./img/Side-Part-hien-dai.jpg" alt="Classic side part hairstyle"
-                                class="w-full aspect-[4/5] object-cover transition duration-500 group-hover:scale-105"
-                                loading="lazy">
-                            <div class="absolute bottom-0 left-0 w-full bg-slate-900/80 p-5 text-white backdrop-blur">
-                                <p class="text-base font-semibold uppercase tracking-[0.2em] text-blue-400 lang-el"
-                                    data-vi="Mẫu tóc hot" data-en="Trending">Trending</p>
-                                <p class="mt-1 text-xl font-bold lang-el" data-vi="Cổ điển classic như side part"
-                                    data-en="Classic and elegant like side part">Classic and elegant like side part</p>
+                            <div class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-slate-950 via-slate-900/90 to-transparent p-6 text-white backdrop-blur-xs">
+                                <span class="inline-block rounded-full bg-blue-600 px-3 py-1 text-xs font-bold uppercase tracking-wider text-white mb-2 lang-el"
+                                    data-vi="Mẫu Tóc Hot" data-en="Trending Style">Trending Style</span>
+                                <p class="text-2xl font-black leading-snug lang-el" data-vi="Undercut Hiện Đại"
+                                    data-en="Modern Undercut">Modern Undercut</p>
+                                <p class="mt-1 text-sm text-slate-300 lang-el" data-vi="Sạch sẽ, nam tính và lịch lãm"
+                                    data-en="Clean, masculine and elegant">Clean, masculine and elegant</p>
                             </div>
                         </div>
 
+                        <!-- Banner 2 -->
                         <div
-                            class="shrink-0 w-full snap-center rounded-[1.5rem] overflow-hidden shadow-sm transition hover:-translate-y-1 relative group">
+                            class="shrink-0 w-full snap-center rounded-[1.5rem] overflow-hidden shadow-lg transition hover:-translate-y-1 relative group">
+                            <img src="./img/Side-Part-hien-dai.jpg" alt="Classic side part hairstyle"
+                                class="w-full aspect-[4/5] object-cover transition duration-500 group-hover:scale-105"
+                                loading="lazy">
+                            <div class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-slate-950 via-slate-900/90 to-transparent p-6 text-white backdrop-blur-xs">
+                                <span class="inline-block rounded-full bg-blue-600 px-3 py-1 text-xs font-bold uppercase tracking-wider text-white mb-2 lang-el"
+                                    data-vi="Mẫu Tóc Hot" data-en="Trending Style">Trending Style</span>
+                                <p class="text-2xl font-black leading-snug lang-el" data-vi="Side Part Cổ Điển"
+                                    data-en="Classic Side Part">Classic Side Part</p>
+                                <p class="mt-1 text-sm text-slate-300 lang-el" data-vi="Phong thái quý ông thanh lịch"
+                                    data-en="Gentlemanly and sophisticated">Gentlemanly and sophisticated</p>
+                            </div>
+                        </div>
+
+                        <!-- Banner 3 -->
+                        <div
+                            class="shrink-0 w-full snap-center rounded-[1.5rem] overflow-hidden shadow-lg transition hover:-translate-y-1 relative group">
                             <img src="./img/layer-taper-fade.png" alt="Modern taper fade hairstyle"
                                 class="w-full aspect-[4/5] object-cover transition duration-500 group-hover:scale-105"
                                 loading="lazy">
-                            <div class="absolute bottom-0 left-0 w-full bg-slate-900/80 p-5 text-white backdrop-blur">
-                                <p class="text-base font-semibold uppercase tracking-[0.2em] text-blue-400 lang-el"
-                                    data-vi="Mẫu tóc hot" data-en="Trending">Trending</p>
-                                <p class="mt-1 text-xl font-bold lang-el" data-vi="Gọn gàng với Taper Fade"
-                                    data-en="Neat and clean with Taper Fade">Neat and clean with Taper Fade</p>
+                            <div class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-slate-950 via-slate-900/90 to-transparent p-6 text-white backdrop-blur-xs">
+                                <span class="inline-block rounded-full bg-blue-600 px-3 py-1 text-xs font-bold uppercase tracking-wider text-white mb-2 lang-el"
+                                    data-vi="Mẫu Tóc Hot" data-en="Trending Style">Trending Style</span>
+                                <p class="text-2xl font-black leading-snug lang-el" data-vi="Taper Fade Sắc Nét"
+                                    data-en="Sharp Taper Fade">Sharp Taper Fade</p>
+                                <p class="mt-1 text-sm text-slate-300 lang-el" data-vi="Gọn gàng, trẻ trung và cá tính"
+                                    data-en="Neat, youthful and sharp">Neat, youthful and sharp</p>
                             </div>
                         </div>
                     </div>
@@ -251,16 +260,14 @@
             <div class="mt-10 grid gap-6 grid-cols-1 md:grid-cols-3">
                 <!-- Card 1 VIP -->
                 <div
-                    class="group relative overflow-hidden rounded-[2rem] border border-slate-800 bg-slate-900 p-8 shadow-2xl transition-all duration-500 hover:-translate-y-2 hover:shadow-blue-900/50 reveal-scale">
+                    class="group relative overflow-hidden rounded-[2rem] border border-slate-800 bg-slate-900 p-8 shadow-xl transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl reveal-scale">
                     <div
-                        class="absolute -right-20 -top-20 h-64 w-64 rounded-full bg-blue-600/20 blur-3xl transition-transform duration-500 group-hover:scale-150">
-                    </div>
-                    <div
-                        class="absolute top-6 right-6 rounded-full bg-gradient-to-r from-yellow-400 to-orange-500 px-3 py-1 text-sm font-black text-white shadow-lg shadow-orange-500/30 tracking-wider">
+                        class="absolute top-6 right-6 rounded-full bg-blue-600 px-3 py-1 text-xs font-bold text-white tracking-wider uppercase">
                         BEST SELLER</div>
                     <div
-                        class="relative z-10 flex h-16 w-16 items-center justify-center rounded-2xl bg-white/10 text-4xl shadow-inner backdrop-blur-md transition-transform duration-500 group-hover:scale-110 group-hover:rotate-3 border border-white/10">
-                        ✂️</div>
+                        class="relative z-10 flex h-14 w-14 items-center justify-center rounded-2xl bg-white/10 text-white shadow-inner backdrop-blur-md transition-transform duration-300 group-hover:scale-105 border border-white/10">
+                        <i class="fa-solid fa-scissors text-2xl text-white"></i>
+                    </div>
                     <h3 class="relative z-10 mt-6 text-3xl font-black text-white lang-el" data-vi="Combo Cắt Gội VIP"
                         data-en="VIP Cut & Wash Combo">VIP Cut & Wash Combo</h3>
                     <p class="relative z-10 mt-4 text-base leading-relaxed text-slate-300 lang-el"
@@ -274,25 +281,19 @@
                             <span class="text-4xl font-black text-white">$40</span>
                         </div>
                         <a href="#booking"
-                            class="flex h-12 w-12 items-center justify-center rounded-full bg-blue-600 text-white transition-transform duration-300 hover:scale-110 shadow-lg shadow-blue-600/40">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5"
-                                stroke="currentColor" class="w-5 h-5">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-                            </svg>
+                            class="flex h-12 w-12 items-center justify-center rounded-full bg-blue-600 text-white transition-transform duration-300 hover:scale-105 shadow-md">
+                            <i class="fa-solid fa-arrow-right text-sm"></i>
                         </a>
                     </div>
                 </div>
 
                 <!-- Card 2 Perm -->
                 <div
-                    class="group relative overflow-hidden rounded-[2rem] border border-blue-100 bg-gradient-to-b from-blue-50/50 to-white p-8 shadow-lg shadow-slate-200/50 transition-all duration-500 hover:-translate-y-2 hover:shadow-blue-900/10 reveal-scale reveal-delay-1">
+                    class="group relative overflow-hidden rounded-[2rem] border border-slate-200 bg-white p-8 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-slate-300 reveal-scale reveal-delay-1">
                     <div
-                        class="absolute -left-20 -bottom-20 h-64 w-64 rounded-full bg-blue-400/10 blur-3xl transition-transform duration-500 group-hover:scale-150">
+                        class="relative z-10 flex h-14 w-14 items-center justify-center rounded-2xl bg-slate-100 text-slate-800 shadow-sm transition-transform duration-300 group-hover:scale-105 border border-slate-200">
+                        <i class="fa-solid fa-wand-magic-sparkles text-2xl text-slate-800"></i>
                     </div>
-                    <div
-                        class="relative z-10 flex h-16 w-16 items-center justify-center rounded-2xl bg-white text-4xl shadow-sm transition-transform duration-500 group-hover:scale-110 group-hover:-rotate-3 border border-blue-50 text-blue-500">
-                        ✨</div>
                     <h3 class="relative z-10 mt-6 text-3xl font-black text-slate-900 lang-el" data-vi="Uốn Tóc Nam"
                         data-en="Men's Perm">Men's Perm</h3>
                     <p class="relative z-10 mt-4 text-base leading-relaxed text-slate-600 lang-el"
@@ -303,29 +304,23 @@
                         <div>
                             <p class="text-sm font-medium uppercase tracking-widest text-slate-400 lang-el"
                                 data-vi="Chỉ từ" data-en="From">From</p>
-                            <span class="text-4xl font-black text-blue-600">$30 <span
+                            <span class="text-4xl font-black text-slate-900">$30 <span
                                     class="text-xl font-bold text-slate-400">- $60</span></span>
                         </div>
                         <a href="#booking"
-                            class="flex h-12 w-12 items-center justify-center rounded-full bg-slate-900 text-white transition-transform duration-300 hover:scale-110 shadow-md">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5"
-                                stroke="currentColor" class="w-5 h-5">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-                            </svg>
+                            class="flex h-12 w-12 items-center justify-center rounded-full bg-slate-900 text-white transition-transform duration-300 hover:scale-105 shadow-md">
+                            <i class="fa-solid fa-arrow-right text-sm"></i>
                         </a>
                     </div>
                 </div>
 
                 <!-- Card 3 Dye -->
                 <div
-                    class="group relative overflow-hidden rounded-[2rem] border border-purple-100 bg-gradient-to-b from-purple-50/50 to-white p-8 shadow-lg shadow-slate-200/50 transition-all duration-500 hover:-translate-y-2 hover:shadow-purple-900/10 reveal-scale reveal-delay-2">
+                    class="group relative overflow-hidden rounded-[2rem] border border-slate-200 bg-white p-8 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-slate-300 reveal-scale reveal-delay-2">
                     <div
-                        class="absolute -right-20 -bottom-20 h-64 w-64 rounded-full bg-purple-400/10 blur-3xl transition-transform duration-500 group-hover:scale-150">
+                        class="relative z-10 flex h-14 w-14 items-center justify-center rounded-2xl bg-slate-100 text-slate-800 shadow-sm transition-transform duration-300 group-hover:scale-105 border border-slate-200">
+                        <i class="fa-solid fa-palette text-2xl text-slate-800"></i>
                     </div>
-                    <div
-                        class="relative z-10 flex h-16 w-16 items-center justify-center rounded-2xl bg-white text-4xl shadow-sm transition-transform duration-500 group-hover:scale-110 group-hover:rotate-3 border border-purple-50 text-purple-500">
-                        🎨</div>
                     <h3 class="relative z-10 mt-6 text-3xl font-black text-slate-900 lang-el"
                         data-vi="Nhuộm Tóc Thời Trang" data-en="Fashion Hair Dye">Fashion Hair Dye</h3>
                     <p class="relative z-10 mt-4 text-base leading-relaxed text-slate-600 lang-el"
@@ -336,16 +331,12 @@
                         <div>
                             <p class="text-sm font-medium uppercase tracking-widest text-slate-400 lang-el"
                                 data-vi="Chỉ từ" data-en="From">From</p>
-                            <span class="text-4xl font-black text-purple-600">$30 <span
+                            <span class="text-4xl font-black text-slate-900">$30 <span
                                     class="text-xl font-bold text-slate-400">- $100</span></span>
                         </div>
                         <a href="#booking"
-                            class="flex h-12 w-12 items-center justify-center rounded-full bg-slate-900 text-white transition-transform duration-300 hover:scale-110 shadow-md">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5"
-                                stroke="currentColor" class="w-5 h-5">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-                            </svg>
+                            class="flex h-12 w-12 items-center justify-center rounded-full bg-slate-900 text-white transition-transform duration-300 hover:scale-105 shadow-md">
+                            <i class="fa-solid fa-arrow-right text-sm"></i>
                         </a>
                     </div>
                 </div>
@@ -354,7 +345,6 @@
             <div class="mt-14 grid gap-8 lg:grid-cols-[0.95fr_1.05fr]">
                 <div
                     class="rounded-[2rem] bg-slate-900 p-8 text-white flex flex-col justify-center relative overflow-hidden">
-                    <div class="absolute -right-20 -top-20 h-64 w-64 rounded-full bg-blue-600/20 blur-3xl"></div>
                     <div class="relative z-10">
                         <p class="text-base font-bold uppercase tracking-[0.25em] text-blue-400 lang-el"
                             data-vi="Bảng giá & dịch vụ" data-en="Pricing & Services">Pricing & Services</p>
@@ -395,8 +385,8 @@
                             <span class="text-right font-bold text-blue-600">$35</span>
                         </div>
                         <div class="grid grid-cols-2 items-center border-b border-slate-100 px-6 py-4 bg-blue-50/50">
-                            <span class="font-bold text-slate-900 lang-el" data-vi="Combo Cắt Gội VIP ⭐"
-                                data-en="VIP Cut & Wash Combo ⭐">VIP Cut & Wash Combo ⭐</span>
+                            <span class="font-bold text-slate-900 lang-el" data-vi="Combo Cắt Gội VIP"
+                                data-en="VIP Cut & Wash Combo">VIP Cut & Wash Combo</span>
                             <span class="text-right font-black text-blue-600">$40</span>
                         </div>
 
@@ -1052,9 +1042,6 @@
         <section id="booking" class="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 overflow-hidden">
             <div class="grid grid-cols-1 gap-8 lg:grid-cols-[0.9fr_1.1fr] w-full max-w-full">
                 <div class="rounded-[2rem] bg-slate-900 p-8 text-white sm:p-10 relative overflow-hidden reveal-left">
-                    <div
-                        class="absolute right-0 bottom-0 h-64 w-64 rounded-full bg-blue-600/10 blur-3xl translate-x-1/2 translate-y-1/2">
-                    </div>
                     <div class="relative z-10">
                         <p class="text-base font-bold uppercase tracking-[0.25em] text-blue-400 lang-el"
                             data-vi="Liên hệ & đặt lịch" data-en="Contact & Booking">Contact & Booking</p>
@@ -1064,12 +1051,7 @@
                             <div class="flex gap-4 items-start group">
                                 <div
                                     class="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-blue-500/10 text-blue-400 transition-colors group-hover:bg-blue-500 group-hover:text-white">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
-                                        class="w-5 h-5">
-                                        <path fill-rule="evenodd"
-                                            d="M11.54 22.351l.07.04.028.016a.76.76 0 00.723 0l.028-.015.071-.041a16.975 16.975 0 001.144-.742 19.58 19.58 0 002.683-2.282c1.944-1.99 3.963-4.98 3.963-8.827a8.25 8.25 0 00-16.5 0c0 3.846 2.02 6.837 3.963 8.827a19.58 19.58 0 002.682 2.282 16.975 16.975 0 001.145.742zM12 13.5a3 3 0 100-6 3 3 0 000 6z"
-                                            clip-rule="evenodd" />
-                                    </svg>
+                                    <i class="fa-solid fa-location-dot text-lg"></i>
                                 </div>
                                 <div>
                                     <p class="font-semibold text-white lang-el" data-vi="Địa chỉ" data-en="Address">
@@ -1087,12 +1069,7 @@
                             <div class="flex gap-4 items-start group">
                                 <div
                                     class="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-blue-500/10 text-blue-400 transition-colors group-hover:bg-blue-500 group-hover:text-white">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
-                                        class="w-5 h-5">
-                                        <path fill-rule="evenodd"
-                                            d="M1.5 4.5a3 3 0 013-3h1.372c.86 0 1.61.586 1.819 1.42l1.105 4.423a1.875 1.875 0 01-.694 1.955l-1.293.97c-.135.101-.164.249-.126.352a11.285 11.285 0 006.697 6.697c.103.038.25.009.352-.126l.97-1.293a1.875 1.875 0 011.955-.694l4.423 1.105c.834.209 1.42.959 1.42 1.82V19.5a3 3 0 01-3 3h-2.25C8.552 22.5 1.5 15.448 1.5 6.75V4.5z"
-                                            clip-rule="evenodd" />
-                                    </svg>
+                                    <i class="fa-solid fa-phone text-lg"></i>
                                 </div>
                                 <div>
                                     <p class="font-semibold text-white lang-el" data-vi="Điện thoại" data-en="Phone">
@@ -1107,12 +1084,7 @@
                             <div class="flex gap-4 items-start group">
                                 <div
                                     class="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-blue-500/10 text-blue-400 transition-colors group-hover:bg-blue-500 group-hover:text-white">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
-                                        class="w-5 h-5">
-                                        <path fill-rule="evenodd"
-                                            d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zM12.75 6a.75.75 0 00-1.5 0v6c0 .414.336.75.75.75h4.5a.75.75 0 000-1.5h-3.75V6z"
-                                            clip-rule="evenodd" />
-                                    </svg>
+                                    <i class="fa-solid fa-clock text-lg"></i>
                                 </div>
                                 <div>
                                     <p class="font-semibold text-white lang-el" data-vi="Giờ mở cửa"
@@ -1129,12 +1101,12 @@
                                     data-en="Follow us">Follow us</p>
                                 <div class="flex gap-3">
                                     <a href="#" rel="noopener noreferrer" target="_blank"
-                                        class="rounded-xl border border-white/15 bg-white/5 px-5 py-3 min-h-[44px] text-base font-semibold backdrop-blur transition hover:bg-white/20 hover:scale-105">Facebook</a>
+                                        class="rounded-xl border border-white/15 bg-white/5 px-5 py-3 min-h-[44px] text-base font-semibold backdrop-blur transition hover:bg-white/20 hover:scale-105 flex items-center"><i class="fa-brands fa-facebook-f mr-2 text-blue-400"></i>Facebook</a>
                                     <a href="https://www.tiktok.com/@justin.realbarber1?_r=1&_t=ZP-956hku2GH9D&fbclid=PAZXh0bgNhZW0CMTEAc3J0YwZhcHBfaWQPOTM2NjE5NzQzMzkyNDU5AAGn61NrOdO7bCxxYkopG1nNZS1OL5UK-pI4_b9QhCi9LbSVItYu3y9jnGR8vik_aem_cPagB-tCnYfb_iXE2UkCXw"
                                         rel="noopener noreferrer" target="_blank"
-                                        class="rounded-xl border border-white/15 bg-white/5 px-5 py-3 min-h-[44px] text-base font-semibold backdrop-blur transition hover:bg-white/20 hover:scale-105">TikTok</a>
+                                        class="rounded-xl border border-white/15 bg-white/5 px-5 py-3 min-h-[44px] text-base font-semibold backdrop-blur transition hover:bg-white/20 hover:scale-105 flex items-center"><i class="fa-brands fa-tiktok mr-2 text-pink-400"></i>TikTok</a>
                                     <a href="https://www.instagram.com/justin.nguyen1997"
-                                        class="rounded-xl border border-white/15 bg-white/5 px-5 py-3 min-h-[44px] text-base font-semibold backdrop-blur transition hover:bg-white/20 hover:scale-105">Insta</a>
+                                        class="rounded-xl border border-white/15 bg-white/5 px-5 py-3 min-h-[44px] text-base font-semibold backdrop-blur transition hover:bg-white/20 hover:scale-105 flex items-center"><i class="fa-brands fa-instagram mr-2 text-purple-400"></i>Insta</a>
                                 </div>
                             </div>
 
@@ -1189,7 +1161,7 @@
                                     <!-- Card 1 -->
                                     <button type="button" data-value="Adult Haircut"
                                         class="service-card flex flex-col items-center justify-center p-4 rounded-2xl border border-slate-200 bg-slate-50 hover:bg-slate-100/50 hover:border-blue-300 transition-all text-center">
-                                        <span class="text-3xl mb-2">✂️</span>
+                                        <i class="fa-solid fa-scissors text-2xl text-slate-700 mb-2"></i>
                                         <span class="text-sm font-bold text-slate-900 leading-tight lang-el"
                                             data-vi="Cắt người lớn" data-en="Adult Cut">Adult Cut</span>
                                         <span class="text-xs text-blue-600 font-bold mt-1.5">$20</span>
@@ -1197,7 +1169,7 @@
                                     <!-- Card 2 -->
                                     <button type="button" data-value="Kids Haircut"
                                         class="service-card flex flex-col items-center justify-center p-4 rounded-2xl border border-slate-200 bg-slate-50 hover:bg-slate-100/50 hover:border-blue-300 transition-all text-center">
-                                        <span class="text-3xl mb-2">👦</span>
+                                        <i class="fa-solid fa-child text-2xl text-slate-700 mb-2"></i>
                                         <span class="text-sm font-bold text-slate-900 leading-tight lang-el"
                                             data-vi="Cắt trẻ em" data-en="Kids Cut">Kids Cut</span>
                                         <span class="text-xs text-blue-600 font-bold mt-1.5">$15</span>
@@ -1205,7 +1177,7 @@
                                     <!-- Card 3 -->
                                     <button type="button" data-value="VIP Cut & Wash Combo"
                                         class="service-card flex flex-col items-center justify-center p-4 rounded-2xl border border-slate-200 bg-slate-50 hover:bg-slate-100/50 hover:border-blue-300 transition-all text-center">
-                                        <span class="text-3xl mb-2">⭐</span>
+                                        <i class="fa-solid fa-crown text-2xl text-amber-500 mb-2"></i>
                                         <span class="text-sm font-bold text-slate-900 leading-tight lang-el"
                                             data-vi="Combo VIP" data-en="VIP Combo">VIP Combo</span>
                                         <span class="text-xs text-blue-600 font-bold mt-1.5">$40</span>
@@ -1213,7 +1185,7 @@
                                     <!-- Card 4 -->
                                     <button type="button" data-value="Men's Perm"
                                         class="service-card flex flex-col items-center justify-center p-4 rounded-2xl border border-slate-200 bg-slate-50 hover:bg-slate-100/50 hover:border-blue-300 transition-all text-center">
-                                        <span class="text-3xl mb-2">✨</span>
+                                        <i class="fa-solid fa-wand-magic-sparkles text-2xl text-slate-700 mb-2"></i>
                                         <span class="text-sm font-bold text-slate-900 leading-tight lang-el"
                                             data-vi="Uốn tóc nam" data-en="Men's Perm">Men's Perm</span>
                                         <span class="text-xs text-blue-600 font-bold mt-1.5">$30 - $60</span>
@@ -1221,7 +1193,7 @@
                                     <!-- Card 5 -->
                                     <button type="button" data-value="Fashion Hair Dye"
                                         class="service-card flex flex-col items-center justify-center p-4 rounded-2xl border border-slate-200 bg-slate-50 hover:bg-slate-100/50 hover:border-blue-300 transition-all text-center">
-                                        <span class="text-3xl mb-2">🎨</span>
+                                        <i class="fa-solid fa-palette text-2xl text-slate-700 mb-2"></i>
                                         <span class="text-sm font-bold text-slate-900 leading-tight lang-el"
                                             data-vi="Nhuộm tóc" data-en="Hair Dye">Hair Dye</span>
                                         <span class="text-xs text-blue-600 font-bold mt-1.5">$30 - $100</span>
@@ -1366,13 +1338,13 @@
     <div class="fixed bottom-6 right-6 z-50 flex flex-col gap-3">
         <a href="tel:5105010274"
             class="flex h-12 w-12 items-center justify-center rounded-full bg-blue-600 text-white shadow-lg shadow-blue-600/30 transition hover:-translate-y-1 sm:h-auto sm:w-auto sm:px-5 sm:py-3">
-            <span class="sm:hidden">📞</span>
+            <i class="fa-solid fa-phone text-base sm:mr-2"></i>
             <span class="hidden text-base font-bold sm:block lang-el" data-vi="Gọi ngay" data-en="Call Now">Call
                 Now</span>
         </a>
         <a href="https://ig.me/m/justin.nguyen1997" target="_blank" rel="noopener noreferrer"
             class="flex h-12 w-12 items-center justify-center rounded-full bg-slate-900 text-white shadow-lg transition hover:-translate-y-1 sm:h-auto sm:w-auto sm:px-5 sm:py-3">
-            <span class="sm:hidden">💬</span>
+            <i class="fa-brands fa-instagram text-lg sm:mr-2"></i>
             <span class="hidden text-base font-bold sm:block">Chat qua Insta</span>
         </a>
     </div>
@@ -1380,10 +1352,7 @@
     <!-- Back to top button -->
     <button id="back-to-top" title="Back to top"
         class="fixed bottom-40 right-6 z-50 flex h-11 w-11 items-center justify-center rounded-full bg-white border border-slate-200 text-slate-700 shadow-lg transition hover:-translate-y-1 hover:bg-slate-50 sm:bottom-40">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"
-            stroke-width="2">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M5 10l7-7m0 0l7 7m-7-7v18" />
-        </svg>
+        <i class="fa-solid fa-arrow-up text-base"></i>
     </button>
 
     <!-- Success Modal -->
@@ -1391,8 +1360,8 @@
         class="hidden fixed inset-0 z-[100] items-center justify-center bg-slate-900/60 backdrop-blur-sm p-4 opacity-0 transition-opacity duration-300">
         <div id="success-modal-card"
             class="w-full max-w-sm rounded-[2rem] bg-white p-6 shadow-2xl transform scale-95 transition-transform duration-300 relative flex flex-col items-center">
-            <div class="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-green-100 mb-4">
-                <span class="text-4xl text-green-600">✓</span>
+            <div class="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-emerald-100 mb-4">
+                <i class="fa-solid fa-check text-3xl text-emerald-600"></i>
             </div>
             <h3 class="text-center text-3xl font-black text-slate-900 mb-2 lang-el" data-vi="Đặt lịch thành công!"
                 data-en="Booking Successful!">Đặt lịch thành công!</h3>

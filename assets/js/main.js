@@ -65,6 +65,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 applyLang(currentLang);
             }
 
+
+
             // --- 1. XỬ LÝ MOBILE MENU ---
             const btn = document.getElementById('mobile-menu-btn');
             const menu = document.getElementById('mobile-menu');
