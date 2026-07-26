@@ -666,7 +666,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Ẩn thanh "Book Now" dính khi khách đã ở section đặt lịch
                 const stickyBar = document.getElementById('sticky-book-bar');
                 if (stickyBar) {
-                    stickyBar.classList.toggle('translate-y-full', entry.target.id === 'booking');
+                    if (entry.target.id === 'booking') {
+                        stickyBar.style.transform = 'translateY(100%)';
+                    } else {
+                        stickyBar.style.transform = 'translateY(0)';
+                    }
                 }
             }
         });
