@@ -8,13 +8,13 @@ head_seo = """    <meta name="theme-color" content="#0f172a">
     <title>1997 Barber - Men's Grooming Studio</title>
     
     <!-- SEO & Social Media -->
-    <link rel="canonical" href="https://1997barber.com/" />
+    <link rel="canonical" href="https://barber-eight-omega.vercel.app/" />
     <link rel="icon" type="image/png" href="./img/image.png" />
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://1997barber.com/">
+    <meta property="og:url" content="https://barber-eight-omega.vercel.app/">
     <meta property="og:title" content="1997 Barber - Men's Grooming Studio">
     <meta property="og:description" content="1997 Barber - Men's Grooming Studio. Modern barber shop with skilled barbers, quick online booking, and no hidden fees.">
-    <meta property="og:image" content="https://1997barber.com/img/image.png">
+    <meta property="og:image" content="https://barber-eight-omega.vercel.app/img/image.png">
 
     <!-- Schema Markup (LocalBusiness) -->
     <script type="application/ld+json">
@@ -22,8 +22,8 @@ head_seo = """    <meta name="theme-color" content="#0f172a">
       "@context": "https://schema.org",
       "@type": "Barbershop",
       "name": "1997 Barber",
-      "image": "https://1997barber.com/img/image.png",
-      "url": "https://1997barber.com",
+      "image": "https://barber-eight-omega.vercel.app/img/image.png",
+      "url": "https://barber-eight-omega.vercel.app",
       "telephone": "+15105010274",
       "address": {
         "@type": "PostalAddress",

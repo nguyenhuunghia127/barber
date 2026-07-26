@@ -1,0 +1,25 @@
+{
+  "name": "1997 Barber - Men's Grooming Studio",
+  "short_name": "1997 Barber",
+  "description": "Modern barber shop with skilled barbers, quick online booking, and no hidden fees.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0f172a",
+  "theme_color": "#0f172a",
+  "icons": [
+    {
+      "src": "/img/image.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/img/image.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}

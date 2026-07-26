@@ -7,6 +7,8 @@
     <meta name="description"
         content="1997 Barber - Men's Grooming Studio. Modern barber shop with skilled barbers, quick online booking, and no hidden fees. Located in Ho Chi Minh City.">
     <meta name="theme-color" content="#0f172a">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="apple-touch-icon" href="./img/image.png">
     <title>1997 Barber - Men's Grooming Studio</title>
 
     <!-- SEO & Social Media -->
@@ -45,12 +47,21 @@
       }
     }
     </script>
+    <!-- Google Analytics (GA4) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RJXMGFP6G8"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-RJXMGFP6G8');
+    </script>
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 
-<body class="min-h-screen bg-white text-slate-900 overflow-x-hidden">
+<body class="min-h-screen bg-white text-slate-900 overflow-x-hidden pb-20 md:pb-0">
 
     <header class="sticky top-0 z-50 border-b border-slate-200 bg-white/90 backdrop-blur">
         <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
@@ -134,7 +145,8 @@
                     <p class="mt-6 max-w-xl text-base leading-relaxed text-slate-300 sm:text-lg lang-el"
                         data-vi="Hơn cả một mái tóc, đó là nghệ thuật và đẳng cấp. Không gian chỉn chu, thợ tay nghề cao, trải nghiệm thư giãn và đặt lịch giữ chỗ nhanh chóng."
                         data-en="More than just a haircut, it's art and lifestyle. Premium studio space, master barbers, relaxing experience, and instant slot reservation.">
-                        More than just a haircut, it's art and lifestyle. Premium studio space, master barbers, relaxing experience, and instant slot reservation.
+                        More than just a haircut, it's art and lifestyle. Premium studio space, master barbers, relaxing
+                        experience, and instant slot reservation.
                     </p>
 
                     <div class="mt-8 flex flex-wrap items-center gap-4">
@@ -162,8 +174,10 @@
                             <img src="./img/undercut2.png" alt="Modern undercut hairstyle"
                                 class="w-full aspect-[4/5] object-cover transition duration-500 group-hover:scale-105"
                                 loading="lazy">
-                            <div class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-slate-950 via-slate-900/90 to-transparent p-6 text-white backdrop-blur-xs">
-                                <span class="inline-block rounded-full bg-blue-600 px-3 py-1 text-xs font-bold uppercase tracking-wider text-white mb-2 lang-el"
+                            <div
+                                class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-slate-950 via-slate-900/90 to-transparent p-6 text-white backdrop-blur-xs">
+                                <span
+                                    class="inline-block rounded-full bg-blue-600 px-3 py-1 text-xs font-bold uppercase tracking-wider text-white mb-2 lang-el"
                                     data-vi="Mẫu Tóc Hot" data-en="Trending Style">Trending Style</span>
                                 <p class="text-2xl font-black leading-snug lang-el" data-vi="Undercut Hiện Đại"
                                     data-en="Modern Undercut">Modern Undercut</p>
@@ -178,8 +192,10 @@
                             <img src="./img/Side-Part-hien-dai.jpg" alt="Classic side part hairstyle"
                                 class="w-full aspect-[4/5] object-cover transition duration-500 group-hover:scale-105"
                                 loading="lazy">
-                            <div class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-slate-950 via-slate-900/90 to-transparent p-6 text-white backdrop-blur-xs">
-                                <span class="inline-block rounded-full bg-blue-600 px-3 py-1 text-xs font-bold uppercase tracking-wider text-white mb-2 lang-el"
+                            <div
+                                class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-slate-950 via-slate-900/90 to-transparent p-6 text-white backdrop-blur-xs">
+                                <span
+                                    class="inline-block rounded-full bg-blue-600 px-3 py-1 text-xs font-bold uppercase tracking-wider text-white mb-2 lang-el"
                                     data-vi="Mẫu Tóc Hot" data-en="Trending Style">Trending Style</span>
                                 <p class="text-2xl font-black leading-snug lang-el" data-vi="Side Part Cổ Điển"
                                     data-en="Classic Side Part">Classic Side Part</p>
@@ -194,8 +210,10 @@
                             <img src="./img/layer-taper-fade.png" alt="Modern taper fade hairstyle"
                                 class="w-full aspect-[4/5] object-cover transition duration-500 group-hover:scale-105"
                                 loading="lazy">
-                            <div class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-slate-950 via-slate-900/90 to-transparent p-6 text-white backdrop-blur-xs">
-                                <span class="inline-block rounded-full bg-blue-600 px-3 py-1 text-xs font-bold uppercase tracking-wider text-white mb-2 lang-el"
+                            <div
+                                class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-slate-950 via-slate-900/90 to-transparent p-6 text-white backdrop-blur-xs">
+                                <span
+                                    class="inline-block rounded-full bg-blue-600 px-3 py-1 text-xs font-bold uppercase tracking-wider text-white mb-2 lang-el"
                                     data-vi="Mẫu Tóc Hot" data-en="Trending Style">Trending Style</span>
                                 <p class="text-2xl font-black leading-snug lang-el" data-vi="Taper Fade Sắc Nét"
                                     data-en="Sharp Taper Fade">Sharp Taper Fade</p>
@@ -1039,6 +1057,53 @@
             </div>
         </section>
 
+        <section id="style-inspiration" class="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+            <div class="text-center reveal-scale">
+                <p class="text-base font-bold uppercase tracking-[0.25em] text-blue-600 lang-el"
+                    data-vi="Cảm hứng kiểu tóc" data-en="Style Inspiration">Style Inspiration</p>
+                <h2 class="mt-3 text-4xl font-black sm:text-5xl lang-el" data-vi="Một số kiểu tóc đang thịnh hành"
+                    data-en="Trending Styles Worth Trying">Trending Styles Worth Trying</h2>
+                <p class="mx-auto mt-4 max-w-2xl text-slate-600 lang-el"
+                    data-vi="Ảnh sưu tầm mang tính tham khảo kiểu tóc, chưa phải là sản phẩm thực hiện tại 1997 Barber."
+                    data-en="Curated reference photos for style inspiration — not actual work performed at 1997 Barber.">
+                    Curated reference photos for style inspiration — not actual work performed at 1997 Barber.
+                </p>
+            </div>
+
+            <div class="mt-10 grid gap-6 grid-cols-1 sm:grid-cols-3">
+                <div
+                    class="group relative overflow-hidden rounded-[2rem] border border-slate-200 bg-white shadow-sm reveal">
+                    <img src="./img/styles/layer-taper-fade.png" alt="Kiểu tóc layer taper fade tham khảo"
+                        loading="lazy" class="h-72 w-full object-cover">
+                    <div class="p-4 text-center">
+                        <p class="font-bold text-slate-900 lang-el" data-vi="Layer Taper Fade"
+                            data-en="Layer Taper Fade">
+                            Layer Taper Fade</p>
+                    </div>
+                </div>
+                <div
+                    class="group relative overflow-hidden rounded-[2rem] border border-slate-200 bg-white shadow-sm reveal reveal-delay-1">
+                    <img src="./img/styles/undercut1.png" alt="Kiểu tóc undercut tham khảo 1" loading="lazy"
+                        class="h-72 w-full object-cover">
+                    <div class="p-4 text-center">
+                        <p class="font-bold text-slate-900 lang-el" data-vi="Undercut Cổ Điển"
+                            data-en="Classic Undercut">
+                            Classic Undercut</p>
+                    </div>
+                </div>
+                <div
+                    class="group relative overflow-hidden rounded-[2rem] border border-slate-200 bg-white shadow-sm reveal reveal-delay-2">
+                    <img src="./img/styles/undercut2.png" alt="Kiểu tóc undercut tham khảo 2" loading="lazy"
+                        class="h-72 w-full object-cover">
+                    <div class="p-4 text-center">
+                        <p class="font-bold text-slate-900 lang-el" data-vi="Undercut Rẽ Ngôi"
+                            data-en="Side Part Undercut">
+                            Side Part Undercut</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <section id="booking" class="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 overflow-hidden">
             <div class="grid grid-cols-1 gap-8 lg:grid-cols-[0.9fr_1.1fr] w-full max-w-full">
                 <div class="rounded-[2rem] bg-slate-900 p-8 text-white sm:p-10 relative overflow-hidden reveal-left">
@@ -1089,7 +1154,8 @@
                                 <div>
                                     <p class="font-semibold text-white lang-el" data-vi="Giờ mở cửa"
                                         data-en="Working Hours">Working Hours</p>
-                                    <p class="mt-1 text-slate-300 lang-el" data-vi="Thứ 3 &amp; Thứ 4: 09:00 - 20:00 (Còn lại đóng cửa)"
+                                    <p class="mt-1 text-slate-300 lang-el"
+                                        data-vi="Thứ 3 &amp; Thứ 4: 09:00 - 20:00 (Còn lại đóng cửa)"
                                         data-en="Tue &amp; Wed: 9:00 AM - 8:00 PM (Closed other days)">
                                         Tue &amp; Wed: 9:00 AM - 8:00 PM (Closed other days)
                                     </p>
@@ -1099,14 +1165,17 @@
                             <div class="pt-6 border-t border-white/10 mt-6">
                                 <p class="mb-4 font-semibold text-white lang-el" data-vi="Theo dõi chúng tôi"
                                     data-en="Follow us">Follow us</p>
-                                <div class="flex gap-3">
+                                <div class="flex flex-wrap gap-3">
                                     <a href="#" rel="noopener noreferrer" target="_blank"
-                                        class="rounded-xl border border-white/15 bg-white/5 px-5 py-3 min-h-[44px] text-base font-semibold backdrop-blur transition hover:bg-white/20 hover:scale-105 flex items-center"><i class="fa-brands fa-facebook-f mr-2 text-blue-400"></i>Facebook</a>
+                                        class="rounded-xl border border-white/15 bg-white/5 px-5 py-3 min-h-[44px] text-base font-semibold backdrop-blur transition hover:bg-white/20 hover:scale-105 flex items-center"><i
+                                            class="fa-brands fa-facebook-f mr-2 text-blue-400"></i>Facebook</a>
                                     <a href="https://www.tiktok.com/@justin.realbarber1?_r=1&_t=ZP-956hku2GH9D&fbclid=PAZXh0bgNhZW0CMTEAc3J0YwZhcHBfaWQPOTM2NjE5NzQzMzkyNDU5AAGn61NrOdO7bCxxYkopG1nNZS1OL5UK-pI4_b9QhCi9LbSVItYu3y9jnGR8vik_aem_cPagB-tCnYfb_iXE2UkCXw"
                                         rel="noopener noreferrer" target="_blank"
-                                        class="rounded-xl border border-white/15 bg-white/5 px-5 py-3 min-h-[44px] text-base font-semibold backdrop-blur transition hover:bg-white/20 hover:scale-105 flex items-center"><i class="fa-brands fa-tiktok mr-2 text-pink-400"></i>TikTok</a>
+                                        class="rounded-xl border border-white/15 bg-white/5 px-5 py-3 min-h-[44px] text-base font-semibold backdrop-blur transition hover:bg-white/20 hover:scale-105 flex items-center"><i
+                                            class="fa-brands fa-tiktok mr-2 text-pink-400"></i>TikTok</a>
                                     <a href="https://www.instagram.com/justin.nguyen1997"
-                                        class="rounded-xl border border-white/15 bg-white/5 px-5 py-3 min-h-[44px] text-base font-semibold backdrop-blur transition hover:bg-white/20 hover:scale-105 flex items-center"><i class="fa-brands fa-instagram mr-2 text-purple-400"></i>Insta</a>
+                                        class="rounded-xl border border-white/15 bg-white/5 px-5 py-3 min-h-[44px] text-base font-semibold backdrop-blur transition hover:bg-white/20 hover:scale-105 flex items-center"><i
+                                            class="fa-brands fa-instagram mr-2 text-purple-400"></i>Insta</a>
                                 </div>
                             </div>
 
@@ -1322,8 +1391,7 @@
                 <p class="font-bold text-slate-900 lang-el" data-vi="Giờ làm việc" data-en="Working Hours">Working Hours
                 </p>
                 <div class="mt-4 space-y-3 text-base text-slate-600">
-                    <p class="lang-el" data-vi="Thứ 3 - Thứ 4: 09:00 - 20:00"
-                        data-en="Tue - Wed: 9:00 AM - 8:00 PM">
+                    <p class="lang-el" data-vi="Thứ 3 - Thứ 4: 09:00 - 20:00" data-en="Tue - Wed: 9:00 AM - 8:00 PM">
                         Tue - Wed: 9:00 AM - 8:00 PM</p>
                     <p class="text-blue-600 font-semibold mt-2 lang-el" data-vi="Các ngày còn lại đóng cửa"
                         data-en="Closed on all other days">Closed on all other days</p>
@@ -1335,7 +1403,7 @@
         </div>
     </footer>
 
-    <div class="fixed bottom-6 right-6 z-50 flex flex-col gap-3">
+    <div class="fixed bottom-24 right-6 z-50 flex flex-col gap-3 md:bottom-6">
         <a href="tel:5105010274"
             class="flex h-12 w-12 items-center justify-center rounded-full bg-blue-600 text-white shadow-lg shadow-blue-600/30 transition hover:-translate-y-1 sm:h-auto sm:w-auto sm:px-5 sm:py-3">
             <i class="fa-solid fa-phone text-base sm:mr-2"></i>
@@ -1351,7 +1419,7 @@
 
     <!-- Back to top button -->
     <button id="back-to-top" title="Back to top"
-        class="fixed bottom-40 right-6 z-50 flex h-11 w-11 items-center justify-center rounded-full bg-white border border-slate-200 text-slate-700 shadow-lg transition hover:-translate-y-1 hover:bg-slate-50 sm:bottom-40">
+        class="fixed bottom-[15.5rem] right-6 z-50 flex h-11 w-11 items-center justify-center rounded-full bg-white border border-slate-200 text-slate-700 shadow-lg transition hover:-translate-y-1 hover:bg-slate-50 md:bottom-40">
         <i class="fa-solid fa-arrow-up text-base"></i>
     </button>
 
@@ -1371,6 +1439,17 @@
                 class="w-full rounded-2xl bg-blue-600 py-3.5 font-bold text-white transition hover:-translate-y-0.5 hover:bg-blue-700 shadow-lg shadow-blue-600/30 lang-el"
                 data-vi="Tuyệt vời" data-en="Awesome">Tuyệt vời</button>
         </div>
+    </div>
+
+    <!-- Sticky Mobile "Book Now" Bar (chỉ hiện trên mobile & tablet nhỏ) -->
+    <div id="sticky-book-bar"
+        class="fixed bottom-0 left-0 right-0 z-40 border-t border-slate-200 bg-white/95 backdrop-blur px-4 py-3 shadow-[0_-4px_20px_rgba(15,23,42,0.08)] transition-transform duration-300 md:hidden">
+        <a href="#booking"
+            class="flex w-full items-center justify-center gap-2 rounded-2xl bg-blue-600 px-5 py-3.5 text-base font-bold text-white shadow-lg shadow-blue-600/30 transition active:scale-[0.98] lang-el"
+            data-vi="ĐẶT LỊCH NGAY" data-en="BOOK NOW">
+            <i class="fa-solid fa-calendar-check"></i>
+            <span>BOOK NOW</span>
+        </a>
     </div>
 
     <script src="assets/js/main.js"></script>
