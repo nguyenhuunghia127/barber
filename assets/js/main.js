@@ -1,4 +1,14 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // --- Image Fallback Handler ---
+    document.querySelectorAll('img').forEach(img => {
+        img.addEventListener('error', function () {
+            if (!this.getAttribute('data-fallback-applied')) {
+                this.setAttribute('data-fallback-applied', 'true');
+                this.src = './img/image.png';
+            }
+        });
+    });
+
     // --- Modal Handler ---
     const modalEl = document.getElementById('success-modal');
     const modalCard = document.getElementById('success-modal-card');
