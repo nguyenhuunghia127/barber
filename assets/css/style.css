@@ -186,3 +186,99 @@ nav a.nav-active {
     -ms-overflow-style: none;
     scrollbar-width: none;
 }
+
+/* =========================================
+   LUXURY PRELOADER / SPLASH
+   ========================================= */
+#preloader {
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+    background: #090d16;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+#preloader.loaded {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.loader-bar-progress {
+    animation: loaderBar 1.2s ease-in-out infinite;
+}
+
+@keyframes loaderBar {
+    0% { transform: translateX(-100%); }
+    50% { transform: translateX(0%); }
+    100% { transform: translateX(100%); }
+}
+
+/* Pulse glow for primary CTA buttons */
+.pulse-glow {
+    animation: pulseGlow 3s ease-in-out infinite;
+}
+
+@keyframes pulseGlow {
+    0%, 100% {
+        box-shadow: 0 10px 25px -5px rgba(37, 99, 235, 0.4);
+    }
+    50% {
+        box-shadow: 0 15px 35px 0px rgba(37, 99, 235, 0.7);
+    }
+}
+
+/* =========================================
+   LIVE BOOKING SOCIAL PROOF TOAST
+   ========================================= */
+#live-booking-toast {
+    position: fixed;
+    bottom: 90px;
+    left: 20px;
+    z-index: 45;
+    transform: translateY(120px) scale(0.95);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease;
+}
+
+#live-booking-toast.show {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+    pointer-events: auto;
+}
+
+@media (max-width: 640px) {
+    #live-booking-toast {
+        left: 12px;
+        right: 12px;
+        bottom: 76px;
+    }
+}
+
+/* Shimmer pass effect on cards */
+.shimmer-effect {
+    position: relative;
+    overflow: hidden;
+}
+
+.shimmer-effect::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(60deg, transparent 0%, rgba(255, 255, 255, 0.06) 50%, transparent 100%);
+    transform: rotate(30deg);
+    animation: shimmerPass 5s infinite;
+}
+
+@keyframes shimmerPass {
+    0% { transform: translate(-100%, -100%) rotate(30deg); }
+    25%, 100% { transform: translate(100%, 100%) rotate(30deg); }
+}

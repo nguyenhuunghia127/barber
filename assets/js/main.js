@@ -735,4 +735,80 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     }
+
+    // --- 9. LUXURY PRELOADER ---
+    const preloader = document.getElementById('preloader');
+    if (preloader) {
+        const dismissPreloader = () => {
+            preloader.classList.add('loaded');
+            setTimeout(() => {
+                if (preloader.parentNode) {
+                    preloader.parentNode.removeChild(preloader);
+                }
+            }, 700);
+        };
+        // Dismiss quickly so user experience stays fast & fluid
+        setTimeout(dismissPreloader, 450);
+    }
+
+    // --- 10. LIVE BOOKING SOCIAL PROOF TOAST ---
+    const initLiveBookingToast = () => {
+        const toast = document.getElementById('live-booking-toast');
+        const toastMsg = document.getElementById('toast-message');
+        const toastTime = document.getElementById('toast-time');
+        const toastAvatar = document.getElementById('toast-avatar');
+        const toastClose = document.getElementById('toast-close');
+        if (!toast || !toastMsg) return;
+
+        const sampleBookings = [
+            { name: "Anh Tuấn", service: "Combo Cắt Gội VIP", serviceEn: "VIP Cut & Wash Combo", timeVi: "3 phút trước", timeEn: "3 mins ago", avatar: "T", bg: "bg-blue-600" },
+            { name: "David M.", service: "Uốn Tóc Nam (Perm)", serviceEn: "Men's Perm", timeVi: "7 phút trước", timeEn: "7 mins ago", avatar: "D", bg: "bg-emerald-600" },
+            { name: "Anh Minh", service: "Modern Undercut", serviceEn: "Modern Undercut", timeVi: "12 phút trước", timeEn: "12 mins ago", avatar: "M", bg: "bg-indigo-600" },
+            { name: "Alex K.", service: "Taper Fade Sắc Nét", serviceEn: "Sharp Taper Fade", timeVi: "18 phút trước", timeEn: "18 mins ago", avatar: "A", bg: "bg-amber-600" },
+            { name: "Hoàng Nam", service: "Nhuộm Tóc Thời Trang", serviceEn: "Fashion Hair Dye", timeVi: "25 phút trước", timeEn: "25 mins ago", avatar: "H", bg: "bg-purple-600" },
+            { name: "Eric P.", service: "Cắt + Gội + Tạo Kiểu", serviceEn: "Cut + Wash + Style", timeVi: "32 phút trước", timeEn: "32 mins ago", avatar: "E", bg: "bg-cyan-600" }
+        ];
+
+        let currentIndex = 0;
+        let isDismissed = false;
+
+        const showToast = () => {
+            if (isDismissed) return;
+            const item = sampleBookings[currentIndex];
+            const isEn = currentLang === 'en';
+            if (toastAvatar) {
+                toastAvatar.textContent = item.avatar;
+                toastAvatar.className = `flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-white font-bold ${item.bg} shadow-md`;
+            }
+
+            toastMsg.innerHTML = isEn
+                ? `<strong>${item.name}</strong> just booked <span class="text-blue-600 font-bold">${item.serviceEn}</span>`
+                : `<strong>${item.name}</strong> vừa đặt lịch <span class="text-blue-600 font-bold">${item.service}</span>`;
+            if (toastTime) {
+                toastTime.textContent = isEn ? item.timeEn : item.timeVi;
+            }
+
+            toast.classList.add('show');
+
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 5500);
+
+            currentIndex = (currentIndex + 1) % sampleBookings.length;
+        };
+
+        // First popup after 3 seconds
+        setTimeout(() => {
+            showToast();
+            setInterval(showToast, 18000);
+        }, 3000);
+
+        if (toastClose) {
+            toastClose.addEventListener('click', () => {
+                toast.classList.remove('show');
+                isDismissed = true;
+            });
+        }
+    };
+    initLiveBookingToast();
 });

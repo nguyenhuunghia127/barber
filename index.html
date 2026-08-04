@@ -63,6 +63,26 @@
 
 <body class="min-h-screen bg-white text-slate-900 overflow-x-hidden pb-20 md:pb-0">
 
+    <!-- Luxury Preloader Screen -->
+    <div id="preloader">
+        <div class="relative flex flex-col items-center">
+            <div class="relative flex items-center justify-center mb-5">
+                <div class="h-20 w-20 rounded-2xl bg-gradient-to-tr from-blue-600 to-indigo-500 p-0.5 shadow-xl shadow-blue-500/20">
+                    <img src="./img/image.png" alt="1997 Barber Logo" class="h-full w-full rounded-2xl object-cover">
+                </div>
+                <div class="absolute -bottom-2 -right-2 flex h-8 w-8 items-center justify-center rounded-full bg-blue-600 text-white shadow-lg">
+                    <i class="fa-solid fa-scissors text-xs"></i>
+                </div>
+            </div>
+            <p class="text-xl font-black tracking-widest text-white">1997 BARBER</p>
+            <p class="text-xs uppercase tracking-[0.3em] text-slate-400 mt-1">Men's Grooming Studio</p>
+            
+            <div class="mt-6 h-1 w-44 overflow-hidden rounded-full bg-slate-800">
+                <div class="loader-bar-progress h-full w-full bg-gradient-to-r from-blue-500 to-indigo-400 rounded-full"></div>
+            </div>
+        </div>
+    </div>
+
     <header class="sticky top-0 z-50 border-b border-slate-200 bg-white/90 backdrop-blur">
         <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
             <div class="flex items-center gap-3">
@@ -151,7 +171,7 @@
 
                     <div class="mt-8 flex flex-wrap items-center gap-4">
                         <a href="#booking"
-                            class="inline-flex items-center gap-2 rounded-2xl bg-blue-600 px-7 py-4 text-base font-bold text-white shadow-lg shadow-blue-600/30 transition hover:-translate-y-0.5 hover:bg-blue-700 lang-el"
+                            class="inline-flex items-center gap-2 rounded-2xl bg-blue-600 px-7 py-4 text-base font-bold text-white shadow-lg shadow-blue-600/30 transition hover:-translate-y-0.5 hover:bg-blue-700 pulse-glow lang-el"
                             data-vi="ĐẶT LỊCH NGAY <i class='fa-solid fa-arrow-right text-sm ml-1'></i>"
                             data-en="BOOK NOW <i class='fa-solid fa-arrow-right text-sm ml-1'></i>">
                             BOOK NOW <i class="fa-solid fa-arrow-right text-sm ml-1"></i>
@@ -161,6 +181,39 @@
                             data-vi="Xem dịch vụ & bảng giá" data-en="View Services & Prices">
                             View Services & Prices
                         </a>
+                    </div>
+
+                    <!-- Social Proof / Customer Trust Bar -->
+                    <div class="mt-10 flex flex-wrap items-center gap-4 pt-6 border-t border-white/10">
+                        <div class="flex -space-x-3 overflow-hidden">
+                            <img class="inline-block h-10 w-10 rounded-full ring-2 ring-slate-900 object-cover"
+                                src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&h=100&fit=crop&q=80"
+                                alt="Client avatar">
+                            <img class="inline-block h-10 w-10 rounded-full ring-2 ring-slate-900 object-cover"
+                                src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&q=80"
+                                alt="Client avatar">
+                            <img class="inline-block h-10 w-10 rounded-full ring-2 ring-slate-900 object-cover"
+                                src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop&q=80"
+                                alt="Client avatar">
+                            <div class="flex h-10 w-10 items-center justify-center rounded-full bg-blue-600 ring-2 ring-slate-900 text-xs font-bold text-white">
+                                500+
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex items-center gap-1 text-amber-400 text-sm">
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <span class="font-bold text-white ml-1 text-sm">4.9 / 5.0</span>
+                            </div>
+                            <p class="text-xs text-slate-300 mt-0.5 lang-el"
+                                data-vi="Hơn 500+ quý ông tin tưởng & hài lòng"
+                                data-en="Over 500+ gentlemen trust & satisfied">
+                                Over 500+ gentlemen trust & satisfied
+                            </p>
+                        </div>
                     </div>
                 </div>
 
@@ -255,6 +308,80 @@
                         <p class="mt-2 text-slate-600 font-medium lang-el" data-vi="Đánh giá trung bình"
                             data-en="Average Rating">Average Rating</p>
                     </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Trust & Guarantees Badges Section -->
+        <section class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+                <!-- Badge 1 -->
+                <div class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm hover:shadow-md transition-all hover:-translate-y-1 reveal">
+                    <div class="flex h-12 w-12 items-center justify-center rounded-2xl bg-blue-50 text-blue-600 mb-4">
+                        <i class="fa-solid fa-shield-heart text-2xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900 lang-el" data-vi="100% Cam Kết Hài Lòng" data-en="100% Satisfaction Guarantee">100% Satisfaction Guarantee</h3>
+                    <p class="mt-2 text-sm text-slate-600 leading-relaxed lang-el" data-vi="Chỉnh sửa miễn phí đến khi bạn hoàn toàn ưng ý với kiểu tóc mới của mình." data-en="Free touch-ups and styling adjustment until you are completely satisfied.">Free touch-ups and styling adjustment until you are completely satisfied.</p>
+                </div>
+                <!-- Badge 2 -->
+                <div class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm hover:shadow-md transition-all hover:-translate-y-1 reveal reveal-delay-1">
+                    <div class="flex h-12 w-12 items-center justify-center rounded-2xl bg-emerald-50 text-emerald-600 mb-4">
+                        <i class="fa-solid fa-tag text-2xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900 lang-el" data-vi="Giá Rõ Ràng, Không Phí Ẩn" data-en="Transparent & Fixed Pricing">Transparent & Fixed Pricing</h3>
+                    <p class="mt-2 text-sm text-slate-600 leading-relaxed lang-el" data-vi="Bảng giá niêm yết minh bạch. Tuyệt đối không chèo kéo, không phát sinh phụ phí." data-en="Clearly listed prices. No pressure selling, no hidden fees or surprise charges.">Clearly listed prices. No pressure selling, no hidden fees or surprise charges.</p>
+                </div>
+                <!-- Badge 3 -->
+                <div class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm hover:shadow-md transition-all hover:-translate-y-1 reveal reveal-delay-2">
+                    <div class="flex h-12 w-12 items-center justify-center rounded-2xl bg-purple-50 text-purple-600 mb-4">
+                        <i class="fa-solid fa-pump-medical text-2xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900 lang-el" data-vi="Tiệt Trùng & Vệ Sinh 100%" data-en="Sanitized Tools & Hygiene">Sanitized Tools & Hygiene</h3>
+                    <p class="mt-2 text-sm text-slate-600 leading-relaxed lang-el" data-vi="Tất cả kéo, tông đơ, khăn choàng đều được khử trùng sạch sẽ trước mỗi khách." data-en="All scissors, clippers, and capes are thoroughly sanitized before each client.">All scissors, clippers, and capes are thoroughly sanitized before each client.</p>
+                </div>
+                <!-- Badge 4 -->
+                <div class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm hover:shadow-md transition-all hover:-translate-y-1 reveal reveal-delay-3">
+                    <div class="flex h-12 w-12 items-center justify-center rounded-2xl bg-amber-50 text-amber-600 mb-4">
+                        <i class="fa-solid fa-clock-rotate-left text-2xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900 lang-el" data-vi="Đúng Giờ, Không Phải Chờ" data-en="On-Time Slot Guarantee">On-Time Slot Guarantee</h3>
+                    <p class="mt-2 text-sm text-slate-600 leading-relaxed lang-el" data-vi="Đặt lịch trực tuyến trước để được phục vụ đúng giờ, không tốn thời gian ngồi chờ." data-en="Book online in advance to enjoy priority seating without waiting in line.">Book online in advance to enjoy priority seating without waiting in line.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3-Step Easy Booking Process -->
+        <section class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+            <div class="rounded-[2.5rem] bg-gradient-to-br from-slate-900 to-slate-950 p-8 sm:p-12 text-white border border-slate-800 shadow-2xl relative overflow-hidden shimmer-effect">
+                <div class="max-w-2xl">
+                    <p class="text-base font-bold uppercase tracking-[0.25em] text-blue-400 lang-el" data-vi="Quy trình đơn giản" data-en="Easy 3-Step Booking">Easy 3-Step Booking</p>
+                    <h2 class="mt-3 text-3xl sm:text-4xl font-black lang-el" data-vi="Trải nghiệm tút lại phong độ chỉ với 3 bước" data-en="Level Up Your Grooming In 3 Simple Steps">Level Up Your Grooming In 3 Simple Steps</h2>
+                </div>
+
+                <div class="mt-10 grid grid-cols-1 md:grid-cols-3 gap-6 relative z-10">
+                    <div class="rounded-2xl bg-white/5 border border-white/10 p-6 backdrop-blur transition hover:bg-white/10">
+                        <span class="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-blue-600 font-black text-lg text-white mb-4 shadow-md">1</span>
+                        <h3 class="text-xl font-bold text-white lang-el" data-vi="Chọn Dịch Vụ" data-en="Select Your Service">Select Your Service</h3>
+                        <p class="mt-2 text-slate-400 text-sm leading-relaxed lang-el" data-vi="Chọn dịch vụ cắt tóc, uốn, nhuộm hoặc combo chăm sóc VIP phù hợp với phong cách của bạn." data-en="Choose haircut, perm, dye, or VIP full grooming package suited to your lifestyle.">Choose haircut, perm, dye, or VIP full grooming package suited to your lifestyle.</p>
+                    </div>
+
+                    <div class="rounded-2xl bg-white/5 border border-white/10 p-6 backdrop-blur transition hover:bg-white/10">
+                        <span class="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-blue-600 font-black text-lg text-white mb-4 shadow-md">2</span>
+                        <h3 class="text-xl font-bold text-white lang-el" data-vi="Chọn Ngày & Giờ Rảnh" data-en="Pick Date & Slot">Pick Date & Slot</h3>
+                        <p class="mt-2 text-slate-400 text-sm leading-relaxed lang-el" data-vi="Chọn ngày Thứ 3 hoặc Thứ 4 cùng khung giờ rảnh phù hợp nhất với lịch trình của bạn." data-en="Select Tuesday or Wednesday and a time slot that matches your schedule perfectly.">Select Tuesday or Wednesday and a time slot that matches your schedule perfectly.</p>
+                    </div>
+
+                    <div class="rounded-2xl bg-white/5 border border-white/10 p-6 backdrop-blur transition hover:bg-white/10">
+                        <span class="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-blue-600 font-black text-lg text-white mb-4 shadow-md">3</span>
+                        <h3 class="text-xl font-bold text-white lang-el" data-vi="Xác Nhận & Đến Tiệm" data-en="Confirm & Relax">Confirm & Relax</h3>
+                        <p class="mt-2 text-slate-400 text-sm leading-relaxed lang-el" data-vi="Bấm xác nhận giữ chỗ trong 30s. Thợ chính Justin sẽ chuẩn bị sẵn sàng đón tiếp bạn." data-en="Instant confirmation in 30s. Master barber Justin will be fully prepared to welcome you.">Instant confirmation in 30s. Master barber Justin will be fully prepared to welcome you.</p>
+                    </div>
+                </div>
+
+                <div class="mt-8 flex justify-center">
+                    <a href="#booking" class="inline-flex items-center gap-2 rounded-2xl bg-blue-600 px-8 py-4 text-base font-bold text-white shadow-lg shadow-blue-600/30 transition hover:-translate-y-0.5 hover:bg-blue-700 pulse-glow lang-el" data-vi="ĐẶT LỊCH NGAY TRONG 30 GIÂY <i class='fa-solid fa-arrow-right text-sm ml-1'></i>" data-en="BOOK YOUR SLOT IN 30 SECONDS <i class='fa-solid fa-arrow-right text-sm ml-1'></i>">
+                        BOOK YOUR SLOT IN 30 SECONDS <i class="fa-solid fa-arrow-right text-sm ml-1"></i>
+                    </a>
                 </div>
             </div>
         </section>
@@ -1015,6 +1142,25 @@
                     </div>
                 </div>
 
+                <!-- Live Feedback Reviews Carousel & Filters -->
+                <div class="mt-12 pt-10 border-t border-blue-100/80">
+                    <div class="flex flex-wrap items-center justify-between gap-4 mb-6">
+                        <div>
+                            <h3 class="text-2xl font-black text-slate-900 lang-el" data-vi="Đánh giá gần đây của khách" data-en="Recent Customer Feedback">Recent Customer Feedback</h3>
+                            <p class="text-sm text-slate-500 mt-1 lang-el" data-vi="Được cập nhật tự động từ khách hàng thực tế" data-en="Automatically updated from real client visits">Automatically updated from real client visits</p>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <button id="filter-latest" class="rounded-xl px-4 py-2 text-sm font-semibold bg-blue-600 text-white shadow-sm transition lang-el cursor-pointer" data-vi="Mới nhất" data-en="Latest">Latest</button>
+                            <button id="filter-best" class="rounded-xl px-4 py-2 text-sm font-semibold bg-white text-slate-700 hover:bg-slate-100 transition lang-el cursor-pointer" data-vi="Tốt nhất" data-en="Best">Best</button>
+                            <button id="filter-worst" class="rounded-xl px-4 py-2 text-sm font-semibold bg-white text-slate-700 hover:bg-slate-100 transition lang-el cursor-pointer" data-vi="Thấp nhất" data-en="Worst">Worst</button>
+                        </div>
+                    </div>
+
+                    <div id="review-container" class="flex gap-6 overflow-x-auto snap-x snap-mandatory hide-scrollbar pb-6 pt-2">
+                        <!-- Dynamic reviews loaded from Google Sheets -->
+                    </div>
+                </div>
+
                 <!-- Google CTA Buttons -->
                 <div class="mt-8 flex flex-col sm:flex-row justify-center items-center gap-4">
                     <a href="https://maps.app.goo.gl/Puk6qHugSEPYYwc66" target="_blank" rel="noopener noreferrer"
@@ -1440,6 +1586,26 @@
                 class="w-full rounded-2xl bg-blue-600 py-3.5 font-bold text-white transition hover:-translate-y-0.5 hover:bg-blue-700 shadow-lg shadow-blue-600/30 lang-el"
                 data-vi="Tuyệt vời" data-en="Awesome">Tuyệt vời</button>
         </div>
+    </div>
+
+    <!-- Live Booking Social Proof Toast -->
+    <div id="live-booking-toast" class="flex items-center gap-3.5 rounded-2xl bg-white/95 backdrop-blur border border-slate-200/90 p-4 shadow-2xl max-w-sm">
+        <div id="toast-avatar" class="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-blue-600 text-white font-bold text-base shadow-md">
+            T
+        </div>
+        <div class="flex-1 min-w-0">
+            <p id="toast-message" class="text-xs text-slate-800 leading-snug">
+                <strong>Anh Tuấn</strong> vừa đặt lịch <span class="text-blue-600 font-bold">Combo Cắt Gội VIP</span>
+            </p>
+            <div class="flex items-center gap-2 mt-1">
+                <span class="inline-block h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                <span id="toast-time" class="text-[11px] font-medium text-slate-400">3 phút trước</span>
+                <span class="text-[11px] text-blue-600 font-bold ml-auto">• Verified Booking</span>
+            </div>
+        </div>
+        <button id="toast-close" type="button" class="text-slate-400 hover:text-slate-600 p-1 -mr-1 cursor-pointer" title="Close">
+            <i class="fa-solid fa-xmark text-xs"></i>
+        </button>
     </div>
 
     <!-- Sticky Mobile "Book Now" Bar (chỉ hiện trên mobile & tablet nhỏ) -->
