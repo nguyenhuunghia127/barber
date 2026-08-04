@@ -82,15 +82,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const menu = document.getElementById('mobile-menu');
     const links = document.querySelectorAll('.mobile-link');
 
-    btn.addEventListener('click', () => {
-        menu.classList.toggle('hidden');
-    });
-
-    links.forEach(link => {
-        link.addEventListener('click', () => {
-            menu.classList.add('hidden');
+    if (btn && menu) {
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
         });
-    });
+
+        links.forEach(link => {
+            link.addEventListener('click', () => {
+                menu.classList.add('hidden');
+            });
+        });
+    }
 
 
     // --- 2. XỬ LÝ ĐẶT LỊCH TRỰC QUAN (SERVICE & DATE-TIME SLOTS SELECTOR) ---
@@ -219,7 +221,8 @@ document.addEventListener('DOMContentLoaded', () => {
             dateTabsContainer.appendChild(button);
 
             if (isSelected) {
-                selectedDateObj = tempDate;
+                // Clone the date to avoid closure reference issues
+                selectedDateObj = new Date(tempDate.getTime());
             }
         }
     };
@@ -334,8 +337,8 @@ document.addEventListener('DOMContentLoaded', () => {
         // Compute end time (+30 minutes)
         let eh = h;
         let mintemp = min + 30;
-        if (mintemp === 60) {
-            mintemp = 0;
+        if (mintemp >= 60) {
+            mintemp = mintemp - 60;
             eh = (h + 1) % 24;
         }
 
@@ -476,10 +479,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         reviewsToRender.forEach(row => {
-            const name = row.c[1].v;
-            const ratingStr = row.c[4].v;
+            const name = row.c[1]?.v || 'Anonymous';
+            const ratingStr = row.c[4]?.v ?? '5';
             const rating = parseInt(ratingStr.toString().charAt(0)) || 5;
-            const comment = row.c[5].v;
+            const comment = row.c[5]?.v || '';
 
             const starsHTML = '<span class="text-yellow-400 text-2xl">' + '★'.repeat(rating) + '</span><span class="text-slate-200 text-2xl">' + '★'.repeat(5 - rating) + '</span>';
 
