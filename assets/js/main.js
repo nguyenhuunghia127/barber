@@ -43,18 +43,26 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- 0. XỬ LÝ CHUYỂN NGÔN NGỮ (LANGUAGE TOGGLE) ---
     const langToggleBtn = document.getElementById('lang-toggle');
     let currentLang = 'en'; // MẶC ĐỊNH LÀ TIẾNG ANH
+    let updateFinalDateTime = () => {}; // Will be assigned during datetime setup
 
     const applyLang = (lang) => {
         // Cập nhật html lang attribute
-        document.getElementById('html-root').setAttribute('lang', lang);
+        const htmlRoot = document.getElementById('html-root');
+        if (htmlRoot) htmlRoot.setAttribute('lang', lang);
 
         // Cập nhật chữ trên nút
-        langToggleBtn.innerText = lang === 'en' ? 'VN' : 'EN';
+        if (langToggleBtn) langToggleBtn.innerText = lang === 'en' ? 'VN' : 'EN';
 
         // Cập nhật toàn bộ các thẻ có class lang-el
         document.querySelectorAll('.lang-el').forEach(el => {
             const newText = el.getAttribute(`data-${lang}`);
             if (newText) el.innerHTML = newText;
+        });
+
+        // Cập nhật placeholder cho các input có data-placeholder
+        document.querySelectorAll('[data-placeholder-en]').forEach(el => {
+            const newPlaceholder = el.getAttribute(`data-placeholder-${lang}`);
+            if (newPlaceholder) el.placeholder = newPlaceholder;
         });
 
         // ĐỔI NGÔN NGỮ GOOGLE FORM (Đổi link iframe)
@@ -63,6 +71,9 @@ document.addEventListener('DOMContentLoaded', () => {
             const newUrl = feedbackIframe.getAttribute(`data-url-${lang}`);
             if (newUrl) feedbackIframe.src = newUrl;
         }
+
+        // Cập nhật visual datetime summary nếu đang chọn
+        updateFinalDateTime();
     };
 
     if (langToggleBtn) {
@@ -320,7 +331,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     // 2d. Combine selected Date + Time and update hidden input and visual text
-    const updateFinalDateTime = () => {
+    updateFinalDateTime = () => {
         if (!selectedDateObj || !selectedTimeStr) {
             if (datetimeInput) datetimeInput.value = "";
             if (selectedTimeDisplay) selectedTimeDisplay.classList.add('hidden');

@@ -1353,7 +1353,8 @@
                                         class="text-red-500">*</span></label>
                                 <input type="text" id="cus_name" name="Full Name" required
                                     class="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3.5 outline-none transition focus:border-blue-600 focus:bg-white focus:ring-4 focus:ring-blue-600/10"
-                                    placeholder="Customer Name">
+                                    data-placeholder-vi="Ví dụ: Nguyễn Văn A" data-placeholder-en="e.g. John Doe"
+                                    placeholder="e.g. John Doe">
                             </div>
                             <div class="sm:col-span-1">
                                 <label class="mb-2 block text-base font-bold text-slate-700"><span class="lang-el"
@@ -1361,7 +1362,8 @@
                                         class="text-red-500">*</span></label>
                                 <input type="tel" id="cus_phone" name="Phone Number" required
                                     class="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3.5 outline-none transition focus:border-blue-600 focus:bg-white focus:ring-4 focus:ring-blue-600/10"
-                                    placeholder="Customer Phone">
+                                    data-placeholder-vi="Ví dụ: 0912 345 678" data-placeholder-en="e.g. 510-501-0274"
+                                    placeholder="e.g. 510-501-0274">
                             </div>
 
                             <!-- Step 2: Choose Service -->
@@ -1484,7 +1486,7 @@
                                     id="selected-time-display">
                                     <span class="lang-el" data-vi="Lịch hẹn đã chọn:"
                                         data-en="Selected Appointment:">Selected Appointment:</span>
-                                    <span id="selected-time-text" class="text-blue-900"></span>
+                                    <span id="selected-time-text" class="lang-el text-blue-900"></span>
                                 </div>
 
                                 <!-- Hidden field to store final value -->
@@ -1497,7 +1499,9 @@
                                     data-vi="Ghi chú thêm" data-en="Additional Notes">Additional Notes</label>
                                 <textarea id="cus_notes" name="Notes" rows="2"
                                     class="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3.5 outline-none transition focus:border-blue-600 focus:bg-white focus:ring-4 focus:ring-blue-600/10 resize-none"
-                                    placeholder="..."></textarea>
+                                    data-placeholder-vi="Ghi chú về kiểu tóc yêu cầu hoặc thời gian linh hoạt..."
+                                    data-placeholder-en="Notes about requested hairstyle or preferred barber..."
+                                    placeholder="Notes about requested hairstyle or preferred barber..."></textarea>
                             </div>
                         </div>
                         <button type="submit"
@@ -1560,7 +1564,7 @@
         <a href="https://ig.me/m/justin.nguyen1997" target="_blank" rel="noopener noreferrer"
             class="flex h-12 w-12 items-center justify-center rounded-full bg-slate-900 text-white shadow-lg transition hover:-translate-y-1 sm:h-auto sm:w-auto sm:px-5 sm:py-3">
             <i class="fa-brands fa-instagram text-lg sm:mr-2"></i>
-            <span class="hidden text-base font-bold sm:block">Chat qua Insta</span>
+            <span class="hidden text-base font-bold sm:block lang-el" data-vi="Chat qua Insta" data-en="Chat on Insta">Chat on Insta</span>
         </a>
     </div>
 
@@ -1584,7 +1588,7 @@
             </p>
             <button id="close-modal-btn"
                 class="w-full rounded-2xl bg-blue-600 py-3.5 font-bold text-white transition hover:-translate-y-0.5 hover:bg-blue-700 shadow-lg shadow-blue-600/30 lang-el"
-                data-vi="Tuyệt vời" data-en="Awesome">Tuyệt vời</button>
+                data-vi="Tuyệt vời" data-en="Awesome">Awesome</button>
         </div>
     </div>
 
