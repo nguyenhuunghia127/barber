@@ -142,6 +142,36 @@ document.addEventListener('DOMContentLoaded', () => {
     const selectedTimeDisplay = document.getElementById('selected-time-display');
     const selectedTimeText = document.getElementById('selected-time-text');
 
+    // --- TIMEZONE CONFIGURATION: Hayward, California (PT / America/Los_Angeles) ---
+    // Tiệm đặt tại: 24654 Joyce St, Hayward, CA 94544, Hoa Kỳ
+    const SHOP_TIMEZONE = 'America/Los_Angeles';
+
+    // Helper: Lấy thời gian hiện tại chuẩn theo múi giờ địa phương của tiệm (Hayward, CA)
+    const getShopNow = () => {
+        try {
+            const now = new Date();
+            const formatter = new Intl.DateTimeFormat('en-US', {
+                timeZone: SHOP_TIMEZONE,
+                year: 'numeric',
+                month: 'numeric',
+                day: 'numeric',
+                hour: 'numeric',
+                minute: 'numeric',
+                second: 'numeric',
+                hour12: false
+            });
+            const parts = formatter.formatToParts(now);
+            const d = {};
+            parts.forEach(({ type, value }) => {
+                d[type] = parseInt(value, 10);
+            });
+            return new Date(d.year, d.month - 1, d.day, (d.hour || 0) % 24, d.minute, d.second);
+        } catch (e) {
+            console.error('Timezone format fallback:', e);
+            return new Date();
+        }
+    };
+
     // Helper function to pad zeros
     const pad = (num) => String(num).padStart(2, '0');
 
@@ -166,18 +196,17 @@ document.addEventListener('DOMContentLoaded', () => {
         };
     };
 
-    // 2b. Generate Date Tabs for the next 7 days
+    // 2b. Generate Date Tabs for the next 7 days (based on Hayward, CA time)
     const generateDateTabs = () => {
         if (!dateTabsContainer) return;
         dateTabsContainer.innerHTML = '';
 
-        const now = new Date();
+        const now = getShopNow();
 
         // Find first open day (Tuesday or Wednesday) to auto-select
         let defaultSelectIdx = -1;
         for (let i = 0; i < 7; i++) {
-            const checkDate = new Date();
-            checkDate.setDate(now.getDate() + i);
+            const checkDate = new Date(now.getFullYear(), now.getMonth(), now.getDate() + i);
             if (isOpenDay(checkDate)) {
                 defaultSelectIdx = i;
                 break;
@@ -186,8 +215,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (defaultSelectIdx === -1) defaultSelectIdx = 0;
 
         for (let i = 0; i < 7; i++) {
-            const tempDate = new Date();
-            tempDate.setDate(now.getDate() + i);
+            const tempDate = new Date(now.getFullYear(), now.getMonth(), now.getDate() + i);
 
             const label = getDayLabel(tempDate, i);
             const formattedDateNum = pad(tempDate.getDate());
@@ -245,7 +273,7 @@ document.addEventListener('DOMContentLoaded', () => {
         evening: ["18:00", "18:30", "19:00", "19:30"]
     };
 
-    // 2c. Update & generate Time Slots (filter out past time slots if date is today)
+    // 2c. Update & generate Time Slots (filter out past time slots if date is today in Hayward, CA)
     const updateTimeSlots = () => {
         if (!selectedDateObj) return;
 
@@ -258,8 +286,8 @@ document.addEventListener('DOMContentLoaded', () => {
                                 <p class="font-bold text-sm lang-el" data-vi="Tiệm đóng cửa vào ngày này" data-en="Shop is closed on this day">
                                     ${currentLang === 'en' ? 'Shop is closed on this day' : 'Tiệm đóng cửa vào ngày này'}
                                 </p>
-                                <p class="text-xs mt-1 text-amber-700 lang-el" data-vi="Tiệm chỉ mở cửa vào Thứ 3 & Thứ 4 hàng tuần." data-en="Open on Tuesday & Wednesday only.">
-                                    ${currentLang === 'en' ? 'Open on Tuesday & Wednesday only.' : 'Tiệm chỉ mở cửa vào Thứ 3 & Thứ 4 hàng tuần.'}
+                                <p class="text-xs mt-1 text-amber-700 lang-el" data-vi="Tiệm chỉ mở cửa vào Thứ 3 &amp; Thứ 4 hàng tuần." data-en="Open on Tuesday &amp; Wednesday only.">
+                                    ${currentLang === 'en' ? 'Open on Tuesday &amp; Wednesday only.' : 'Tiệm chỉ mở cửa vào Thứ 3 &amp; Thứ 4 hàng tuần.'}
                                 </p>
                             </div>
                         `;
@@ -269,7 +297,7 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        const now = new Date();
+        const now = getShopNow();
         const isToday = selectedDateObj.toDateString() === now.toDateString();
         const currentHour = now.getHours();
         const currentMin = now.getMinutes();
@@ -314,7 +342,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 container.appendChild(button);
             });
 
-            // If no slots available (e.g. today after 21:30)
+            // If no slots available (e.g. today after 19:30)
             if (availableCount === 0) {
                 const emptyMsg = document.createElement('p');
                 emptyMsg.className = "text-xs italic text-slate-400 py-1 lang-el col-span-4";
@@ -357,7 +385,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const endStr = `${pad(eh)}:${pad(mintemp)}`;
 
         // Format: m/d/Y H:i - eh:emin (same as flatpickr output format)
-        const finalVal = `${m}/${d}/${y} ${startStr} - ${endStr}`;
+        const finalVal = `${m}/${d}/${y} ${startStr} - ${endStr} (PT)`;
         if (datetimeInput) {
             datetimeInput.value = finalVal;
         }
@@ -370,8 +398,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const weekdaysFullEN = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
             const dayOfWeek = selectedDateObj.getDay();
 
-            const viText = `${weekdaysFullVI[dayOfWeek]}, ngày ${d}/${m}/${y} | Khung giờ: ${startStr} - ${endStr}`;
-            const enText = `${weekdaysFullEN[dayOfWeek]}, ${m}/${d}/${y} | Slot: ${startStr} - ${endStr}`;
+            const viText = `${weekdaysFullVI[dayOfWeek]}, ngày ${d}/${m}/${y} | Khung giờ: ${startStr} - ${endStr} (Giờ California - PT)`;
+            const enText = `${weekdaysFullEN[dayOfWeek]}, ${m}/${d}/${y} | Slot: ${startStr} - ${endStr} (California Time - PT)`;
 
             selectedTimeText.setAttribute('data-vi', viText);
             selectedTimeText.setAttribute('data-en', enText);

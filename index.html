@@ -32,8 +32,9 @@
       "telephone": "+15105010274",
       "address": {
         "@type": "PostalAddress",
-        "streetAddress": "24654 Joyce street",
+        "streetAddress": "24654 Joyce St",
         "addressLocality": "Hayward",
+        "addressRegion": "CA",
         "postalCode": "94544",
         "addressCountry": "US"
       },
@@ -1267,12 +1268,12 @@
                                 <div>
                                     <p class="font-semibold text-white lang-el" data-vi="Địa chỉ" data-en="Address">
                                         Address</p>
-                                    <a href="https://maps.google.com/?q=24654+Joyce+street,+Hayward+94544"
+                                    <a href="https://maps.google.com/?q=24654+Joyce+St,+Hayward,+CA+94544"
                                         target="_blank"
                                         class="mt-1 block text-slate-300 hover:text-white transition-colors lang-el"
-                                        data-vi="24654 Joyce street, Hayward 94544"
-                                        data-en="24654 Joyce street, Hayward 94544">
-                                        24654 Joyce street, Hayward 94544
+                                        data-vi="24654 Joyce St, Hayward, CA 94544, Hoa Kỳ"
+                                        data-en="24654 Joyce St, Hayward, CA 94544, USA">
+                                        24654 Joyce St, Hayward, CA 94544, USA
                                     </a>
                                 </div>
                             </div>
@@ -1301,9 +1302,9 @@
                                     <p class="font-semibold text-white lang-el" data-vi="Giờ mở cửa"
                                         data-en="Working Hours">Working Hours</p>
                                     <p class="mt-1 text-slate-300 lang-el"
-                                        data-vi="Thứ 3 &amp; Thứ 4: 09:00 - 20:00 (Còn lại đóng cửa)"
-                                        data-en="Tue &amp; Wed: 9:00 AM - 8:00 PM (Closed other days)">
-                                        Tue &amp; Wed: 9:00 AM - 8:00 PM (Closed other days)
+                                        data-vi="Thứ 3 &amp; Thứ 4: 09:00 - 20:00 (Giờ California - PT)"
+                                        data-en="Tue &amp; Wed: 9:00 AM - 8:00 PM (California Time - PT)">
+                                        Tue &amp; Wed: 9:00 AM - 8:00 PM (California Time - PT)
                                     </p>
                                 </div>
                             </div>
@@ -1438,9 +1439,15 @@
                             <!-- Step 3: Select Date & Time -->
                             <div class="sm:col-span-2 mt-4 p-5 rounded-2xl border border-slate-100 bg-slate-50/50 transition-all duration-300"
                                 id="datetime-picker-wrapper">
-                                <label class="mb-3 block text-base font-bold text-slate-700 lang-el"
-                                    data-vi="2. Chọn ngày & giờ dự kiến" data-en="2. Select Expected Date & Time">2.
-                                    Select Expected Date & Time</label>
+                                <div class="mb-3 flex items-center justify-between flex-wrap gap-2">
+                                    <label class="text-base font-bold text-slate-700 lang-el"
+                                        data-vi="2. Chọn ngày & giờ dự kiến" data-en="2. Select Expected Date & Time">2.
+                                        Select Expected Date & Time</label>
+                                    <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-blue-50 text-blue-700 border border-blue-100 shadow-sm">
+                                        <i class="fa-regular fa-clock text-xs"></i>
+                                        <span class="lang-el" data-vi="Giờ California (PT)" data-en="California Time (PT)">California Time (PT)</span>
+                                    </span>
+                                </div>
 
                                 <!-- Date Tabs Row (Horizontal Scroll) -->
                                 <div class="flex gap-2 overflow-x-auto pb-2.5 snap-x hide-scrollbar w-full max-w-full"
@@ -1532,8 +1539,8 @@
             <div>
                 <p class="font-bold text-slate-900 lang-el" data-vi="Liên hệ" data-en="Contact">Contact</p>
                 <div class="mt-4 space-y-3 text-base text-slate-600">
-                    <p class="lang-el" data-vi="24654 Joyce street, Hayward 94544"
-                        data-en="24654 Joyce street, Hayward 94544">24654 Joyce street, Hayward 94544</p>
+                    <p class="lang-el" data-vi="24654 Joyce St, Hayward, CA 94544, Hoa Kỳ"
+                        data-en="24654 Joyce St, Hayward, CA 94544, USA">24654 Joyce St, Hayward, CA 94544, USA</p>
                     <p><a href="tel:5105010274" class="inline-block py-1 text-slate-700 hover:text-blue-600 font-medium transition">510-501-0274</a></p>
                     <p><a href="mailto:tuaudi@gmail.com" class="inline-block py-1 text-slate-700 hover:text-blue-600 transition lang-el" data-vi="tuaudi@gmail.com" data-en="tuaudi@gmail.com">tuaudi@gmail.com</a></p>
                 </div>
@@ -1542,8 +1549,8 @@
                 <p class="font-bold text-slate-900 lang-el" data-vi="Giờ làm việc" data-en="Working Hours">Working Hours
                 </p>
                 <div class="mt-4 space-y-3 text-base text-slate-600">
-                    <p class="lang-el" data-vi="Thứ 3 - Thứ 4: 09:00 - 20:00" data-en="Tue - Wed: 9:00 AM - 8:00 PM">
-                        Tue - Wed: 9:00 AM - 8:00 PM</p>
+                    <p class="lang-el" data-vi="Thứ 3 - Thứ 4: 09:00 - 20:00 (Giờ PT)" data-en="Tue - Wed: 9:00 AM - 8:00 PM (PT)">
+                        Tue - Wed: 9:00 AM - 8:00 PM (PT)</p>
                     <p class="text-blue-600 font-semibold mt-2 lang-el" data-vi="Các ngày còn lại đóng cửa"
                         data-en="Closed on all other days">Closed on all other days</p>
                 </div>
