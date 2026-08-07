@@ -1581,41 +1581,102 @@
         <i class="fa-solid fa-arrow-up text-base"></i>
     </button>
 
-    <!-- Success Modal -->
+    <!-- SUCCESS BOOKING CONFIRMATION MODAL -->
     <div id="success-modal"
-        class="hidden fixed inset-0 z-[100] items-center justify-center bg-slate-900/60 backdrop-blur-sm p-4 opacity-0 transition-opacity duration-300">
+        class="fixed inset-0 z-[100] hidden items-center justify-center bg-slate-950/80 backdrop-blur-md p-4 opacity-0 transition-opacity duration-300">
         <div id="success-modal-card"
-            class="w-full max-w-sm rounded-[2rem] bg-white p-6 shadow-2xl transform scale-95 transition-transform duration-300 relative flex flex-col items-center">
-            <div class="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-emerald-100 mb-4">
-                <i class="fa-solid fa-check text-3xl text-emerald-600"></i>
+            class="relative w-full max-w-md rounded-3xl bg-white p-6 sm:p-7 shadow-2xl border border-blue-100 transform scale-95 transition-all duration-300 overflow-hidden text-center">
+            <!-- Background Glow Decor -->
+            <div class="absolute -top-20 -right-20 h-40 w-40 rounded-full bg-blue-500/15 blur-3xl pointer-events-none"></div>
+            <div class="absolute -bottom-20 -left-20 h-40 w-40 rounded-full bg-indigo-500/15 blur-3xl pointer-events-none"></div>
+
+            <!-- Close X -->
+            <button id="close-modal-x" class="absolute top-3.5 right-3.5 h-8 w-8 rounded-full bg-slate-100 text-slate-400 hover:text-slate-700 hover:bg-slate-200 flex items-center justify-center text-sm transition">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <!-- Success Icon -->
+            <div class="relative mx-auto mb-3 h-16 w-16 flex items-center justify-center">
+                <div class="absolute inset-0 rounded-full bg-blue-100 animate-ping opacity-60"></div>
+                <div class="relative h-14 w-14 rounded-full bg-gradient-to-tr from-blue-600 to-indigo-600 text-white flex items-center justify-center text-2xl shadow-lg shadow-blue-500/30">
+                    <i class="fa-solid fa-check"></i>
+                </div>
             </div>
-            <h3 class="text-center text-3xl font-black text-slate-900 mb-2 lang-el" data-vi="Đặt lịch thành công!"
-                data-en="Booking Successful!">Booking Successful!</h3>
-            <p id="success-modal-message" class="text-center text-slate-600 mb-6 leading-relaxed whitespace-pre-line">
+
+            <!-- Title & Subtitle -->
+            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 text-[11px] font-bold uppercase tracking-wider mb-1.5 border border-emerald-200">
+                <i class="fa-solid fa-circle-check"></i> <span class="lang-el" data-vi="Xác Nhận Đặt Lịch Thành Công" data-en="Booking Confirmed">Xác Nhận Đặt Lịch Thành Công</span>
+            </span>
+            <h3 class="text-xl sm:text-2xl font-black text-slate-900 lang-el" data-vi="Đặt Lịch Thành Công!" data-en="Booking Successful!">
+                Đặt Lịch Thành Công!
+            </h3>
+            <p class="text-xs text-slate-500 mt-1 lang-el" data-vi="1997 Barber đã ghi nhận lịch hẹn và sẵn sàng phục vụ bạn." data-en="1997 Barber has recorded your appointment.">
+                1997 Barber đã ghi nhận lịch hẹn và sẵn sàng phục vụ bạn.
             </p>
-            <button id="close-modal-btn"
-                class="w-full rounded-2xl bg-blue-600 py-3.5 font-bold text-white transition hover:-translate-y-0.5 hover:bg-blue-700 shadow-lg shadow-blue-600/30 lang-el"
-                data-vi="Tuyệt vời" data-en="Awesome">Awesome</button>
+
+            <!-- Booking Ticket Summary -->
+            <div class="mt-4 rounded-2xl bg-blue-50/60 border border-blue-100 p-3.5 text-left space-y-2 text-xs">
+                <div class="flex items-center justify-between pb-1.5 border-b border-blue-100/80">
+                    <span class="text-slate-500 flex items-center gap-1.5"><i class="fa-solid fa-user text-blue-600"></i> <span class="lang-el" data-vi="Khách hàng:" data-en="Customer:">Khách hàng:</span></span>
+                    <span class="font-bold text-slate-900" id="ticket-barber-name">Quý khách</span>
+                </div>
+                <div class="flex items-center justify-between pb-1.5 border-b border-blue-100/80">
+                    <span class="text-slate-500 flex items-center gap-1.5"><i class="fa-solid fa-phone text-blue-600"></i> <span class="lang-el" data-vi="Số điện thoại:" data-en="Phone:">Số điện thoại:</span></span>
+                    <span class="font-bold text-slate-900 font-mono" id="ticket-barber-phone">0906 xxx xxx</span>
+                </div>
+                <div class="flex items-start justify-between pb-1.5 border-b border-blue-100/80 gap-2">
+                    <span class="text-slate-500 shrink-0 flex items-center gap-1.5"><i class="fa-solid fa-scissors text-blue-600"></i> <span class="lang-el" data-vi="Dịch vụ:" data-en="Service:">Dịch vụ:</span></span>
+                    <span class="font-bold text-blue-900 text-right" id="ticket-barber-service">Combo Cắt Gội VIP</span>
+                </div>
+                <div class="flex items-center justify-between pb-1.5 border-b border-blue-100/80">
+                    <span class="text-slate-500 flex items-center gap-1.5"><i class="fa-solid fa-calendar-check text-blue-600"></i> <span class="lang-el" data-vi="Thời gian hẹn:" data-en="Time:">Thời gian hẹn:</span></span>
+                    <span class="font-bold text-slate-900" id="ticket-barber-time">18:00 - Hôm nay</span>
+                </div>
+                <div class="flex items-start justify-between gap-2">
+                    <span class="text-slate-500 shrink-0 flex items-center gap-1.5"><i class="fa-solid fa-location-dot text-blue-600"></i> <span class="lang-el" data-vi="Chi nhánh:" data-en="Branch:">Chi nhánh:</span></span>
+                    <span class="font-bold text-slate-800 text-right text-xs" id="ticket-barber-branch">Chi nhánh 1 (Quận 10)</span>
+                </div>
+            </div>
+
+            <!-- Hotline Notice Box -->
+            <div class="mt-3.5 flex items-center gap-2 p-2.5 rounded-xl bg-slate-900 text-slate-200 text-left">
+                <i class="fa-solid fa-phone-volume text-blue-400 text-sm shrink-0 animate-pulse"></i>
+                <span class="text-[11px] leading-tight">
+                    <span class="lang-el" data-vi="Barber sẽ gọi điện xác nhận lịch hẹn của bạn trong vòng <strong>5 phút</strong>!" data-en="Barber will call to confirm your appointment within <strong>5 minutes</strong>!">Barber sẽ gọi điện xác nhận lịch hẹn của bạn trong vòng <strong>5 phút</strong>!</span>
+                </span>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="mt-4 grid grid-cols-2 gap-2.5">
+                <a href="tel:0906933888" class="w-full py-3 rounded-xl border border-slate-200 bg-slate-50 hover:bg-slate-100 text-slate-700 font-bold text-xs flex items-center justify-center gap-1.5 transition">
+                    <i class="fa-solid fa-phone text-blue-600"></i>
+                    <span class="lang-el" data-vi="Hotline" data-en="Hotline">Hotline</span>
+                </a>
+                <button id="close-modal-btn" class="w-full py-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs shadow-md shadow-blue-600/30 flex items-center justify-center gap-1 transition">
+                    <i class="fa-solid fa-check"></i>
+                    <span class="lang-el" data-vi="HOÀN TẤT" data-en="AWESOME">HOÀN TẤT</span>
+                </button>
+            </div>
         </div>
     </div>
 
     <!-- Live Booking Social Proof Toast -->
-    <div id="live-booking-toast" class="flex items-center gap-3.5 rounded-2xl bg-white/95 backdrop-blur border border-slate-200/90 p-4 shadow-2xl max-w-sm">
-        <div id="toast-avatar" class="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-blue-600 text-white font-bold text-base shadow-md">
+    <div id="live-booking-toast" class="flex items-center gap-3.5 rounded-2xl bg-white/95 backdrop-blur-md border border-slate-200/90 p-3.5 shadow-2xl max-w-sm">
+        <div id="toast-avatar" class="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-blue-600 text-white font-bold text-base shadow-md ring-2 ring-blue-400/50">
             T
         </div>
-        <div class="flex-1 min-w-0">
+        <div class="grow min-w-0 pr-1">
             <p id="toast-message" class="text-xs text-slate-800 leading-snug">
                 <strong>Anh Tuấn</strong> vừa đặt lịch <span class="text-blue-600 font-bold">Combo Cắt Gội VIP</span>
             </p>
             <div class="flex items-center gap-2 mt-1">
                 <span class="inline-block h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-                <span id="toast-time" class="text-[11px] font-medium text-slate-400">3 phút trước</span>
-                <span class="text-[11px] text-blue-600 font-bold ml-auto">• Verified Booking</span>
+                <span id="toast-time" class="text-[10px] font-medium text-slate-400">3 phút trước</span>
+                <span class="text-[10px] text-blue-600 font-bold ml-auto flex items-center gap-1"><i class="fa-solid fa-circle-check text-emerald-500"></i> Đã xác nhận</span>
             </div>
         </div>
-        <button id="toast-close" type="button" class="text-slate-400 hover:text-slate-600 p-1 -mr-1 cursor-pointer" title="Close">
-            <i class="fa-solid fa-xmark text-xs"></i>
+        <button id="toast-close" type="button" class="text-slate-400 hover:text-slate-600 p-1 text-xs" aria-label="Close">
+            <i class="fa-solid fa-xmark"></i>
         </button>
     </div>
 
@@ -1630,6 +1691,8 @@
         </a>
     </div>
 
+    <!-- Canvas Confetti & JS Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
     <script src="assets/js/main.js"></script>
 </body>
 

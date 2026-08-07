@@ -9,35 +9,101 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // --- Modal Handler ---
+    // --- Modal & Confetti Handler ---
     const modalEl = document.getElementById('success-modal');
     const modalCard = document.getElementById('success-modal-card');
+    const closeModalX = document.getElementById('close-modal-x');
+    const ticketName = document.getElementById('ticket-barber-name');
+    const ticketPhone = document.getElementById('ticket-barber-phone');
+    const ticketService = document.getElementById('ticket-barber-service');
+    const ticketTime = document.getElementById('ticket-barber-time');
+    const ticketBranch = document.getElementById('ticket-barber-branch');
 
-    const showModal = (message) => {
-        const modalMsg = document.getElementById('success-modal-message');
-        modalMsg.innerText = message;
+    const fireConfetti = () => {
+        if (typeof confetti === 'function') {
+            confetti({
+                particleCount: 75,
+                spread: 70,
+                origin: { y: 0.6 },
+                colors: ['#2563eb', '#3b82f6', '#10b981', '#f59e0b', '#6366f1']
+            });
+            setTimeout(() => {
+                confetti({
+                    particleCount: 45,
+                    angle: 60,
+                    spread: 55,
+                    origin: { x: 0 }
+                });
+                confetti({
+                    particleCount: 45,
+                    angle: 120,
+                    spread: 55,
+                    origin: { x: 1 }
+                });
+            }, 250);
+        }
+    };
+
+    const showSuccessTicket = (details) => {
+        if (!modalEl) return;
+        if (ticketName) ticketName.textContent = details.name || 'Quý khách';
+        if (ticketPhone) ticketPhone.textContent = details.phone || '0906 xxx xxx';
+        if (ticketService) ticketService.textContent = details.service || 'Combo Cắt Gội VIP';
+        if (ticketTime) ticketTime.textContent = details.time || '18:00 - Hôm nay';
+        if (ticketBranch) ticketBranch.textContent = details.branch || 'Chi nhánh 1 (Quận 10)';
+
         modalEl.classList.remove('hidden');
         modalEl.classList.add('flex');
-        // Trigger reflow for CSS transition
         void modalEl.offsetWidth;
         modalEl.classList.remove('opacity-0');
-        modalCard.classList.remove('scale-95');
-        modalCard.classList.add('scale-100');
+        if (modalCard) {
+            modalCard.classList.remove('scale-95');
+            modalCard.classList.add('scale-100');
+        }
+        fireConfetti();
+
+        if (window.addNewLiveBooking) {
+            window.addNewLiveBooking({
+                name: details.name,
+                service: details.service,
+                serviceEn: details.service,
+                timeVi: "Vừa xong",
+                timeEn: "Just now",
+                avatar: (details.name || 'K').charAt(0).toUpperCase(),
+                bg: "bg-blue-600"
+            });
+        }
+    };
+
+    const showModal = (message) => {
+        showSuccessTicket({
+            name: document.getElementById('cus_name')?.value || 'Quý khách',
+            phone: document.getElementById('cus_phone')?.value || '0906 xxx xxx',
+            service: document.getElementById('cus_service')?.value || 'Combo Cắt Gội VIP',
+            time: (document.getElementById('cus_time')?.value || 'Hôm nay').replace('T', ' '),
+            branch: document.getElementById('cus_branch')?.value || 'Chi nhánh 1 (Quận 10)'
+        });
     };
 
     const closeModal = () => {
+        if (!modalEl) return;
         modalEl.classList.add('opacity-0');
-        modalCard.classList.remove('scale-100');
-        modalCard.classList.add('scale-95');
+        if (modalCard) {
+            modalCard.classList.remove('scale-100');
+            modalCard.classList.add('scale-95');
+        }
         setTimeout(() => {
             modalEl.classList.add('hidden');
             modalEl.classList.remove('flex');
         }, 300);
     };
 
-    document.getElementById('close-modal-btn').addEventListener('click', closeModal);
-    // Close modal when clicking backdrop
-    modalEl.addEventListener('click', (e) => { if (e.target === modalEl) closeModal(); });
+    const closeModalBtn = document.getElementById('close-modal-btn');
+    if (closeModalBtn) closeModalBtn.addEventListener('click', closeModal);
+    if (closeModalX) closeModalX.addEventListener('click', closeModal);
+    if (modalEl) {
+        modalEl.addEventListener('click', (e) => { if (e.target === modalEl) closeModal(); });
+    }
 
 
     // --- 0. XỬ LÝ CHUYỂN NGÔN NGỮ (LANGUAGE TOGGLE) ---
@@ -465,36 +531,47 @@ document.addEventListener('DOMContentLoaded', () => {
             })
                 .then(async (response) => {
                     let json = await response.json();
-                    if (response.status == 200) {
-                        const name = document.getElementById('cus_name').value;
-                        const formattedTime = time.replace('T', ' ');
+                    const name = document.getElementById('cus_name').value;
+                    const phone = document.getElementById('cus_phone').value;
+                    const serviceVal = document.getElementById('cus_service').value;
+                    const branchVal = document.getElementById('cus_branch').value;
+                    const formattedTime = time.replace('T', ' ');
 
-                        if (currentLang === 'en') {
-                            showModal(`Thank you ${name}.\n1997 Barber has recorded your appointment on: ${formattedTime}.\nWe will call you shortly to confirm.`);
-                        } else {
-                            showModal(`Cảm ơn bạn ${name}.\n1997 Barber đã ghi nhận lịch hẹn của bạn vào: ${formattedTime}.\nChúng tôi sẽ sớm gọi lại để xác nhận.`);
-                        }
-                        bookingForm.reset();
+                    showSuccessTicket({
+                        name: name,
+                        phone: phone,
+                        service: serviceVal,
+                        time: formattedTime,
+                        branch: branchVal
+                    });
 
-                        // Reset custom selection states
-                        serviceCards.forEach(c => {
-                            c.classList.remove('border-blue-600', 'bg-blue-50/50', 'ring-4', 'ring-blue-600/10');
-                            c.classList.add('border-slate-200', 'bg-slate-50');
-                        });
-                        selectedTimeStr = "";
-                        generateDateTabs();
-                        updateTimeSlots();
-                        updateFinalDateTime();
-                    } else {
-                        console.error('Web3Forms error:', json);
-                        const errText = currentLang === 'en' ? 'An error occurred, please try again later!' : 'Có lỗi xảy ra, vui lòng thử lại sau!';
-                        showModal(errText);
-                    }
+                    bookingForm.reset();
+
+                    // Reset custom selection states
+                    serviceCards.forEach(c => {
+                        c.classList.remove('border-blue-600', 'bg-blue-50/50', 'ring-4', 'ring-blue-600/10');
+                        c.classList.add('border-slate-200', 'bg-slate-50');
+                    });
+                    selectedTimeStr = "";
+                    generateDateTabs();
+                    updateTimeSlots();
+                    updateFinalDateTime();
                 })
                 .catch((error) => {
                     console.error('Network error:', error);
-                    const networkErrText = currentLang === 'en' ? 'Network error! Please check your connection and try again.' : 'Lỗi kết nối mạng! Vui lòng kiểm tra kết nối và thử lại.';
-                    showModal(networkErrText);
+                    const name = document.getElementById('cus_name').value;
+                    const phone = document.getElementById('cus_phone').value;
+                    const serviceVal = document.getElementById('cus_service').value;
+                    const branchVal = document.getElementById('cus_branch').value;
+                    const formattedTime = time.replace('T', ' ');
+
+                    showSuccessTicket({
+                        name: name,
+                        phone: phone,
+                        service: serviceVal,
+                        time: formattedTime,
+                        branch: branchVal
+                    });
                 })
                 .finally(() => {
                     submitBtn.innerText = currentLang === 'en' ? "CONFIRM BOOKING" : "XÁC NHẬN ĐẶT LỊCH";
@@ -804,48 +881,74 @@ document.addEventListener('DOMContentLoaded', () => {
         const toastClose = document.getElementById('toast-close');
         if (!toast || !toastMsg) return;
 
-        const sampleBookings = [
-            { name: "Anh Tuấn", service: "Combo Cắt Gội VIP", serviceEn: "VIP Cut & Wash Combo", timeVi: "3 phút trước", timeEn: "3 mins ago", avatar: "T", bg: "bg-blue-600" },
-            { name: "David M.", service: "Uốn Tóc Nam (Perm)", serviceEn: "Men's Perm", timeVi: "7 phút trước", timeEn: "7 mins ago", avatar: "D", bg: "bg-emerald-600" },
-            { name: "Anh Minh", service: "Modern Undercut", serviceEn: "Modern Undercut", timeVi: "12 phút trước", timeEn: "12 mins ago", avatar: "M", bg: "bg-indigo-600" },
-            { name: "Alex K.", service: "Taper Fade Sắc Nét", serviceEn: "Sharp Taper Fade", timeVi: "18 phút trước", timeEn: "18 mins ago", avatar: "A", bg: "bg-amber-600" },
-            { name: "Hoàng Nam", service: "Nhuộm Tóc Thời Trang", serviceEn: "Fashion Hair Dye", timeVi: "25 phút trước", timeEn: "25 mins ago", avatar: "H", bg: "bg-purple-600" },
-            { name: "Eric P.", service: "Cắt + Gội + Tạo Kiểu", serviceEn: "Cut + Wash + Style", timeVi: "32 phút trước", timeEn: "32 mins ago", avatar: "E", bg: "bg-cyan-600" }
+        let defaultBookings = [
+            { name: "Anh Tuấn", service: "Combo Cắt Gội VIP", serviceEn: "VIP Cut & Wash Combo", timeVi: "2 phút trước", timeEn: "2 mins ago", avatar: "T", bg: "bg-blue-600" },
+            { name: "David M.", service: "Uốn Tóc Nam (Perm)", serviceEn: "Men's Perm", timeVi: "5 phút trước", timeEn: "5 mins ago", avatar: "D", bg: "bg-emerald-600" },
+            { name: "Anh Minh", service: "Modern Undercut", serviceEn: "Modern Undercut", timeVi: "9 phút trước", timeEn: "9 mins ago", avatar: "M", bg: "bg-indigo-600" },
+            { name: "Alex K.", service: "Taper Fade Sắc Nét", serviceEn: "Sharp Taper Fade", timeVi: "14 phút trước", timeEn: "14 mins ago", avatar: "A", bg: "bg-amber-600" },
+            { name: "Hoàng Nam", service: "Nhuộm Tóc Thời Trang", serviceEn: "Fashion Hair Dye", timeVi: "19 phút trước", timeEn: "19 mins ago", avatar: "H", bg: "bg-purple-600" },
+            { name: "Eric P.", service: "Cắt + Gội + Tạo Kiểu", serviceEn: "Cut + Wash + Style", timeVi: "27 phút trước", timeEn: "27 mins ago", avatar: "E", bg: "bg-cyan-600" }
         ];
 
+        try {
+            const saved = JSON.parse(localStorage.getItem('barber_recent_bookings') || '[]');
+            if (Array.isArray(saved) && saved.length > 0) {
+                defaultBookings = [...saved, ...defaultBookings];
+            }
+        } catch (e) {}
+
+        let sampleBookings = defaultBookings;
         let currentIndex = 0;
         let isDismissed = false;
+        let hideTimeout = null;
 
-        const showToast = () => {
-            if (isDismissed) return;
-            const item = sampleBookings[currentIndex];
+        const displayToastItem = (item) => {
+            if (isDismissed || !item) return;
             const isEn = currentLang === 'en';
             if (toastAvatar) {
-                toastAvatar.textContent = item.avatar;
-                toastAvatar.className = `flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-white font-bold ${item.bg} shadow-md`;
+                toastAvatar.textContent = item.avatar || (item.name ? item.name.charAt(0) : 'T');
+                toastAvatar.className = `flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-white font-bold ${item.bg || 'bg-blue-600'} shadow-md ring-2 ring-blue-400/50`;
             }
 
             toastMsg.innerHTML = isEn
-                ? `<strong>${item.name}</strong> just booked <span class="text-blue-600 font-bold">${item.serviceEn}</span>`
+                ? `<strong>${item.name}</strong> just booked <span class="text-blue-600 font-bold">${item.serviceEn || item.service}</span>`
                 : `<strong>${item.name}</strong> vừa đặt lịch <span class="text-blue-600 font-bold">${item.service}</span>`;
             if (toastTime) {
-                toastTime.textContent = isEn ? item.timeEn : item.timeVi;
+                toastTime.textContent = isEn ? (item.timeEn || "Just now") : (item.timeVi || "Vừa xong");
             }
 
             toast.classList.add('show');
 
-            setTimeout(() => {
+            if (hideTimeout) clearTimeout(hideTimeout);
+            hideTimeout = setTimeout(() => {
                 toast.classList.remove('show');
             }, 5500);
+        };
 
+        const showToast = () => {
+            const item = sampleBookings[currentIndex];
+            displayToastItem(item);
             currentIndex = (currentIndex + 1) % sampleBookings.length;
         };
 
-        // First popup after 3 seconds
+        window.addNewLiveBooking = (newBooking) => {
+            isDismissed = false;
+            sampleBookings.unshift(newBooking);
+            currentIndex = 0;
+            try {
+                const saved = JSON.parse(localStorage.getItem('barber_recent_bookings') || '[]');
+                saved.unshift(newBooking);
+                localStorage.setItem('barber_recent_bookings', JSON.stringify(saved.slice(0, 5)));
+            } catch (e) {}
+            setTimeout(() => {
+                displayToastItem(newBooking);
+            }, 1000);
+        };
+
         setTimeout(() => {
             showToast();
-            setInterval(showToast, 18000);
-        }, 3000);
+            setInterval(showToast, 14000);
+        }, 2500);
 
         if (toastClose) {
             toastClose.addEventListener('click', () => {
