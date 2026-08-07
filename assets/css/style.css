@@ -256,7 +256,7 @@ nav a.nav-active {
     #live-booking-toast {
         left: 12px;
         right: 12px;
-        bottom: 76px;
+        bottom: calc(76px + env(safe-area-inset-bottom, 0px));
         max-width: calc(100% - 24px);
     }
 }
@@ -273,8 +273,31 @@ nav a.nav-active {
     opacity: 1 !important;
 }
 
+#success-modal-card {
+    -webkit-overflow-scrolling: touch;
+}
+
 #success-modal.show #success-modal-card {
     transform: scale(1) translateY(0);
+}
+
+/* =========================================
+   STICKY MOBILE BAR & SAFE AREA
+   ========================================= */
+#sticky-book-bar {
+    padding-bottom: max(12px, env(safe-area-inset-bottom, 12px));
+}
+
+/* iOS Safari auto-zoom prevention on input focus */
+@media screen and (max-width: 768px) {
+    input[type="text"],
+    input[type="tel"],
+    input[type="email"],
+    input[type="date"],
+    select,
+    textarea {
+        font-size: 16px !important;
+    }
 }
 
 /* Shimmer pass effect on cards */
@@ -298,4 +321,5 @@ nav a.nav-active {
 @keyframes shimmerPass {
     0% { transform: translate(-100%, -100%) rotate(30deg); }
     25%, 100% { transform: translate(100%, 100%) rotate(30deg); }
-}
+}
+
