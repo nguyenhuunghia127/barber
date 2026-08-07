@@ -449,6 +449,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             const formData = new FormData(bookingForm);
+            const formObj = Object.fromEntries(formData);
 
             submitBtn.innerText = currentLang === 'en' ? "SENDING INFO..." : "ĐANG GỬI THÔNG TIN...";
             submitBtn.disabled = true;
@@ -456,7 +457,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
             fetch('https://api.web3forms.com/submit', {
                 method: 'POST',
-                body: formData
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify(formObj)
             })
                 .then(async (response) => {
                     let json = await response.json();
