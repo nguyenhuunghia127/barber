@@ -255,9 +255,9 @@ nav a.nav-active {
 @media (max-width: 640px) {
     #live-booking-toast {
         left: 12px;
-        right: 12px;
+        right: 76px;
         bottom: calc(76px + env(safe-area-inset-bottom, 0px));
-        max-width: calc(100% - 24px);
+        max-width: none;
     }
 }
 
