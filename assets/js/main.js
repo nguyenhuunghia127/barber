@@ -531,10 +531,10 @@ document.addEventListener('DOMContentLoaded', () => {
             })
                 .then(async (response) => {
                     let json = await response.json();
-                    const name = document.getElementById('cus_name').value;
-                    const phone = document.getElementById('cus_phone').value;
-                    const serviceVal = document.getElementById('cus_service').value;
-                    const branchVal = document.getElementById('cus_branch').value;
+                    const name = document.getElementById('cus_name')?.value || '';
+                    const phone = document.getElementById('cus_phone')?.value || '';
+                    const serviceVal = document.getElementById('cus_service')?.value || '';
+                    const branchVal = document.getElementById('cus_branch')?.value || '1997 Barber';
                     const formattedTime = time.replace('T', ' ');
 
                     showSuccessTicket({
@@ -559,10 +559,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 })
                 .catch((error) => {
                     console.error('Network error:', error);
-                    const name = document.getElementById('cus_name').value;
-                    const phone = document.getElementById('cus_phone').value;
-                    const serviceVal = document.getElementById('cus_service').value;
-                    const branchVal = document.getElementById('cus_branch').value;
+                    const name = document.getElementById('cus_name')?.value || '';
+                    const phone = document.getElementById('cus_phone')?.value || '';
+                    const serviceVal = document.getElementById('cus_service')?.value || '';
+                    const branchVal = document.getElementById('cus_branch')?.value || '1997 Barber';
                     const formattedTime = time.replace('T', ' ');
 
                     showSuccessTicket({
